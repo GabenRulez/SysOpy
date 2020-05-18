@@ -1,0 +1,46 @@
+ Pod względem prędkości biblioteka statyczna zdaje się być najszybszą z tu wymienionych bibliotek.
+
+ ____ Biblioteka statyczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.800000 Uzytkownika: 0.570000 Systemowy: 0.010000
+Rzeczywisty: 0.750000 Uzytkownika: 0.560000 Systemowy: 0.040000
+Rzeczywisty: 0.960000 Uzytkownika: 0.640000 Systemowy: 0.060000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.550000 Uzytkownika: 2.820000 Systemowy: 0.040000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.510000 Uzytkownika: 2.830000 Systemowy: 0.020000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 1.980000 Uzytkownika: 1.080000 Systemowy: 0.010000
+
+ ____ Biblioteka dzielona ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.620000 Uzytkownika: 0.540000 Systemowy: 0.010000
+Rzeczywisty: 0.760000 Uzytkownika: 0.610000 Systemowy: 0.030000
+Rzeczywisty: 0.860000 Uzytkownika: 0.640000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.860000 Uzytkownika: 2.900000 Systemowy: 0.090000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.630000 Uzytkownika: 2.840000 Systemowy: 0.050000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.210000 Uzytkownika: 1.110000 Systemowy: 0.030000
+
+ ____ Biblioteka dynamiczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.680000 Uzytkownika: 0.530000 Systemowy: 0.020000
+Rzeczywisty: 0.660000 Uzytkownika: 0.550000 Systemowy: 0.020000
+Rzeczywisty: 0.870000 Uzytkownika: 0.660000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.820000 Uzytkownika: 2.900000 Systemowy: 0.050000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.670000 Uzytkownika: 2.850000 Systemowy: 0.050000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.070000 Uzytkownika: 1.030000 Systemowy: 0.040000

@@ -204,6 +204,60 @@ cw01/zad2/myLibrary.c.s:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.s
 .PHONY : cw01/zad2/myLibrary.c.s
 
+cw01/zad3a/main.o: cw01/zad3a/main.c.o
+
+.PHONY : cw01/zad3a/main.o
+
+# target to build an object file
+cw01/zad3a/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o
+.PHONY : cw01/zad3a/main.c.o
+
+cw01/zad3a/main.i: cw01/zad3a/main.c.i
+
+.PHONY : cw01/zad3a/main.i
+
+# target to preprocess a source file
+cw01/zad3a/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.i
+.PHONY : cw01/zad3a/main.c.i
+
+cw01/zad3a/main.s: cw01/zad3a/main.c.s
+
+.PHONY : cw01/zad3a/main.s
+
+# target to generate assembly for a file
+cw01/zad3a/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.s
+.PHONY : cw01/zad3a/main.c.s
+
+cw01/zad3a/main_dynamic.o: cw01/zad3a/main_dynamic.c.o
+
+.PHONY : cw01/zad3a/main_dynamic.o
+
+# target to build an object file
+cw01/zad3a/main_dynamic.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o
+.PHONY : cw01/zad3a/main_dynamic.c.o
+
+cw01/zad3a/main_dynamic.i: cw01/zad3a/main_dynamic.c.i
+
+.PHONY : cw01/zad3a/main_dynamic.i
+
+# target to preprocess a source file
+cw01/zad3a/main_dynamic.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.i
+.PHONY : cw01/zad3a/main_dynamic.c.i
+
+cw01/zad3a/main_dynamic.s: cw01/zad3a/main_dynamic.c.s
+
+.PHONY : cw01/zad3a/main_dynamic.s
+
+# target to generate assembly for a file
+cw01/zad3a/main_dynamic.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s
+.PHONY : cw01/zad3a/main_dynamic.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -249,6 +303,12 @@ help:
 	@echo "... cw01/zad2/myLibrary.o"
 	@echo "... cw01/zad2/myLibrary.i"
 	@echo "... cw01/zad2/myLibrary.s"
+	@echo "... cw01/zad3a/main.o"
+	@echo "... cw01/zad3a/main.i"
+	@echo "... cw01/zad3a/main.s"
+	@echo "... cw01/zad3a/main_dynamic.o"
+	@echo "... cw01/zad3a/main_dynamic.i"
+	@echo "... cw01/zad3a/main_dynamic.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
