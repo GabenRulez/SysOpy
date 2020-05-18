@@ -1,0 +1,148 @@
+Otrzymane wyniki są bardzo zbliżone do siebie.
+Ciężko znaleźć zależność pomiędzy flagą, a wzrostem w wydajności.
+Prawdopodobnie winą jest tutaj stosunkowo mały czas wykonania
+ - sądzę, że przy znacznie większych plikach i ~x100 większych danych zauważylibyśmy różnicę.
+
+ ________ Flaga -O1 ________ 
+   
+
+ ____ Biblioteka statyczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.620000 Uzytkownika: 0.530000 Systemowy: 0.010000
+Rzeczywisty: 0.650000 Uzytkownika: 0.560000 Systemowy: 0.010000
+Rzeczywisty: 0.750000 Uzytkownika: 0.610000 Systemowy: 0.020000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.430000 Uzytkownika: 2.830000 Systemowy: 0.030000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.390000 Uzytkownika: 2.810000 Systemowy: 0.030000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 1.980000 Uzytkownika: 1.050000 Systemowy: 0.020000
+
+ ____ Biblioteka dzielona ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.610000 Uzytkownika: 0.520000 Systemowy: 0.020000
+Rzeczywisty: 0.630000 Uzytkownika: 0.540000 Systemowy: 0.010000
+Rzeczywisty: 0.720000 Uzytkownika: 0.600000 Systemowy: 0.030000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.370000 Uzytkownika: 2.810000 Systemowy: 0.020000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.360000 Uzytkownika: 2.780000 Systemowy: 0.030000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.120000 Uzytkownika: 1.130000 Systemowy: 0.010000
+
+ ____ Biblioteka dynamiczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.610000 Uzytkownika: 0.540000 Systemowy: 0.000000
+Rzeczywisty: 0.620000 Uzytkownika: 0.550000 Systemowy: 0.010000
+Rzeczywisty: 1.000000 Uzytkownika: 0.630000 Systemowy: 0.070000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.840000 Uzytkownika: 3.000000 Systemowy: 0.030000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.660000 Uzytkownika: 2.810000 Systemowy: 0.060000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.370000 Uzytkownika: 1.140000 Systemowy: 0.020000
+
+ ________ Flaga -O2 ________ 
+   
+
+ ____ Biblioteka statyczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.670000 Uzytkownika: 0.600000 Systemowy: 0.010000
+Rzeczywisty: 0.630000 Uzytkownika: 0.550000 Systemowy: 0.010000
+Rzeczywisty: 0.810000 Uzytkownika: 0.640000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.400000 Uzytkownika: 2.810000 Systemowy: 0.010000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.410000 Uzytkownika: 2.810000 Systemowy: 0.030000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 1.950000 Uzytkownika: 1.050000 Systemowy: 0.020000
+
+ ____ Biblioteka dzielona ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.600000 Uzytkownika: 0.500000 Systemowy: 0.020000
+Rzeczywisty: 0.640000 Uzytkownika: 0.560000 Systemowy: 0.010000
+Rzeczywisty: 0.710000 Uzytkownika: 0.590000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.400000 Uzytkownika: 2.820000 Systemowy: 0.030000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.390000 Uzytkownika: 2.810000 Systemowy: 0.020000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.070000 Uzytkownika: 1.110000 Systemowy: 0.010000
+
+ ____ Biblioteka dynamiczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.710000 Uzytkownika: 0.550000 Systemowy: 0.010000
+Rzeczywisty: 0.750000 Uzytkownika: 0.570000 Systemowy: 0.020000
+Rzeczywisty: 0.840000 Uzytkownika: 0.600000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.940000 Uzytkownika: 2.850000 Systemowy: 0.060000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.700000 Uzytkownika: 2.830000 Systemowy: 0.120000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.080000 Uzytkownika: 1.100000 Systemowy: 0.020000
+
+ ________ Flaga -O3 ________ 
+   
+
+ ____ Biblioteka statyczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.630000 Uzytkownika: 0.530000 Systemowy: 0.010000
+Rzeczywisty: 0.640000 Uzytkownika: 0.570000 Systemowy: 0.000000
+Rzeczywisty: 0.750000 Uzytkownika: 0.630000 Systemowy: 0.020000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.490000 Uzytkownika: 2.870000 Systemowy: 0.030000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.770000 Uzytkownika: 2.970000 Systemowy: 0.030000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.040000 Uzytkownika: 1.100000 Systemowy: 0.020000
+
+ ____ Biblioteka dzielona ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.650000 Uzytkownika: 0.550000 Systemowy: 0.010000
+Rzeczywisty: 0.650000 Uzytkownika: 0.560000 Systemowy: 0.010000
+Rzeczywisty: 0.820000 Uzytkownika: 0.680000 Systemowy: 0.020000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.930000 Uzytkownika: 2.980000 Systemowy: 0.030000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.720000 Uzytkownika: 3.020000 Systemowy: 0.000000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.060000 Uzytkownika: 1.110000 Systemowy: 0.010000
+
+ ____ Biblioteka dynamiczna ____ 
+   porownywanie par plikow   
+Rzeczywisty: 0.620000 Uzytkownika: 0.550000 Systemowy: 0.000000
+Rzeczywisty: 0.660000 Uzytkownika: 0.570000 Systemowy: 0.010000
+Rzeczywisty: 0.820000 Uzytkownika: 0.650000 Systemowy: 0.040000
+
+   zapisywanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.680000 Uzytkownika: 2.960000 Systemowy: 0.040000
+
+   usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 4.750000 Uzytkownika: 2.950000 Systemowy: 0.030000
+
+   naprzemienne dodawanie i usuwanie blokow o roznych rozmiarach   
+Rzeczywisty: 2.060000 Uzytkownika: 1.100000 Systemowy: 0.030000
