@@ -51,7 +51,7 @@ int utworz_blok_operacji_z_pliku(FILE* plik_tymczasowy, struct tablica_glowna* t
         if( lineptr[1] == 'a' || lineptr[1] == 'c' || lineptr[1] == 'd' ) ilosc_operacji++;
     }
 
-    struct blok_operacji_edycyjnych* blok = stworz_blok_operacji(1);
+    struct blok_operacji_edycyjnych* blok = stworz_blok_operacji(ilosc_operacji);
 
     rewind(plik_tymczasowy);
     ilosc_operacji = 0;

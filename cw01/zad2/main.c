@@ -47,10 +47,8 @@ int main(int argc, char** argv){
             i = i + 2;
         }
         else if( strcmp(komenda, "compare_pairs") == 0 ){
-
             for(int j=1; j<=ilosc_par_plikow; j++){
-                char* para = argv[i+j];
-                char* plik_A = strtok(para, ":");
+                char* plik_A = strtok(argv[i+j], ":");
                 char* plik_B = strtok(NULL, ":");
 
                 FILE* plik_temp = porownaj_pliki(plik_A, plik_B);

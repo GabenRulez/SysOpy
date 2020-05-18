@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/main.c.o CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o CMakeFiles/sysopy.dir/cw01/zad2/main.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/main.c.o CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o CMakeFiles/sysopy.dir/cw01/zad2/main.c.o CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o  -o sysopy 

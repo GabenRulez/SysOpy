@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/wojtek/CLionProjects/SysOpy/cw01/zad1/myLibrary.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o"
   "/home/wojtek/CLionProjects/SysOpy/cw01/zad2/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad2/main.c.o"
+  "/home/wojtek/CLionProjects/SysOpy/cw01/zad2/myLibrary.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o"
   "/home/wojtek/CLionProjects/SysOpy/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

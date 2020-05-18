@@ -1,13 +1,13 @@
 CC= gcc
 ATRYBUTY= -Wall
 
-all: static shared clean
+all: static clean
 
 static:
 	$(CC) $(ATRYBUTY) -c myLibrary.c
 	ar rcs myLibrary.a myLibrary.o
 	$(CC) $(ATRYBUTY) -o main main.c myLibrary.a
-	make test
+
 	make clean
 
 test:
