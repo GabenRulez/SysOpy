@@ -150,6 +150,33 @@ cw01/zad1/myLibrary.c.s:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.s
 .PHONY : cw01/zad1/myLibrary.c.s
 
+cw01/zad2/main.o: cw01/zad2/main.c.o
+
+.PHONY : cw01/zad2/main.o
+
+# target to build an object file
+cw01/zad2/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.o
+.PHONY : cw01/zad2/main.c.o
+
+cw01/zad2/main.i: cw01/zad2/main.c.i
+
+.PHONY : cw01/zad2/main.i
+
+# target to preprocess a source file
+cw01/zad2/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.i
+.PHONY : cw01/zad2/main.c.i
+
+cw01/zad2/main.s: cw01/zad2/main.c.s
+
+.PHONY : cw01/zad2/main.s
+
+# target to generate assembly for a file
+cw01/zad2/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.s
+.PHONY : cw01/zad2/main.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -189,6 +216,9 @@ help:
 	@echo "... cw01/zad1/myLibrary.o"
 	@echo "... cw01/zad1/myLibrary.i"
 	@echo "... cw01/zad1/myLibrary.s"
+	@echo "... cw01/zad2/main.o"
+	@echo "... cw01/zad2/main.i"
+	@echo "... cw01/zad2/main.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
