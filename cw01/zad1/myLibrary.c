@@ -11,6 +11,7 @@
 #define max_dlugosc_komendy 131072 //standardowa dla Linuxa
 #define mierna_dlugosc_komendy 1024
 #define max_ilosc_operacji 100
+#define max_znakow_na_operacje 250
 
 
 struct tablica_glowna* stworz_tablice_glowna(int ilosc_blokow){
@@ -37,43 +38,32 @@ FILE* porownaj_pliki(char* sciezka_1, char* sciezka_2){
     strcat(komenda, " > wynik_porownania.txt");
 
     system(komenda);
-    FILE* wynik_porownania = fopen("wynik-porownania.txt", "rwb");
+    FILE* wynik_porownania = fopen("wynik_porownania.txt", "r");
     return wynik_porownania;
 }
 
 int utworz_blok_operacji_z_pliku(FILE* plik_tymczasowy, struct tablica_glowna* tablica){
 
-    char * lineptr = NULL;
+    char* lineptr = NULL;
     size_t n = 0;
 
-    int ilosc_operacji = 0;
-    while (getline(&lineptr, &n, plik_tymczasowy) != -1) {
-        if( lineptr[1] == 'a' || lineptr[1] == 'c' || lineptr[1] == 'd' ) ilosc_operacji++;
-    }
+    struct blok_operacji_edycyjnych* blok = stworz_blok_operacji(max_ilosc_operacji);
 
-    struct blok_operacji_edycyjnych* blok = stworz_blok_operacji(ilosc_operacji);
+    while ( getline(&lineptr, &n, plik_tymczasowy ) != -1) {
 
-    rewind(plik_tymczasowy);
-    ilosc_operacji = 0;
-
-    while (getline(&lineptr, &n, plik_tymczasowy) != -1) {
-
-        bool flag = false;
-        if( lineptr[1] == 'a' || lineptr[1] == 'c' || lineptr[1] == 'd' ){
-            blok->operacje_edycyjne[ilosc_operacji] = calloc(max_ilosc_operacji, sizeof(char*));
-            flag = true;
+        if( !(lineptr[0] == '<' || lineptr[0] == '>' || lineptr[0] == '-') ){
+            blok->operacje_edycyjne[blok->index_wolnej_operacji] = (char*) calloc(max_znakow_na_operacje, sizeof(char));
+            strcpy( blok->operacje_edycyjne[ blok->index_wolnej_operacji ], lineptr );
+            blok->index_wolnej_operacji++;
         }
-        strcat(blok->operacje_edycyjne[ilosc_operacji], lineptr);
-
-        if (flag){
-            ilosc_operacji++;
+        else{
+            strcat(blok->operacje_edycyjne[ blok->index_wolnej_operacji-1 ], lineptr);
         }
-
     }
-    blok->index_wolnej_operacji = ilosc_operacji+1;
-    tablica->bloki[tablica->index_wolnego_bloku] = blok;
+    free(lineptr);
+    blok->index_wolnej_operacji++;
+    tablica->bloki[ tablica->index_wolnego_bloku ] = blok;
     tablica->index_wolnego_bloku++;
-
 
     return tablica->index_wolnego_bloku-1;
 }

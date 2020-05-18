@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 void wypisz_czasy(double rzeczywisty, double uzytkownika, double systemowy){
-    printf("Rzeczywisty: %f Uzytkownika: %f Systemowy: %f", rzeczywisty, uzytkownika, systemowy);
+    printf("Rzeczywisty: %f Uzytkownika: %f Systemowy: %f\n", rzeczywisty, uzytkownika, systemowy);
 }
 
 double roznica_czasow(clock_t start, clock_t stop){
