@@ -12,18 +12,6 @@
 #define mierna_dlugosc_komendy 1024
 #define max_ilosc_operacji 100
 
-struct blok_operacji_edycyjnych{
-    char** operacje_edycyjne;
-    int ilosc_operacji;
-    int index_wolnej_operacji;
-
-};
-
-struct tablica_glowna{
-    struct blok_operacji_edycyjnych** bloki;
-    int ilosc_blokow;
-    int index_wolnego_bloku;
-};
 
 struct tablica_glowna* stworz_tablice_glowna(int ilosc_blokow){
     struct tablica_glowna* tablica = malloc(sizeof(struct tablica_glowna));
