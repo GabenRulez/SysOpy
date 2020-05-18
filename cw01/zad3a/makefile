@@ -27,7 +27,9 @@ shared: myLibrary.c main.c
 	make test
 	make clean
 
-dynamic: main_dynamic.c shared
+dynamic: main_dynamic.c
+	$(CC) $(ATRYBUTY) -fPIC -c myLibrary.c
+	$(CC) $(ATRYBUTY) -fPIC -shared -o myLibrary.so myLibrary.o
 	$(CC) $(ATRYBUTY) -o main main_dynamic.c -L. -ldl -D DYNAMIC
 	make test
 	make clean

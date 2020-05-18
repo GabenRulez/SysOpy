@@ -22,7 +22,14 @@ int main(int argc, char** argv){
     }
     
     
-    void* dl_handle = dlopen(".myLibrary.so", RTLD_LAZY);
+    void* dl_handle = dlopen("../myLibrary.so", RTLD_NOW);
+    if(!dl_handle) {
+        dl_handle = dlopen("./myLibrary.so", RTLD_NOW);
+        if(!dl_handle){
+            dl_handle = dlopen("myLibrary.so", RTLD_NOW);
+            if(!dl_handle) return 4;
+        }
+    }
 
     struct tablica_glowna* (*dl_stworz_tablice_glowna)(int);
     FILE* (*dl_porownaj_pliki)(char*, char*);
@@ -99,4 +106,5 @@ int main(int argc, char** argv){
     czas_na_stop = times(stop_bufor);
     wypisz_czasy( roznica_czasow(czas_na_start, czas_na_stop), roznica_czasow(start_bufor->tms_cutime, stop_bufor->tms_cutime), roznica_czasow(start_bufor->tms_cstime, stop_bufor->tms_cstime) );
     dlclose(dl_handle);
+    return 0;
 }
