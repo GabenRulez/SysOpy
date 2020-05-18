@@ -10,8 +10,8 @@
 
 #define max_dlugosc_komendy 131072 //standardowa dla Linuxa
 #define mierna_dlugosc_komendy 1024
-#define max_ilosc_operacji 100
-#define max_znakow_na_operacje 250
+#define max_ilosc_operacji 131072
+#define max_znakow_na_operacje 131072
 
 
 struct tablica_glowna* stworz_tablice_glowna(int ilosc_blokow){
@@ -73,17 +73,13 @@ int ile_operacji_w_bloku(struct blok_operacji_edycyjnych* blok){
 }
 
 void usun_blok(int index, struct tablica_glowna* tablica){
-    int ilosc_instrukcji_w_bloku = tablica->bloki[ index ]->index_wolnej_operacji-1;
-
-    for (int i = 0; i<=ilosc_instrukcji_w_bloku; i++){
-        free( tablica->bloki[ index ]->operacje_edycyjne[i] );
-    };
     free( tablica->bloki[ index ]->operacje_edycyjne );
     free( tablica->bloki[ index ] );
 
     if (index != tablica->index_wolnego_bloku-1){   // zamiana ostatniego bloku w wolne miejsce
         tablica->bloki[ index ] = tablica->bloki[ tablica->index_wolnego_bloku-1 ];
     }
+
     tablica->index_wolnego_bloku--;
 }
 
