@@ -258,6 +258,33 @@ cw01/zad3a/main_dynamic.c.s:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s
 .PHONY : cw01/zad3a/main_dynamic.c.s
 
+cw09/zad1/main.o: cw09/zad1/main.c.o
+
+.PHONY : cw09/zad1/main.o
+
+# target to build an object file
+cw09/zad1/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.o
+.PHONY : cw09/zad1/main.c.o
+
+cw09/zad1/main.i: cw09/zad1/main.c.i
+
+.PHONY : cw09/zad1/main.i
+
+# target to preprocess a source file
+cw09/zad1/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.i
+.PHONY : cw09/zad1/main.c.i
+
+cw09/zad1/main.s: cw09/zad1/main.c.s
+
+.PHONY : cw09/zad1/main.s
+
+# target to generate assembly for a file
+cw09/zad1/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.s
+.PHONY : cw09/zad1/main.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -309,6 +336,9 @@ help:
 	@echo "... cw01/zad3a/main_dynamic.o"
 	@echo "... cw01/zad3a/main_dynamic.i"
 	@echo "... cw01/zad3a/main_dynamic.s"
+	@echo "... cw09/zad1/main.o"
+	@echo "... cw09/zad1/main.i"
+	@echo "... cw09/zad1/main.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
