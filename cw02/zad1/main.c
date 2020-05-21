@@ -3,6 +3,10 @@
 #include <string.h>
 #include <sys/times.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+
 
 void wypisz_czasy(double rzeczywisty, double uzytkownika, double systemowy){
     printf("Rzeczywisty: %f Uzytkownika: %f Systemowy: %f\n", rzeczywisty, uzytkownika, systemowy);
@@ -12,6 +16,61 @@ double roznica_czasow(clock_t start, clock_t stop){
     return ((double)(stop - start) / sysconf(_SC_CLK_TCK));
 }
 
+
+
+void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc_elementu){
+    char* temp1 = calloc(wielkosc_elementu, sizeof(char));
+    char* temp2 = calloc(wielkosc_elementu, sizeof(char));
+
+
+    lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
+    read(   plik, &temp1,   wielkosc_elementu);
+
+    lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
+    read(   plik, &temp2,   wielkosc_elementu);
+
+
+    lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
+    write(  plik, temp2,    wielkosc_elementu);
+
+    lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
+    read(   plik, temp1,    wielkosc_elementu);
+
+    free(temp1);
+    free(temp2);
+}
+
+void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
+    if (l<r){
+        int punkt_podzialu = l;     // tak powiedziane w poleceniu
+        char* wartosc_punktu_podzialu = calloc(wielkosc_elementu, sizeof(char));
+
+        lseek(  plik, punkt_podzialu * wielkosc_elementu, SEEK_SET);
+        read(   plik, &wartosc_punktu_podzialu, wielkosc_elementu);
+
+        zamien_miejscami_systemowo(plik, punkt_podzialu, r, wielkosc_elementu);
+
+
+        int aktualna_pozycja = l;
+
+        for (int i=1; i < r-1; i++){
+            char* wartosc_porownywana = calloc(wielkosc_elementu, sizeof(char));
+            lseek(  plik, i * wielkosc_elementu, SEEK_SET);
+            read(   plik, &wartosc_porownywana, wielkosc_elementu);
+
+            if( strcmp(wartosc_porownywana, wartosc_punktu_podzialu) < 0 ){ // czytaj: jeśli w porządku leksykograficznym tekst1 jest przed tekst2
+                zamien_miejscami_systemowo(plik, i, aktualna_pozycja, wielkosc_elementu);
+                aktualna_pozycja++;
+            }
+            //free(wartosc_porownywana);
+        }
+
+        zamien_miejscami_systemowo(plik, aktualna_pozycja, r, wielkosc_elementu);
+
+        quicksort_systemowo(plik, l, aktualna_pozycja-1, wielkosc_elementu);
+        quicksort_systemowo(plik, aktualna_pozycja+1, r, wielkosc_elementu);
+    }
+}
 
 int main(int argc, char** argv){
     if (argc < 3){
@@ -39,9 +98,7 @@ int main(int argc, char** argv){
         int ilosc_elementow = (int) strtol(argv[3], (char**)NULL, 10);
         int wielkosc_elementu = (int) strtol(argv[4], (char**)NULL, 10);
 
-
         char* bufor = (char*)malloc(wielkosc_elementu * sizeof(char));  // tworze bufor o wielkosci jednego elementu
-
 
         FILE* plik = fopen(sciezka, "w");
         for (int i=0; i<ilosc_elementow; i++){
@@ -51,13 +108,40 @@ int main(int argc, char** argv){
             fwrite(bufor, wielkosc_elementu, 1, plik);  // zapis jednego elementu do pliku
         }
     }
+
     else if( strcmp(komenda, "sort") == 0 ){
         if (argc != 6){
             printf("Do funkcji 'sort' podaj:  sort   <nazwa_pliku>  <ilosc rekordow>    <ilosc_znakow>  <sys/lib>\n");
             return 1;
         }
+        char* sciezka = argv[2];
+        int ilosc_elementow = (int) strtol(argv[3], (char**)NULL, 10);
+        int wielkosc_elementu = (int) strtol(argv[4], (char**)NULL, 10);
+
+        if( strcmp(argv[5], "sys") == 0 ){
+            int plik = open(sciezka, O_RDWR);
+            if( plik<0 ){
+                printf("Blad przy czytaniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka);
+                return 4;   // brak pliku
+            }
 
 
+
+            quicksort_systemowo(plik, 1, ilosc_elementow-1, wielkosc_elementu);
+
+
+
+
+            close(plik);
+        }
+        else if( strcmp(argv[5], "lib") == 0 ){
+
+        }
+        else{
+            printf("Nie istnieje tryb: %s", argv[5]);
+            return 3;
+        }
+        /*
 
         for(int j=1; j<=ilosc_par_plikow; j++){
             char* plik_A = strtok(argv[i+j], ":");
@@ -66,9 +150,9 @@ int main(int argc, char** argv){
             FILE* plik_temp = porownaj_pliki(plik_A, plik_B);
             utworz_blok_operacji_z_pliku(plik_temp, tablica);
         }
-        i = i + ilosc_par_plikow + 1;   // przeskocz przez wszystkie pary plików do nastepnej komendy
+        i = i + ilosc_par_plikow + 1;   // przeskocz przez wszystkie pary plików do nastepnej komendy*/
     }
-    else if( strcmp(komenda, "copy") == 0 ){
+    /*else if( strcmp(komenda, "copy") == 0 ){
         int numer_bloku = (int) strtol(argv[i+1], (char**)NULL, 10);
         usun_blok(numer_bloku, tablica);
         i = i + 2;
@@ -79,7 +163,7 @@ int main(int argc, char** argv){
         printf("'\nSprawdz, czy poprawnie wprowadziles argumenty.\n");
         return 3;
     }
-
+*/
 
 
     czas_na_stop = times(stop_bufor);
