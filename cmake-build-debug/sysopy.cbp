@@ -97,6 +97,9 @@
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main_dynamic.c">
 			<Option target="sysopy"/>
 		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw02/zad1/main.c">
+			<Option target="sysopy"/>
+		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw09/zad1/main.c">
 			<Option target="sysopy"/>
 		</Unit>
