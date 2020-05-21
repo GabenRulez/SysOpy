@@ -116,9 +116,7 @@ void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
         for (int i=l; i < r; i++){
             char* wartosc_porownywana = (char*) malloc(wielkosc_elementu * sizeof(char));
             fseek(  plik, i * wielkosc_elementu, 0);
-            //lseek(  plik, i * wielkosc_elementu, SEEK_SET);
             fread(  wartosc_porownywana, sizeof(char), wielkosc_elementu, plik);
-            //read(   plik, wartosc_porownywana, wielkosc_elementu);
 
             if( strcmp(wartosc_porownywana, wartosc_punktu_podzialu) < 0 ){ // czytaj: jeśli w porządku leksykograficznym tekst1 jest przed tekst2
                 zamien_miejscami_bibliotecznie(plik, i, aktualna_pozycja, wielkosc_elementu);
@@ -180,6 +178,8 @@ int main(int argc, char** argv){
         }
     }
 
+
+
     else if( strcmp(komenda, "sort") == 0 ){
         if (argc != 6){
             printf("Do funkcji 'sort' podaj:  sort   <nazwa_pliku>  <ilosc rekordow>    <ilosc_znakow>  <sys/lib>\n");
@@ -197,7 +197,7 @@ int main(int argc, char** argv){
                 return 4;   // brak pliku
             }
 
-            quicksort_systemowo(plik, 0, ilosc_elementow-1, wielkosc_elementu);
+                quicksort_systemowo(plik, 0, ilosc_elementow-1, wielkosc_elementu);
 
             close(plik);
         }
@@ -209,7 +209,7 @@ int main(int argc, char** argv){
                 return 4;   // brak pliku
             }
 
-            quicksort_bibliotecznie(plik, 0, ilosc_elementow-1, wielkosc_elementu);
+                quicksort_bibliotecznie(plik, 0, ilosc_elementow-1, wielkosc_elementu);
 
             fclose(plik);
         }
@@ -217,21 +217,87 @@ int main(int argc, char** argv){
             printf("Nie istnieje tryb: %s", argv[5]);
             return 3;
         }
-        /*
-
-        for(int j=1; j<=ilosc_par_plikow; j++){
-            char* plik_A = strtok(argv[i+j], ":");
-            char* plik_B = strtok(NULL, ":");
-
-            FILE* plik_temp = porownaj_pliki(plik_A, plik_B);
-            utworz_blok_operacji_z_pliku(plik_temp, tablica);
-        }
-        i = i + ilosc_par_plikow + 1;   // przeskocz przez wszystkie pary plików do nastepnej komendy*/
     }
-    /*else if( strcmp(komenda, "copy") == 0 ){
-        int numer_bloku = (int) strtol(argv[i+1], (char**)NULL, 10);
-        usun_blok(numer_bloku, tablica);
-        i = i + 2;
+
+
+
+    else if( strcmp(komenda, "copy") == 0 ){
+        if (argc != 7){
+            printf("Do funkcji 'copy' podaj:  copy   <nazwa_pliku1> <nazwa_pliku2> <ilosc rekordow>    <ilosc_znakow>  <sys/lib>\n");
+            return 1;
+        }
+        char* sciezka1 = argv[2];
+        char* sciezka2 = argv[3];
+        int ilosc_elementow = (int) strtol(argv[4], (char**)NULL, 10);
+        int wielkosc_elementu = (int) strtol(argv[5], (char**)NULL, 10);
+
+        if( strcmp(argv[6], "sys") == 0 ){
+            int plik1 = open(sciezka1, O_RDONLY);
+            if( plik1<0 ){
+                printf("Blad przy czytaniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka1);
+                return 4;   // brak pliku
+            }
+            lseek(plik1, 0, SEEK_SET);
+
+            int plik2 = open(sciezka2, O_RDWR|O_CREAT|O_TRUNC, 0644);
+            if( plik2<0 ){
+                printf("Blad przy otwieraniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka2);
+                return 4;
+            }
+            lseek(plik2, 0, SEEK_SET);
+
+            char* bufor = (char*) malloc(wielkosc_elementu * sizeof(char));
+            for(int i=0; i<ilosc_elementow; i++){
+                if( read(plik1, bufor, wielkosc_elementu) != wielkosc_elementu ){
+                    printf("W: Blad przy czytaniu wartosci z pliku %s. Prawdopodobnie podales bledne dane wejsciowe.", sciezka1);
+                    //return 6;
+                }
+                if( write(plik2, bufor, wielkosc_elementu) != wielkosc_elementu ){
+                    printf("W: Blad przy zapisywaniu wartosci do pliku %s.", sciezka2);
+                }
+            }
+            free(bufor);
+            close(plik1);
+            close(plik2);
+        }
+
+
+        else if( strcmp(argv[6], "lib") == 0 ){
+            FILE* plik1 = fopen(sciezka1, "r");
+            if( plik1 == NULL ){
+                printf("Blad przy czytaniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka1);
+                return 4;   // brak pliku
+            }
+
+            FILE* plik2 = fopen(sciezka2, "w");
+            if( plik2 == NULL ){
+                printf("Blad przy otwieraniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka2);
+                return 4;
+            }
+
+            char* bufor = (char*) malloc(wielkosc_elementu * sizeof(char));
+
+            for(int i=0; i<ilosc_elementow; i++){
+                if( fread(bufor, sizeof(char), wielkosc_elementu, plik1) != wielkosc_elementu ){
+                    printf("W: Blad przy czytaniu wartosci z pliku %s. Prawdopodobnie podales bledne dane wejsciowe.", sciezka1);
+                    //return 6;
+                }
+                if( fwrite(bufor, sizeof(char), wielkosc_elementu, plik2) != wielkosc_elementu ){
+                    printf("W: Blad przy zapisywaniu wartosci do pliku %s.", sciezka2);
+                }
+            }
+            free(bufor);
+            fclose(plik1);
+            fclose(plik2);
+        }
+
+
+
+        else{
+            printf("Nie istnieje tryb: %s", argv[5]);
+            return 3;
+        }
+
     }
     else{
         printf("Error - nie istnieje komenda: '");
@@ -239,7 +305,7 @@ int main(int argc, char** argv){
         printf("'\nSprawdz, czy poprawnie wprowadziles argumenty.\n");
         return 3;
     }
-*/
+
 
 
     czas_na_stop = times(stop_bufor);
