@@ -23,17 +23,20 @@ void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc
     char* temp2 = (char*) malloc(wielkosc_elementu * sizeof(char));
 
     lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
-    read(   plik, &temp1,   wielkosc_elementu);
+    read(   plik, temp1,   wielkosc_elementu);
 
     lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
-    read(   plik, &temp2,   wielkosc_elementu);
+    read(   plik, temp2,   wielkosc_elementu);
 
 
     lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
-    write(  plik, &temp2,    wielkosc_elementu);
+    write(  plik, temp2,    wielkosc_elementu);
 
     lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
-    write(  plik, &temp1,    wielkosc_elementu);
+    write(  plik, temp1,    wielkosc_elementu);
+
+    free(temp1);
+    free(temp2);
 }
 
 void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
