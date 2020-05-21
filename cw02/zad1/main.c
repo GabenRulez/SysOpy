@@ -72,6 +72,83 @@ void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
     }
 }
 
+
+
+
+
+void zamien_miejscami_bibliotecznie(FILE* plik, int indeks1, int indeks2, int wielkosc_elementu){
+    char* temp1 = (char*) malloc(wielkosc_elementu * sizeof(char));
+    char* temp2 = (char*) malloc(wielkosc_elementu * sizeof(char));
+
+    fseek(  plik, indeks1 * wielkosc_elementu, 0);
+    //lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
+    fread(  temp1, wielkosc_elementu, 1, plik);
+    //read(   plik, temp1,   wielkosc_elementu);
+
+    fseek(  plik, indeks2 * wielkosc_elementu, 0);
+    //lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
+    fread(  temp2, wielkosc_elementu, 1, plik);
+    //read(   plik, temp2,   wielkosc_elementu);
+
+
+    fseek(  plik, indeks1 * wielkosc_elementu, 0);
+    //lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
+    fwrite( temp1, wielkosc_elementu, 1, plik);
+    //write(  plik, temp2,    wielkosc_elementu);
+
+    fseek(  plik, indeks2 * wielkosc_elementu, 0);
+    //lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
+    fwrite( temp2, wielkosc_elementu, 1, plik);
+    //write(  plik, temp1,    wielkosc_elementu);
+
+    free(temp1);
+    free(temp2);
+}
+
+void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
+    if (l<r){
+        int punkt_podzialu = l;     // tak powiedziane w poleceniu
+        char* wartosc_punktu_podzialu = (char*) malloc(wielkosc_elementu * sizeof(char));
+
+        fseek(  plik, punkt_podzialu * wielkosc_elementu, 0);
+        //lseek(  plik, punkt_podzialu * wielkosc_elementu, SEEK_SET);
+        fread(  wartosc_punktu_podzialu, wielkosc_elementu, 1, plik);
+        //read(   plik, wartosc_punktu_podzialu, wielkosc_elementu);
+
+        zamien_miejscami_bibliotecznie(plik, punkt_podzialu, r, wielkosc_elementu);
+
+
+        int aktualna_pozycja = l;
+
+        for (int i=l; i < r; i++){
+            char* wartosc_porownywana = (char*) malloc(wielkosc_elementu * sizeof(char));
+            fseek(  plik, i * wielkosc_elementu, 0);
+            //lseek(  plik, i * wielkosc_elementu, SEEK_SET);
+            fread(  wartosc_porownywana, wielkosc_elementu, 1, plik);
+            //read(   plik, wartosc_porownywana, wielkosc_elementu);
+
+            if( strcmp(wartosc_porownywana, wartosc_punktu_podzialu) < 0 ){ // czytaj: jeśli w porządku leksykograficznym tekst1 jest przed tekst2
+                zamien_miejscami_bibliotecznie(plik, i, aktualna_pozycja, wielkosc_elementu);
+                aktualna_pozycja++;
+            }
+            free(wartosc_porownywana);
+        }
+        free(wartosc_punktu_podzialu);
+
+        zamien_miejscami_bibliotecznie(plik, aktualna_pozycja, r, wielkosc_elementu);
+
+        quicksort_bibliotecznie(plik, l, aktualna_pozycja-1, wielkosc_elementu);
+        quicksort_bibliotecznie(plik, aktualna_pozycja+1, r, wielkosc_elementu);
+    }
+}
+
+
+
+
+
+
+
+
 int main(int argc, char** argv){
     if (argc < 3){
         printf("Podaj:  komendę   <plik1> <plik2>\n");
@@ -118,6 +195,7 @@ int main(int argc, char** argv){
         int ilosc_elementow = (int) strtol(argv[3], (char**)NULL, 10);
         int wielkosc_elementu = (int) strtol(argv[4], (char**)NULL, 10);
 
+
         if( strcmp(argv[5], "sys") == 0 ){
             int plik = open(sciezka, O_RDWR);
             if( plik<0 ){
@@ -129,8 +207,17 @@ int main(int argc, char** argv){
 
             close(plik);
         }
-        else if( strcmp(argv[5], "lib") == 0 ){
 
+        else if( strcmp(argv[5], "lib") == 0 ){
+            FILE* plik = fopen(sciezka, "rw");
+            if( plik == NULL ){
+                printf("Blad przy czytaniu pliku ze sciezki %s.\nUpewnij sie, ze istnieje taka sciezka", sciezka);
+                return 4;   // brak pliku
+            }
+
+            quicksort_bibliotecznie(plik, 0, ilosc_elementow-1, wielkosc_elementu);
+
+            fclose(plik);
         }
         else{
             printf("Nie istnieje tryb: %s", argv[5]);
