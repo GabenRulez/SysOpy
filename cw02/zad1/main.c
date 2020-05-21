@@ -8,7 +8,6 @@
 #include <fcntl.h>
 #include <time.h>
 
-
 void wypisz_czasy(double rzeczywisty, double uzytkownika, double systemowy){
     printf("Rzeczywisty: %f Uzytkownika: %f Systemowy: %f\n", rzeczywisty, uzytkownika, systemowy);
 }
@@ -16,8 +15,6 @@ void wypisz_czasy(double rzeczywisty, double uzytkownika, double systemowy){
 double roznica_czasow(clock_t start, clock_t stop){
     return ((double)(stop - start) / sysconf(_SC_CLK_TCK));
 }
-
-
 
 void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc_elementu){
     char* temp1 = (char*) malloc(wielkosc_elementu * sizeof(char));
@@ -104,9 +101,7 @@ void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
         char* wartosc_punktu_podzialu = (char*) malloc(wielkosc_elementu * sizeof(char));
 
         fseek(  plik, punkt_podzialu * wielkosc_elementu, 0);
-        //lseek(  plik, punkt_podzialu * wielkosc_elementu, SEEK_SET);
         fread(  wartosc_punktu_podzialu, sizeof(char), wielkosc_elementu, plik);
-        //read(   plik, wartosc_punktu_podzialu, wielkosc_elementu);
 
         zamien_miejscami_bibliotecznie(plik, punkt_podzialu, r, wielkosc_elementu);
 
@@ -137,17 +132,14 @@ void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
 
 
 
-
-
-
 int main(int argc, char** argv){
     if (argc < 3){
         printf("Podaj:  komendę   <plik1> <plik2>\n");
         return 1;
     }
 
-    struct tms* start_bufor = calloc(1, sizeof(struct tms));
-    struct tms* stop_bufor =  calloc(1, sizeof(struct tms));
+    struct tms* start_bufor = malloc(sizeof(struct tms));
+    struct tms* stop_bufor =  malloc(sizeof(struct tms));
 
     clock_t czas_na_start = 0;
     clock_t czas_na_stop = 0;
@@ -305,8 +297,6 @@ int main(int argc, char** argv){
         printf("'\nSprawdz, czy poprawnie wprowadziles argumenty.\n");
         return 3;
     }
-
-
 
     czas_na_stop = times(stop_bufor);
     wypisz_czasy( roznica_czasow(czas_na_start, czas_na_stop), roznica_czasow(start_bufor->tms_cutime, stop_bufor->tms_cutime), roznica_czasow(start_bufor->tms_cstime, stop_bufor->tms_cstime) );
