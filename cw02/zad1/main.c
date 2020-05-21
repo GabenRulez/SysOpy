@@ -19,9 +19,8 @@ double roznica_czasow(clock_t start, clock_t stop){
 
 
 void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc_elementu){
-    char* temp1 = calloc(wielkosc_elementu, sizeof(char));
-    char* temp2 = calloc(wielkosc_elementu, sizeof(char));
-
+    char* temp1 = (char*) malloc(wielkosc_elementu * sizeof(char));
+    char* temp2 = (char*) malloc(wielkosc_elementu * sizeof(char));
 
     lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
     read(   plik, &temp1,   wielkosc_elementu);
@@ -31,30 +30,27 @@ void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc
 
 
     lseek(  plik, indeks1 * wielkosc_elementu, SEEK_SET);
-    write(  plik, temp2,    wielkosc_elementu);
+    write(  plik, &temp2,    wielkosc_elementu);
 
     lseek(  plik, indeks2 * wielkosc_elementu, SEEK_SET);
-    read(   plik, temp1,    wielkosc_elementu);
-
-    free(temp1);
-    free(temp2);
+    write(  plik, &temp1,    wielkosc_elementu);
 }
 
 void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
     if (l<r){
         int punkt_podzialu = l;     // tak powiedziane w poleceniu
-        char* wartosc_punktu_podzialu = calloc(wielkosc_elementu, sizeof(char));
+        char* wartosc_punktu_podzialu = malloc(wielkosc_elementu * sizeof(char));
 
         lseek(  plik, punkt_podzialu * wielkosc_elementu, SEEK_SET);
         read(   plik, &wartosc_punktu_podzialu, wielkosc_elementu);
 
         zamien_miejscami_systemowo(plik, punkt_podzialu, r, wielkosc_elementu);
-
+/*
 
         int aktualna_pozycja = l;
 
         for (int i=1; i < r-1; i++){
-            char* wartosc_porownywana = calloc(wielkosc_elementu, sizeof(char));
+            char* wartosc_porownywana = malloc(wielkosc_elementu * sizeof(char));
             lseek(  plik, i * wielkosc_elementu, SEEK_SET);
             read(   plik, &wartosc_porownywana, wielkosc_elementu);
 
@@ -64,11 +60,12 @@ void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
             }
             //free(wartosc_porownywana);
         }
+        //free(wartosc_punktu_podzialu);
 
         zamien_miejscami_systemowo(plik, aktualna_pozycja, r, wielkosc_elementu);
 
         quicksort_systemowo(plik, l, aktualna_pozycja-1, wielkosc_elementu);
-        quicksort_systemowo(plik, aktualna_pozycja+1, r, wielkosc_elementu);
+        quicksort_systemowo(plik, aktualna_pozycja+1, r, wielkosc_elementu);*/
     }
 }
 
@@ -127,8 +124,8 @@ int main(int argc, char** argv){
 
 
 
-            quicksort_systemowo(plik, 1, ilosc_elementow-1, wielkosc_elementu);
-
+            //quicksort_systemowo(plik, 1, ilosc_elementow-1, wielkosc_elementu);
+            zamien_miejscami_systemowo(plik, 0, 1, wielkosc_elementu);
 
 
 
