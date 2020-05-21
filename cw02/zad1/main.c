@@ -27,25 +27,38 @@ int main(int argc, char** argv){
 
     czas_na_start = times(start_bufor);
 
-
-
-    //int ilosc_par_plikow = (int) strtol(argv[1], (char**)NULL, 10);
-
     char* komenda = argv[1];
     if(komenda == NULL) return 2;
 
     if( strcmp(komenda, "generate") == 0 ){
-        if (argc < 5){
+        if (argc != 5){
             printf("Do funkcji 'generate' podaj:  generate   <nazwa_pliku>  <ilosc rekordow>    <ilosc_znakow>\n");
             return 1;
         }
-        char* sciezka = argv[2]
+        char* sciezka = argv[2];
+        int ilosc_elementow = (int) strtol(argv[3], (char**)NULL, 10);
+        int wielkosc_elementu = (int) strtol(argv[4], (char**)NULL, 10);
 
-        int rozmiar = (int) strtol(argv[i+1], (char**)NULL, 10);
-        tablica = stworz_tablice_glowna(rozmiar);
-        i = i + 2;
+
+        char* bufor = (char*)malloc(wielkosc_elementu * sizeof(char));  // tworze bufor o wielkosci jednego elementu
+
+
+        FILE* plik = fopen(sciezka, "w");
+        for (int i=0; i<ilosc_elementow; i++){
+            for (int i=0; i<wielkosc_elementu; i++){    // wypelniam bufor losowymi znakami
+                bufor[i] = "ABCDEFGHIJKLMNOPRSTUWYZabcdefghijklmnoprstuwyz"[random() % 46];
+            }
+            fwrite(bufor, wielkosc_elementu, 1, plik);  // zapis jednego elementu do pliku
+        }
     }
     else if( strcmp(komenda, "sort") == 0 ){
+        if (argc != 6){
+            printf("Do funkcji 'sort' podaj:  sort   <nazwa_pliku>  <ilosc rekordow>    <ilosc_znakow>  <sys/lib>\n");
+            return 1;
+        }
+
+
+
         for(int j=1; j<=ilosc_par_plikow; j++){
             char* plik_A = strtok(argv[i+j], ":");
             char* plik_B = strtok(NULL, ":");
