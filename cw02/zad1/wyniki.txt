@@ -1,0 +1,41 @@
+ 
+     Generowanie plikow do testow     
+Pliki A:
+Rzeczywisty: 0.010000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.010000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.720000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.940000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 2.820000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 3.880000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Pliki B:
+Rzeczywisty: 0.000000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.010000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.310000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.500000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 1.600000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 2.190000 Uzytkownika: 0.000000 Systemowy: 0.000000
+ 
+     Kopiowanie sys     
+Pliki A:
+Rzeczywisty: 0.270000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.230000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.200000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.170000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.230000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.240000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Pliki B:
+Rzeczywisty: 0.100000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.130000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.080000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.100000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.100000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.120000 Uzytkownika: 0.000000 Systemowy: 0.000000
+ 
+     Kopiowanie lib     
+Pliki A:
+Rzeczywisty: 0.010000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.010000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.070000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.080000 Uzytkownika: 0.000000 Systemowy: 0.000000
+Rzeczywisty: 0.230000 Uzytkownika: 0.000000 Systemowy: 0.000000
+W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu wartosci do pliku tekst_8192B_a_lib.W: Blad przy zapisywaniu w
