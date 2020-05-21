@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <time.h>
 
 
 void wypisz_czasy(double rzeczywisty, double uzytkownika, double systemowy){
@@ -170,6 +171,7 @@ int main(int argc, char** argv){
         char* bufor = (char*)malloc(wielkosc_elementu * sizeof(char));  // tworze bufor o wielkosci jednego elementu
 
         FILE* plik = fopen(sciezka, "w");
+        srand(time(0));
         for (int i=0; i<ilosc_elementow; i++){
             for (int i=0; i<wielkosc_elementu; i++){    // wypelniam bufor losowymi znakami
                 bufor[i] = "ABCDEFGHIJKLMNOPRSTUWYZabcdefghijklmnoprstuwyz"[random() % 46];
