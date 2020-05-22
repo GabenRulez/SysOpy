@@ -4,15 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/wojtek/CLionProjects/SysOpy/cw01/zad1/myLibrary.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw01/zad2/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad2/main.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw01/zad2/myLibrary.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main_dynamic.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw02/zad1/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw02/zad1/main.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw02/zad2/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw02/zad2/main.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw09/zad1/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw09/zad1/main.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/main.c.o"
+  "/home/wojtek/CLionProjects/SysOpy/cw02/zad2/main2.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

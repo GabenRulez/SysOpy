@@ -15,7 +15,7 @@ void* utworz_golibrode(){
 };
 
 void* utworz_klienta(){
-    printf("Jestem klientem.")
+    printf("Jestem klientem.");
 };
 
 
@@ -38,7 +38,7 @@ int main(int argc, char** argv){
     pthread_t* wszyscy_klienci = (pthread_t*) calloc(liczba_klientow, sizeof(pthread_t));
     for(int i=0; i<liczba_klientow; i++){
         pthread_create(wszyscy_klienci[i], NULL, utworz_klienta(), NULL);
-        usleep()
+        //usleep(,);
     }
 
 

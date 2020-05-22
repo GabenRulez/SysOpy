@@ -123,248 +123,32 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw01/zad1/myLibrary.o: cw01/zad1/myLibrary.c.o
+cw02/zad2/main2.o: cw02/zad2/main2.c.o
 
-.PHONY : cw01/zad1/myLibrary.o
-
-# target to build an object file
-cw01/zad1/myLibrary.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o
-.PHONY : cw01/zad1/myLibrary.c.o
-
-cw01/zad1/myLibrary.i: cw01/zad1/myLibrary.c.i
-
-.PHONY : cw01/zad1/myLibrary.i
-
-# target to preprocess a source file
-cw01/zad1/myLibrary.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.i
-.PHONY : cw01/zad1/myLibrary.c.i
-
-cw01/zad1/myLibrary.s: cw01/zad1/myLibrary.c.s
-
-.PHONY : cw01/zad1/myLibrary.s
-
-# target to generate assembly for a file
-cw01/zad1/myLibrary.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.s
-.PHONY : cw01/zad1/myLibrary.c.s
-
-cw01/zad2/main.o: cw01/zad2/main.c.o
-
-.PHONY : cw01/zad2/main.o
+.PHONY : cw02/zad2/main2.o
 
 # target to build an object file
-cw01/zad2/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.o
-.PHONY : cw01/zad2/main.c.o
+cw02/zad2/main2.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o
+.PHONY : cw02/zad2/main2.c.o
 
-cw01/zad2/main.i: cw01/zad2/main.c.i
+cw02/zad2/main2.i: cw02/zad2/main2.c.i
 
-.PHONY : cw01/zad2/main.i
-
-# target to preprocess a source file
-cw01/zad2/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.i
-.PHONY : cw01/zad2/main.c.i
-
-cw01/zad2/main.s: cw01/zad2/main.c.s
-
-.PHONY : cw01/zad2/main.s
-
-# target to generate assembly for a file
-cw01/zad2/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/main.c.s
-.PHONY : cw01/zad2/main.c.s
-
-cw01/zad2/myLibrary.o: cw01/zad2/myLibrary.c.o
-
-.PHONY : cw01/zad2/myLibrary.o
-
-# target to build an object file
-cw01/zad2/myLibrary.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o
-.PHONY : cw01/zad2/myLibrary.c.o
-
-cw01/zad2/myLibrary.i: cw01/zad2/myLibrary.c.i
-
-.PHONY : cw01/zad2/myLibrary.i
+.PHONY : cw02/zad2/main2.i
 
 # target to preprocess a source file
-cw01/zad2/myLibrary.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.i
-.PHONY : cw01/zad2/myLibrary.c.i
+cw02/zad2/main2.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main2.c.i
+.PHONY : cw02/zad2/main2.c.i
 
-cw01/zad2/myLibrary.s: cw01/zad2/myLibrary.c.s
+cw02/zad2/main2.s: cw02/zad2/main2.c.s
 
-.PHONY : cw01/zad2/myLibrary.s
-
-# target to generate assembly for a file
-cw01/zad2/myLibrary.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.s
-.PHONY : cw01/zad2/myLibrary.c.s
-
-cw01/zad3a/main.o: cw01/zad3a/main.c.o
-
-.PHONY : cw01/zad3a/main.o
-
-# target to build an object file
-cw01/zad3a/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o
-.PHONY : cw01/zad3a/main.c.o
-
-cw01/zad3a/main.i: cw01/zad3a/main.c.i
-
-.PHONY : cw01/zad3a/main.i
-
-# target to preprocess a source file
-cw01/zad3a/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.i
-.PHONY : cw01/zad3a/main.c.i
-
-cw01/zad3a/main.s: cw01/zad3a/main.c.s
-
-.PHONY : cw01/zad3a/main.s
+.PHONY : cw02/zad2/main2.s
 
 # target to generate assembly for a file
-cw01/zad3a/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main.c.s
-.PHONY : cw01/zad3a/main.c.s
-
-cw01/zad3a/main_dynamic.o: cw01/zad3a/main_dynamic.c.o
-
-.PHONY : cw01/zad3a/main_dynamic.o
-
-# target to build an object file
-cw01/zad3a/main_dynamic.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o
-.PHONY : cw01/zad3a/main_dynamic.c.o
-
-cw01/zad3a/main_dynamic.i: cw01/zad3a/main_dynamic.c.i
-
-.PHONY : cw01/zad3a/main_dynamic.i
-
-# target to preprocess a source file
-cw01/zad3a/main_dynamic.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.i
-.PHONY : cw01/zad3a/main_dynamic.c.i
-
-cw01/zad3a/main_dynamic.s: cw01/zad3a/main_dynamic.c.s
-
-.PHONY : cw01/zad3a/main_dynamic.s
-
-# target to generate assembly for a file
-cw01/zad3a/main_dynamic.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s
-.PHONY : cw01/zad3a/main_dynamic.c.s
-
-cw02/zad1/main.o: cw02/zad1/main.c.o
-
-.PHONY : cw02/zad1/main.o
-
-# target to build an object file
-cw02/zad1/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad1/main.c.o
-.PHONY : cw02/zad1/main.c.o
-
-cw02/zad1/main.i: cw02/zad1/main.c.i
-
-.PHONY : cw02/zad1/main.i
-
-# target to preprocess a source file
-cw02/zad1/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad1/main.c.i
-.PHONY : cw02/zad1/main.c.i
-
-cw02/zad1/main.s: cw02/zad1/main.c.s
-
-.PHONY : cw02/zad1/main.s
-
-# target to generate assembly for a file
-cw02/zad1/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad1/main.c.s
-.PHONY : cw02/zad1/main.c.s
-
-cw02/zad2/main.o: cw02/zad2/main.c.o
-
-.PHONY : cw02/zad2/main.o
-
-# target to build an object file
-cw02/zad2/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main.c.o
-.PHONY : cw02/zad2/main.c.o
-
-cw02/zad2/main.i: cw02/zad2/main.c.i
-
-.PHONY : cw02/zad2/main.i
-
-# target to preprocess a source file
-cw02/zad2/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main.c.i
-.PHONY : cw02/zad2/main.c.i
-
-cw02/zad2/main.s: cw02/zad2/main.c.s
-
-.PHONY : cw02/zad2/main.s
-
-# target to generate assembly for a file
-cw02/zad2/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main.c.s
-.PHONY : cw02/zad2/main.c.s
-
-cw09/zad1/main.o: cw09/zad1/main.c.o
-
-.PHONY : cw09/zad1/main.o
-
-# target to build an object file
-cw09/zad1/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.o
-.PHONY : cw09/zad1/main.c.o
-
-cw09/zad1/main.i: cw09/zad1/main.c.i
-
-.PHONY : cw09/zad1/main.i
-
-# target to preprocess a source file
-cw09/zad1/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.i
-.PHONY : cw09/zad1/main.c.i
-
-cw09/zad1/main.s: cw09/zad1/main.c.s
-
-.PHONY : cw09/zad1/main.s
-
-# target to generate assembly for a file
-cw09/zad1/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw09/zad1/main.c.s
-.PHONY : cw09/zad1/main.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/main.c.s
-.PHONY : main.c.s
+cw02/zad2/main2.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw02/zad2/main2.c.s
+.PHONY : cw02/zad2/main2.c.s
 
 # Help Target
 help:
@@ -375,33 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw01/zad1/myLibrary.o"
-	@echo "... cw01/zad1/myLibrary.i"
-	@echo "... cw01/zad1/myLibrary.s"
-	@echo "... cw01/zad2/main.o"
-	@echo "... cw01/zad2/main.i"
-	@echo "... cw01/zad2/main.s"
-	@echo "... cw01/zad2/myLibrary.o"
-	@echo "... cw01/zad2/myLibrary.i"
-	@echo "... cw01/zad2/myLibrary.s"
-	@echo "... cw01/zad3a/main.o"
-	@echo "... cw01/zad3a/main.i"
-	@echo "... cw01/zad3a/main.s"
-	@echo "... cw01/zad3a/main_dynamic.o"
-	@echo "... cw01/zad3a/main_dynamic.i"
-	@echo "... cw01/zad3a/main_dynamic.s"
-	@echo "... cw02/zad1/main.o"
-	@echo "... cw02/zad1/main.i"
-	@echo "... cw02/zad1/main.s"
-	@echo "... cw02/zad2/main.o"
-	@echo "... cw02/zad2/main.i"
-	@echo "... cw02/zad2/main.s"
-	@echo "... cw09/zad1/main.o"
-	@echo "... cw09/zad1/main.i"
-	@echo "... cw09/zad1/main.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... cw02/zad2/main2.o"
+	@echo "... cw02/zad2/main2.i"
+	@echo "... cw02/zad2/main2.s"
 .PHONY : help
 
 

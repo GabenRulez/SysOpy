@@ -37,7 +37,7 @@ void zamien_miejscami_systemowo(int plik, int indeks1, int indeks2, int wielkosc
     free(temp2);
 }
 
-void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
+int quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
     if (l<r){
         int punkt_podzialu = l;     // tak powiedziane w poleceniu
         char* wartosc_punktu_podzialu = (char*) malloc(wielkosc_elementu * sizeof(char));
@@ -68,10 +68,8 @@ void quicksort_systemowo(int plik, int l, int r, int wielkosc_elementu){
         quicksort_systemowo(plik, l, aktualna_pozycja-1, wielkosc_elementu);
         quicksort_systemowo(plik, aktualna_pozycja+1, r, wielkosc_elementu);
     }
+    return 0;
 }
-
-
-
 
 
 void zamien_miejscami_bibliotecznie(FILE* plik, int indeks1, int indeks2, int wielkosc_elementu){
@@ -95,7 +93,7 @@ void zamien_miejscami_bibliotecznie(FILE* plik, int indeks1, int indeks2, int wi
     free(temp2);
 }
 
-void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
+int quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
     if (l<r){
         int punkt_podzialu = l;     // tak powiedziane w poleceniu
         char* wartosc_punktu_podzialu = (char*) malloc(wielkosc_elementu * sizeof(char));
@@ -126,6 +124,7 @@ void quicksort_bibliotecznie(FILE* plik, int l, int r, int wielkosc_elementu){
         quicksort_bibliotecznie(plik, l, aktualna_pozycja-1, wielkosc_elementu);
         quicksort_bibliotecznie(plik, aktualna_pozycja+1, r, wielkosc_elementu);
     }
+    return 0;
 }
 
 
@@ -189,7 +188,9 @@ int main(int argc, char** argv){
                 return 4;   // brak pliku
             }
 
-                quicksort_systemowo(plik, 0, ilosc_elementow-1, wielkosc_elementu);
+            if( quicksort_systemowo(plik, 0, ilosc_elementow-1, wielkosc_elementu) != 0){
+                return 7; // error w quicksort
+            };
 
             close(plik);
         }
@@ -201,7 +202,9 @@ int main(int argc, char** argv){
                 return 4;   // brak pliku
             }
 
-                quicksort_bibliotecznie(plik, 0, ilosc_elementow-1, wielkosc_elementu);
+            if( quicksort_bibliotecznie(plik, 0, ilosc_elementow-1, wielkosc_elementu) != 0){
+                return 7; // error w quicksort
+            }
 
             fclose(plik);
         }
