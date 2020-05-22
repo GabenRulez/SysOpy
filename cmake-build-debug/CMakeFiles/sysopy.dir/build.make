@@ -57,150 +57,30 @@ include CMakeFiles/sysopy.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/sysopy.dir/flags.make
 
-CMakeFiles/sysopy.dir/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/sysopy.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/main.c
+CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o: CMakeFiles/sysopy.dir/flags.make
+CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o: ../cw02/zad2/main2.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main2.c
 
-CMakeFiles/sysopy.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/main.c > CMakeFiles/sysopy.dir/main.c.i
+CMakeFiles/sysopy.dir/cw02/zad2/main2.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw02/zad2/main2.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main2.c > CMakeFiles/sysopy.dir/cw02/zad2/main2.c.i
 
-CMakeFiles/sysopy.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/main.c -o CMakeFiles/sysopy.dir/main.c.s
-
-CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o: ../cw01/zad1/myLibrary.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw01/zad1/myLibrary.c
-
-CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw01/zad1/myLibrary.c > CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.i
-
-CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw01/zad1/myLibrary.c -o CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.s
-
-CMakeFiles/sysopy.dir/cw01/zad2/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw01/zad2/main.c.o: ../cw01/zad2/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/sysopy.dir/cw01/zad2/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw01/zad2/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw01/zad2/main.c
-
-CMakeFiles/sysopy.dir/cw01/zad2/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw01/zad2/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw01/zad2/main.c > CMakeFiles/sysopy.dir/cw01/zad2/main.c.i
-
-CMakeFiles/sysopy.dir/cw01/zad2/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw01/zad2/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw01/zad2/main.c -o CMakeFiles/sysopy.dir/cw01/zad2/main.c.s
-
-CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o: ../cw01/zad2/myLibrary.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw01/zad2/myLibrary.c
-
-CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw01/zad2/myLibrary.c > CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.i
-
-CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw01/zad2/myLibrary.c -o CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.s
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o: ../cw01/zad3a/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main.c
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw01/zad3a/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main.c > CMakeFiles/sysopy.dir/cw01/zad3a/main.c.i
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw01/zad3a/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main.c -o CMakeFiles/sysopy.dir/cw01/zad3a/main.c.s
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o: ../cw01/zad3a/main_dynamic.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main_dynamic.c
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main_dynamic.c > CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.i
-
-CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw01/zad3a/main_dynamic.c -o CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.s
-
-CMakeFiles/sysopy.dir/cw09/zad1/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw09/zad1/main.c.o: ../cw09/zad1/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/sysopy.dir/cw09/zad1/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw09/zad1/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw09/zad1/main.c
-
-CMakeFiles/sysopy.dir/cw09/zad1/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw09/zad1/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw09/zad1/main.c > CMakeFiles/sysopy.dir/cw09/zad1/main.c.i
-
-CMakeFiles/sysopy.dir/cw09/zad1/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw09/zad1/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw09/zad1/main.c -o CMakeFiles/sysopy.dir/cw09/zad1/main.c.s
-
-CMakeFiles/sysopy.dir/cw02/zad1/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw02/zad1/main.c.o: ../cw02/zad1/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/sysopy.dir/cw02/zad1/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw02/zad1/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw02/zad1/main.c
-
-CMakeFiles/sysopy.dir/cw02/zad1/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw02/zad1/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw02/zad1/main.c > CMakeFiles/sysopy.dir/cw02/zad1/main.c.i
-
-CMakeFiles/sysopy.dir/cw02/zad1/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw02/zad1/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw02/zad1/main.c -o CMakeFiles/sysopy.dir/cw02/zad1/main.c.s
-
-CMakeFiles/sysopy.dir/cw02/zad2/main.c.o: CMakeFiles/sysopy.dir/flags.make
-CMakeFiles/sysopy.dir/cw02/zad2/main.c.o: ../cw02/zad2/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/sysopy.dir/cw02/zad2/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sysopy.dir/cw02/zad2/main.c.o   -c /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main.c
-
-CMakeFiles/sysopy.dir/cw02/zad2/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sysopy.dir/cw02/zad2/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main.c > CMakeFiles/sysopy.dir/cw02/zad2/main.c.i
-
-CMakeFiles/sysopy.dir/cw02/zad2/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw02/zad2/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main.c -o CMakeFiles/sysopy.dir/cw02/zad2/main.c.s
+CMakeFiles/sysopy.dir/cw02/zad2/main2.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sysopy.dir/cw02/zad2/main2.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wojtek/CLionProjects/SysOpy/cw02/zad2/main2.c -o CMakeFiles/sysopy.dir/cw02/zad2/main2.c.s
 
 # Object files for target sysopy
 sysopy_OBJECTS = \
-"CMakeFiles/sysopy.dir/main.c.o" \
-"CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o" \
-"CMakeFiles/sysopy.dir/cw01/zad2/main.c.o" \
-"CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o" \
-"CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o" \
-"CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o" \
-"CMakeFiles/sysopy.dir/cw09/zad1/main.c.o" \
-"CMakeFiles/sysopy.dir/cw02/zad1/main.c.o" \
-"CMakeFiles/sysopy.dir/cw02/zad2/main.c.o"
+"CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o"
 
 # External object files for target sysopy
 sysopy_EXTERNAL_OBJECTS =
 
-sysopy: CMakeFiles/sysopy.dir/main.c.o
-sysopy: CMakeFiles/sysopy.dir/cw01/zad1/myLibrary.c.o
-sysopy: CMakeFiles/sysopy.dir/cw01/zad2/main.c.o
-sysopy: CMakeFiles/sysopy.dir/cw01/zad2/myLibrary.c.o
-sysopy: CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o
-sysopy: CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o
-sysopy: CMakeFiles/sysopy.dir/cw09/zad1/main.c.o
-sysopy: CMakeFiles/sysopy.dir/cw02/zad1/main.c.o
-sysopy: CMakeFiles/sysopy.dir/cw02/zad2/main.c.o
+sysopy: CMakeFiles/sysopy.dir/cw02/zad2/main2.c.o
 sysopy: CMakeFiles/sysopy.dir/build.make
 sysopy: CMakeFiles/sysopy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable sysopy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable sysopy"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sysopy.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
