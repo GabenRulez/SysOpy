@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/sysopy.dir/cw01/zad3a/main.c.o"
   "CMakeFiles/sysopy.dir/cw01/zad3a/main_dynamic.c.o"
   "CMakeFiles/sysopy.dir/cw02/zad1/main.c.o"
+  "CMakeFiles/sysopy.dir/cw02/zad2/main.c.o"
   "CMakeFiles/sysopy.dir/cw09/zad1/main.c.o"
   "CMakeFiles/sysopy.dir/main.c.o"
   "sysopy"
