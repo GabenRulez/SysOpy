@@ -2,3 +2,5 @@ https://linuxacademy.com/blog/linux-academy/the-linux-find-command/
 
 http://man7.org/linux/man-pages/man1/find.1.html
 
+http://www.qnx.com/developers/docs/7.0.0/#com.qnx.doc.neutrino.lib_ref/topic/n/nftw.html
+
