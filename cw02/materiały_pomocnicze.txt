@@ -1,0 +1,4 @@
+https://linuxacademy.com/blog/linux-academy/the-linux-find-command/
+
+http://man7.org/linux/man-pages/man1/find.1.html
+
