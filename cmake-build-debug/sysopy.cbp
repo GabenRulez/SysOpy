@@ -79,6 +79,9 @@
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw03/zad1/main.c">
 			<Option target="sysopy"/>
 		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw03/zad2/macierz.c">
+			<Option target="sysopy"/>
+		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
