@@ -120,7 +120,7 @@ plik_lista* czytaj_plik_lista(char* nazwa_pliku){
 
         if(macierz_A->kolumny != macierz_B->wiersze){
             printf("Macierzy nie da sie pomnozyc.");
-            return 2;
+            exit(2);
         }
 
         macierz* macierz_C = stworz_macierz(plik_C, macierz_B->kolumny, macierz_A->wiersze);
