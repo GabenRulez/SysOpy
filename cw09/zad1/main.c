@@ -33,27 +33,32 @@ void* golibroda(){
         printf("Golibroda: Idę spać. \n");
         golibroda_spi = 1;
         pthread_cond_wait(&condition, &mutex);
+        if(salon_fryzjerski->oczekujacy_klienci > 0) printf("Golibroda: Budze sie.\n");
     }
 
     golibroda_spi = 0;  // skoro tu przeszedłem, to znaczy ze ktos mnie obudzil
-    pthread_t* temp_klient;
+    pthread_t* temp_klient = NULL;
 
     for(int i=0; i < salon_fryzjerski->ilosc_krzesel_w_poczekalni; i++){
         if( salon_fryzjerski->krzesla_w_poczekalni[i] == NULL ) continue;
 
         temp_klient = salon_fryzjerski->krzesla_w_poczekalni[i];
-        printf("Biore klienta %ld na krzeslo. \n", temp_klient);
+        printf("Golibroda: Biore klienta %ld na krzeslo. \n", temp_klient);
         salon_fryzjerski->krzesla_w_poczekalni[i] = NULL;
         salon_fryzjerski->oczekujacy_klienci--;
         break;
+    }
+    if (temp_klient == NULL){
+        printf("Golibroda: Wystapil blad: ktos mnie obudzil, a nikogo tu nie ma.\n");
+        exit(2);
     }
 
     salon_fryzjerski->klient_na_krzesle = temp_klient;
 
     pthread_mutex_unlock(&mutex);
 
-    sleep(losowy_int(10,30));
-    printf("Obsluzylem klienta %ld.\n", temp_klient);
+    sleep(losowy_int(10,50));
+    printf("Golibroda: Obsluzylem klienta %ld.\n", temp_klient);
 
     pthread_mutex_lock(&mutex);
     if(salon_fryzjerski->oczekujacy_klienci > 0){
@@ -73,6 +78,7 @@ void* klient(){
     for(int i=0; i<salon_fryzjerski->ilosc_krzesel_w_poczekalni; i++){  //zajęcie krzesła
         if( salon_fryzjerski->krzesla_w_poczekalni[i] == NULL ){
             salon_fryzjerski->krzesla_w_poczekalni[i] = &ID;
+            salon_fryzjerski->oczekujacy_klienci++;
             flag = 1;
             break;
         }
@@ -85,7 +91,7 @@ void* klient(){
     }
     // tu przeszedł już klient, który usiadł na krzesle
 
-    if(golibroda_spi == 0){     // budzimy
+    if(golibroda_spi == 1){     // budzimy
         printf("Klient %d: Ach, ten golibroda zasnal. Ide go obudzic.\n", ID);
         pthread_cond_broadcast(&condition);
         pthread_mutex_unlock(&mutex);
@@ -121,15 +127,21 @@ int main(int argc, char** argv){
     for(int i=0; i<salon_fryzjerski->ilosc_krzesel_w_poczekalni; i++) salon_fryzjerski->krzesla_w_poczekalni[i] = NULL;
     salon_fryzjerski->oczekujacy_klienci = 0;
 
-    printf("Jestem golibroda.\n");
-    pthread_create(salon_fryzjerski->golibroda, NULL, golibroda(), NULL);
 
-    printf("Jestem tutaj");
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_init(&condition, NULL);
+
+
+    printf("Jestem golibroda.\n");
+    pthread_create(salon_fryzjerski->golibroda, NULL, golibroda, NULL);
+
+
 
     pthread_t* wszyscy_klienci = (pthread_t*) calloc(liczba_klientow, sizeof(pthread_t));
     for(int i=0; i<liczba_klientow; i++){
-        printf("Jestem klientem.\n");
-        pthread_create(&wszyscy_klienci[i], NULL, klient(), NULL);
+        //printf("Jestem klientem.\n");
+        pthread_create(&wszyscy_klienci[i], NULL, klient, NULL);
+        sleep(losowy_int(5,15));
         //usleep(,);
     }
 
@@ -142,4 +154,5 @@ int main(int argc, char** argv){
     pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&condition);
 
+    printf("\n\nKoniec programu. \n");
 }

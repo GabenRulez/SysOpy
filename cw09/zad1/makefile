@@ -2,22 +2,17 @@ CC= gcc
 ATRYBUTY= -Wall
 
 
-all: build test full_clean
+all: build test clean
 
 build: main.c
 	$(CC) $(ATRYBUTY) -o main main.c -lpthread -lm
 
 test:
-	./main 5 10
-	make full_clean
+	@echo " Test przepelnienia "
+	./main 2 10
+
+	@echo " Test luzny "
+	./main 15 10
 
 clean:
-	rm -f macierz
-
-full_clean:
-	rm -rf macierz
-	rm -rf testy
-	rm -rf temp*
-	rm -rf A__*
-	rm -rf B__*
-	rm -rf C__*
+	rm -rf main
