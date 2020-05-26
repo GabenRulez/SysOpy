@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/file.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/times.h>
+#include <unistd.h>
 
 struct macierz{
     int kolumny;
     int wiersze;
-    int szerokosc_komorki;
+    int szerokosc_komorki;      // potrzebne tylko przy zapisie     // zakladam ze wartosci sa z int, wiec z -2147483648 do 2147483647
     char* sciezka_do_pliku;
 }; typedef struct macierz macierz;
 
@@ -64,7 +69,7 @@ int ile_wierszy(char* plik){
 
 macierz* stworz_macierz(char* nazwa_pliku, int kolumny, int wiersze){
     FILE* plik = fopen(nazwa_pliku, "w+");
-    macierz* temp = init_macierz(kolumny, wiersze, 1024, nazwa_pliku);
+    macierz* temp = init_macierz(kolumny, wiersze, 16, nazwa_pliku);
     for(int y=0; y<temp->kolumny; y++ ){
         for(int x=0; x<temp->wiersze; x++){
             fwrite(" ", 1, 1, plik);
@@ -141,6 +146,43 @@ void usun_liste(plik_lista* lista){
     free(lista);
 }
 
+int czytaj_wartosc(macierz* macierz, FILE* plik, int wiersz, int kolumna){
+    rewind(plik);
+    int i = 0;
+    char* temp_linia = calloc(1048576, sizeof(char));
+    while( fgets(temp_linia, 1048576, plik) != NULL  &&  i < wiersz  &&  i < macierz->wiersze ) i++;    // wybranie odpowiedniej linijki z pliku
+    
+    
+    int j = 0;
+    char* wartosc;
+    wartosc = strtok(temp_linia, " ");
+    while(wartosc != NULL && j < kolumna && j < macierz->kolumny){
+        wartosc = strtok(NULL, " ");            // wybranie odpowiedniego wyrazu z linijki
+        j++;
+    }
+
+
+    int wartosc_liczbowa = (int) strtol(wartosc, (char**) NULL, 10);
+    free(temp_linia);
+    return wartosc_liczbowa;
+}
+
+void zapisz_wartosc(macierz* macierz, FILE* plik, int wiersz, int kolumna, int wynik){
+    rewind(plik);
+
+    int index = macierz->szerokosc_komorki * macierz->kolumny * wiersz + macierz->szerokosc_komorki * kolumna;
+
+    char* wynik_tekst = (char*) calloc(macierz->szerokosc_komorki, sizeof(char));
+    sprintf(wynik_tekst, "%d", wynik);      // zapisanie wartosci liczbowej, jako "tablicy" char'ow
+
+    int j = macierz->szerokosc_komorki-1;
+    while(wynik_tekst[j] == 0) wynik_tekst[j--] = ' ';
+
+    fseek(plik, index, 0);      // ustawienie wskaznika na odpowiednie miejsce
+    fwrite(wynik_tekst, sizeof(char), macierz->szerokosc_komorki - 1, plik);
+    free(wynik_tekst);
+};
+
 int main(int argc, char** argv) {
     if (argc < 5) {
         printf("Podaj:  find <plik z lista> <ilosc podprocesow> <ilosc sekund na podproces> <tryb: 0-oddzielne plik / 1-wszystkie w jednym pliku>\n");
@@ -154,39 +196,165 @@ int main(int argc, char** argv) {
     int tryb = (int) strtol(argv[4], (char**) NULL, 10);
 
     plik_lista* lista = czytaj_plik_lista(sciezka_lista);
-
-    int *proc_per_m = NULL;
-    if( tryb == 0 ){    //oddzielne pliki
-        proc_per_m = count_proc_per_m(m_list, proc_count);
-        create_empty_files(m_list, proc_per_m);
-    }
     
-    pid_t* child_pids = calloc(proc_count, sizeof(pid_t));
-    for(int i = 0; i<proc_count; i++){
-        pid_t child_pid = fork();
-        if(child_pid == 0){
-            int num_of_fragments;
-            multiply(m_list, i, proc_count, max_time, mode, &num_of_fragments);
-            exit(num_of_fragments);
+    pid_t* procesy_potomne = calloc(ilosc_podprocesow, sizeof(pid_t));
+    
+    for(int k=0; k<ilosc_podprocesow; k++){     // zmiana programu -> wczesniej sadzilem, ze program musi wykonac swoja prace
+                                                // teraz zakladam, ze skoro program ma stworzyc tylko n procesow, a kazdy proces po k sekundach ma skonczyc prace
+                                                // to przy podanej zbyt malej ilosci czasu na wejsciu programy moga nie byc skonczone
+        pid_t dziecko = fork();
+        
+        if(dziecko == 0){
+            int wykonane_obliczenia = 0;    // ilosc obliczonych czesci macierzy (czytaj ilosc par plikow na ktorych skonczone roboty)
+
+            struct tms* czas_start = malloc(sizeof(struct tms));
+            struct tms* czas_stop = malloc(sizeof(struct tms));
+            double t_start=times(czas_start);       // rozpoczete odliczanie
+
+
+            for(int i=0; i<lista->ile_macierzy; i++){
+                macierz* macierz_a = lista->macierze_A[i];
+                macierz* macierz_b = lista->macierze_B[i];
+                macierz* macierz_c = lista->macierze_C[i];
+
+                int szerokosc = macierz_b->kolumny;
+                int wysokosc = macierz_a->wiersze;
+
+                float stosunek_kolumn_do_procesow = (float) ( (float) szerokosc / (float) ilosc_podprocesow );
+                
+                int startowa_kolumna = (int) ( stosunek_kolumn_do_procesow * (float) k );           // takie rozmieszczenie gwarantuje mi, że mnożenie zostanie podzielone równo, a także, że program będzie działał, jeśli ilość kolumn jest mniejsza od ilości procesów
+                int koncowa_kolumna = (int) ( stosunek_kolumn_do_procesow * (float) (k + 1) ) - 1 ; 
+                if(koncowa_kolumna < startowa_kolumna){     // jeśli jest więcej procesów niż kolumn do policzenia
+                    printf("My job here is done.");
+                    //exit(-222);
+                    continue;       // przejdz do nastepnych plikow -> moze tam bedziesz przydatny
+                }
+                
+                FILE* plik_A = fopen(lista->macierze_A[i]->sciezka_do_pliku, "r");
+                FILE* plik_B = fopen(lista->macierze_B[i]->sciezka_do_pliku, "r");
+                FILE* plik_C = fopen(lista->macierze_C[i]->sciezka_do_pliku, "r+");
+                
+                for(int kolumna = startowa_kolumna; kolumna <= koncowa_kolumna; kolumna++){
+
+                    FILE* plik_output;
+
+                    if(tryb == 0){
+                        char* nazwa_pliku_czesciowego = malloc(1024 * sizeof(char));
+                        strcat(nazwa_pliku_czesciowego, "temp__plik_");
+
+                        char* temp = malloc(12 * sizeof(char));
+                        sprintf(temp, "%d", i);         // numer pary z pliku
+                        strcat(nazwa_pliku_czesciowego, temp);
+
+                        strcat(nazwa_pliku_czesciowego, "__kolumna_");
+
+                        char* temp2 = malloc(12 * sizeof(char));
+                        sprintf(temp2, "%d", kolumna);         // numer pary z pliku
+                        strcat(nazwa_pliku_czesciowego, temp2);
+
+                        plik_output = fopen(nazwa_pliku_czesciowego, "w");    // stworz plik i go otworz
+
+                        free(nazwa_pliku_czesciowego);
+                        free(temp);
+                        free(temp2);
+                    }
+
+                    for(int wiersz = 0; wiersz < wysokosc; wiersz++){
+                        int wynik = 0;
+                        
+                        for(int iterator=0; iterator<macierz_b->wiersze; iterator++){   // wysokosc macierzy B / szerokosc macierzy A
+                            wynik += czytaj_wartosc(macierz_a, plik_A, iterator, kolumna) * czytaj_wartosc(macierz_b, plik_B, wiersz, iterator);
+                        }
+
+                        if(tryb == 1){
+                            flock(fileno(plik_C), LOCK_EX);
+                            zapisz_wartosc(macierz_c, plik_C, wiersz, kolumna, wynik);
+                            flock(fileno(plik_C), LOCK_UN);
+                        }
+                        else if (tryb == 0){
+                            flock(fileno(plik_output), LOCK_EX);
+                            zapisz_wartosc(macierz_c, plik_output, wiersz, 0, wynik);
+                            flock(fileno(plik_output), LOCK_UN);
+                        }
+
+                        wykonane_obliczenia++;
+                    }
+
+                    if(tryb == 0){
+                        fclose(plik_output);
+                    }
+
+                }
+
+                fclose(plik_A);
+                fclose(plik_B);
+                fclose(plik_C);
+                
+                double t_stop = times(czas_stop);
+                double t_miniony= (t_stop - t_start)/sysconf(_SC_CLK_TCK);
+                if((int) t_miniony >= limit_czasowy){
+                    printf("Gotta go\n");
+                    break;
+                }
+            }
+
+            free(czas_start);
+            free(czas_stop);
+            exit(wykonane_obliczenia);
         }
-        else if (child_pid>0){
-            child_pids[i] = child_pid;
-        }
-        else{
-            exit(EXIT_FAILURE);
+        else{   // sekcja rodzica
+            procesy_potomne[k] = dziecko;
         }
     }
 
-
-    int* stat_loc = malloc(sizeof(int));
-    for(int i = 0; i<proc_count; i++){
-        waitpid(child_pids[i], stat_loc, 0);
-        printf("Process of PID %d multiplied %d fragment(s) of matrices\n", child_pids[i], WEXITSTATUS(*stat_loc));
+    int* status = malloc(sizeof(int));
+    for(int i = 0; i<ilosc_podprocesow; i++){
+        waitpid(procesy_potomne[i], status, 0);
+        printf("Proces %d wykonal %d mnozen macierzy\n", procesy_potomne[i], WEXITSTATUS(*status));
     }
 
-    if(tryb == 0) exec_paste(m_list, proc_per_m, proc_count);
+    if(tryb == 0){  // sumowanie plikow
 
+        for(int i=0; i<lista->ile_macierzy; i++){
+            pid_t dziecko = fork();
 
+            if(dziecko == 0){
+                char* argumenty = malloc(1048576 * sizeof(char));
+
+                char* nazwa_pliku_czesciowego = malloc(1024 * sizeof(char));
+                strcat(nazwa_pliku_czesciowego, "temp__plik_");
+
+                char* temp = malloc(12 * sizeof(char));
+                sprintf(temp, "%d", i);         // numer pary z pliku
+                strcat(nazwa_pliku_czesciowego, temp);
+
+                strcat(nazwa_pliku_czesciowego, "__kolumna_");
+
+                for(int kolumna=0; kolumna<lista->macierze_C[i]->kolumny; kolumna++){
+                    char* temp2 = malloc(12 * sizeof(char));
+                    sprintf(temp2, "%d", kolumna);         // numer pary z pliku
+
+                    char* temp3 = malloc(1024 * sizeof(char));
+                    strcpy(temp3, nazwa_pliku_czesciowego);
+                    strcat(temp3, temp2);
+
+                    strcat(argumenty, temp3);
+                    strcat(argumenty, " ");
+
+                    free(temp2);
+                    free(temp3);
+                }
+                free(nazwa_pliku_czesciowego);
+                free(temp);
+
+                execvp("paste", argumenty);
+                free(argumenty);
+            }
+            else {
+                wait(0);
+            }
+        }
+    }
 
     usun_liste(lista);
     free(sciezka_lista_bezwzgledna);
