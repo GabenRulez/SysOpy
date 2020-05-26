@@ -177,6 +177,33 @@ cw03/zad2/macierz.c.s:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw03/zad2/macierz.c.s
 .PHONY : cw03/zad2/macierz.c.s
 
+cw03/zad2/testy.o: cw03/zad2/testy.c.o
+
+.PHONY : cw03/zad2/testy.o
+
+# target to build an object file
+cw03/zad2/testy.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw03/zad2/testy.c.o
+.PHONY : cw03/zad2/testy.c.o
+
+cw03/zad2/testy.i: cw03/zad2/testy.c.i
+
+.PHONY : cw03/zad2/testy.i
+
+# target to preprocess a source file
+cw03/zad2/testy.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw03/zad2/testy.c.i
+.PHONY : cw03/zad2/testy.c.i
+
+cw03/zad2/testy.s: cw03/zad2/testy.c.s
+
+.PHONY : cw03/zad2/testy.s
+
+# target to generate assembly for a file
+cw03/zad2/testy.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw03/zad2/testy.c.s
+.PHONY : cw03/zad2/testy.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +219,9 @@ help:
 	@echo "... cw03/zad2/macierz.o"
 	@echo "... cw03/zad2/macierz.i"
 	@echo "... cw03/zad2/macierz.s"
+	@echo "... cw03/zad2/testy.o"
+	@echo "... cw03/zad2/testy.i"
+	@echo "... cw03/zad2/testy.s"
 .PHONY : help
 
 

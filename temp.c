@@ -72,7 +72,7 @@ int** create_array(int rows, int cols){
 	return arr;
 }
 
-int rand_val(int min, int max){
+int losowy_int(int min, int max){
 	return rand()%(max - min + 1) + min;
 }
 
