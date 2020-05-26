@@ -223,11 +223,10 @@ int macierz_main(plik_lista* lista) {
 
                 float stosunek_kolumn_do_procesow = (float) ((float) szerokosc / (float) ilosc_podprocesow);
 
-                int startowa_kolumna = (int) (stosunek_kolumn_do_procesow *
-                                              (float) k);           // takie rozmieszczenie gwarantuje mi, że mnożenie zostanie podzielone równo, a także, że program będzie działał, jeśli ilość kolumn jest mniejsza od ilości procesów
-                int koncowa_kolumna = (int) (stosunek_kolumn_do_procesow * (float) (k + 1)) - 1;
-                if (koncowa_kolumna < startowa_kolumna) {     // jeśli jest więcej procesów niż kolumn do policzenia
-                    printf("My job here is done.");
+                int startowa_kolumna = (int) ( stosunek_kolumn_do_procesow * (float) k );           // takie rozmieszczenie gwarantuje mi, że mnożenie zostanie podzielone równo, a także, że program będzie działał, jeśli ilość kolumn jest mniejsza od ilości procesów
+                int koncowa_kolumna = (int) ( stosunek_kolumn_do_procesow * (float) (k + 1) ) - 1 ;
+                if(koncowa_kolumna < startowa_kolumna){     // jeśli jest więcej procesów niż kolumn do policzenia
+                    printf("My job here is done. (nie zostaly mi przypisane zadne kolumny)\n");
                     //exit(-222);
                     continue;       // przejdz do nastepnych plikow -> moze tam bedziesz przydatny
                 }
