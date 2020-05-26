@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sysopy.dir/cw03/zad1/main.c.o"
-  "CMakeFiles/sysopy.dir/cw03/zad2/macierz.c.o"
-  "CMakeFiles/sysopy.dir/cw03/zad2/testy.c.o"
+  "CMakeFiles/sysopy.dir/cw09/zad1/main.c.o"
   "sysopy"
   "sysopy.pdb"
 )
