@@ -37,8 +37,8 @@ int main(int argc, char**argv){
     sigaction(SIGTSTP, &sig_tstp, NULL);
 
     signal(SIGINT, odbior_SIGINT);
+
     usleep(sleep_time_seconds );
-    int i = 0;
     while(1){
         if(flaga_spania == 0) system("ls");
         usleep(sleep_time_seconds * 1000000 );
