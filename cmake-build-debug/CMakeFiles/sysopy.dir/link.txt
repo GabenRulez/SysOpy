@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw04/zad4a/main.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw04/zad4a/sender.c.o CMakeFiles/sysopy.dir/cw04/zad4a/catcher.c.o  -o sysopy 
