@@ -123,32 +123,32 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw04/zad3/main.o: cw04/zad3/main.c.o
+cw04/zad4a/main.o: cw04/zad4a/main.c.o
 
-.PHONY : cw04/zad3/main.o
+.PHONY : cw04/zad4a/main.o
 
 # target to build an object file
-cw04/zad3/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad3/main.c.o
-.PHONY : cw04/zad3/main.c.o
+cw04/zad4a/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/main.c.o
+.PHONY : cw04/zad4a/main.c.o
 
-cw04/zad3/main.i: cw04/zad3/main.c.i
+cw04/zad4a/main.i: cw04/zad4a/main.c.i
 
-.PHONY : cw04/zad3/main.i
+.PHONY : cw04/zad4a/main.i
 
 # target to preprocess a source file
-cw04/zad3/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad3/main.c.i
-.PHONY : cw04/zad3/main.c.i
+cw04/zad4a/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/main.c.i
+.PHONY : cw04/zad4a/main.c.i
 
-cw04/zad3/main.s: cw04/zad3/main.c.s
+cw04/zad4a/main.s: cw04/zad4a/main.c.s
 
-.PHONY : cw04/zad3/main.s
+.PHONY : cw04/zad4a/main.s
 
 # target to generate assembly for a file
-cw04/zad3/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad3/main.c.s
-.PHONY : cw04/zad3/main.c.s
+cw04/zad4a/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/main.c.s
+.PHONY : cw04/zad4a/main.c.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw04/zad3/main.o"
-	@echo "... cw04/zad3/main.i"
-	@echo "... cw04/zad3/main.s"
+	@echo "... cw04/zad4a/main.o"
+	@echo "... cw04/zad4a/main.i"
+	@echo "... cw04/zad4a/main.s"
 .PHONY : help
 
 
