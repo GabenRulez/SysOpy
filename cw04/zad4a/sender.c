@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
-#include <sys/wait.h>
 
 int sygnal_1;
 int sygnal_2;
@@ -17,11 +16,11 @@ void akcja_sygnalu(int sygnal, siginfo_t* info, void* kontekst){
     if(sygnal == sygnal_1){
         otrzymane_sygnaly++;
         if(czy_to_queue == 1){
-            printf("%d", info->si_value.sival_int);
+            printf("%d\n", info->si_value.sival_int);
         }
     }
     else if(sygnal == sygnal_2){
-        printf("Otrzymalem %d sygnalow, a powinienm byl otrzymac %d.", otrzymane_sygnaly, ilosc_sygnalow);
+        printf("Otrzymalem %d sygnalow, a powinienm byl otrzymac %d.\n", otrzymane_sygnaly, ilosc_sygnalow);
         exit(0);
     }
 }
