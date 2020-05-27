@@ -1,0 +1,7 @@
+fork():
+
+Sygnał oczekujący w przodku nie jest widoczny, lecz ignorowanie, handlery i maskowanie są dziedziczone.
+
+exec:
+
+Sygnał oczekujący w przodku jest widoczny, a ignorowanie i maskowanie są dziedziczone.
