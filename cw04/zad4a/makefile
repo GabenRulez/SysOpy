@@ -4,7 +4,9 @@ ATRYBUTY= -Wall
 all: build clean
 
 build:
-	$(CC) $(ATRYBUTY) -o main main.c
+	$(CC) $(ATRYBUTY) -o sender sender.c
+	$(CC) $(ATRYBUTY) -o catcher catcher.c
 
 clean:
-	rm -rf main
+	rm -rf sender
+	rm -rf catcher
