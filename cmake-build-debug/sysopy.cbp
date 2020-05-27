@@ -76,10 +76,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw04/zad2/exec.c">
-			<Option target="sysopy"/>
-		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw04/zad2/main.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw04/zad3/main.c">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">
