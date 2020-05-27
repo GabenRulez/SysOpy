@@ -3,4 +3,4 @@ project(sysopy C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(sysopy cw04/zad4a/sender.c cw04/zad4a/catcher.c)
+add_executable(sysopy cw04/zad4b/sender.c cw04/zad4b/catcher.c)

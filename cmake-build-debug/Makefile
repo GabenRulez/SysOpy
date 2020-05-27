@@ -123,59 +123,59 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw04/zad4a/catcher.o: cw04/zad4a/catcher.c.o
+cw04/zad4b/catcher.o: cw04/zad4b/catcher.c.o
 
-.PHONY : cw04/zad4a/catcher.o
-
-# target to build an object file
-cw04/zad4a/catcher.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/catcher.c.o
-.PHONY : cw04/zad4a/catcher.c.o
-
-cw04/zad4a/catcher.i: cw04/zad4a/catcher.c.i
-
-.PHONY : cw04/zad4a/catcher.i
-
-# target to preprocess a source file
-cw04/zad4a/catcher.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/catcher.c.i
-.PHONY : cw04/zad4a/catcher.c.i
-
-cw04/zad4a/catcher.s: cw04/zad4a/catcher.c.s
-
-.PHONY : cw04/zad4a/catcher.s
-
-# target to generate assembly for a file
-cw04/zad4a/catcher.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/catcher.c.s
-.PHONY : cw04/zad4a/catcher.c.s
-
-cw04/zad4a/sender.o: cw04/zad4a/sender.c.o
-
-.PHONY : cw04/zad4a/sender.o
+.PHONY : cw04/zad4b/catcher.o
 
 # target to build an object file
-cw04/zad4a/sender.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/sender.c.o
-.PHONY : cw04/zad4a/sender.c.o
+cw04/zad4b/catcher.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/catcher.c.o
+.PHONY : cw04/zad4b/catcher.c.o
 
-cw04/zad4a/sender.i: cw04/zad4a/sender.c.i
+cw04/zad4b/catcher.i: cw04/zad4b/catcher.c.i
 
-.PHONY : cw04/zad4a/sender.i
+.PHONY : cw04/zad4b/catcher.i
 
 # target to preprocess a source file
-cw04/zad4a/sender.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/sender.c.i
-.PHONY : cw04/zad4a/sender.c.i
+cw04/zad4b/catcher.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/catcher.c.i
+.PHONY : cw04/zad4b/catcher.c.i
 
-cw04/zad4a/sender.s: cw04/zad4a/sender.c.s
+cw04/zad4b/catcher.s: cw04/zad4b/catcher.c.s
 
-.PHONY : cw04/zad4a/sender.s
+.PHONY : cw04/zad4b/catcher.s
 
 # target to generate assembly for a file
-cw04/zad4a/sender.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4a/sender.c.s
-.PHONY : cw04/zad4a/sender.c.s
+cw04/zad4b/catcher.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/catcher.c.s
+.PHONY : cw04/zad4b/catcher.c.s
+
+cw04/zad4b/sender.o: cw04/zad4b/sender.c.o
+
+.PHONY : cw04/zad4b/sender.o
+
+# target to build an object file
+cw04/zad4b/sender.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/sender.c.o
+.PHONY : cw04/zad4b/sender.c.o
+
+cw04/zad4b/sender.i: cw04/zad4b/sender.c.i
+
+.PHONY : cw04/zad4b/sender.i
+
+# target to preprocess a source file
+cw04/zad4b/sender.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/sender.c.i
+.PHONY : cw04/zad4b/sender.c.i
+
+cw04/zad4b/sender.s: cw04/zad4b/sender.c.s
+
+.PHONY : cw04/zad4b/sender.s
+
+# target to generate assembly for a file
+cw04/zad4b/sender.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw04/zad4b/sender.c.s
+.PHONY : cw04/zad4b/sender.c.s
 
 # Help Target
 help:
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw04/zad4a/catcher.o"
-	@echo "... cw04/zad4a/catcher.i"
-	@echo "... cw04/zad4a/catcher.s"
-	@echo "... cw04/zad4a/sender.o"
-	@echo "... cw04/zad4a/sender.i"
-	@echo "... cw04/zad4a/sender.s"
+	@echo "... cw04/zad4b/catcher.o"
+	@echo "... cw04/zad4b/catcher.i"
+	@echo "... cw04/zad4b/catcher.s"
+	@echo "... cw04/zad4b/sender.o"
+	@echo "... cw04/zad4b/sender.i"
+	@echo "... cw04/zad4b/sender.s"
 .PHONY : help
 
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sysopy.dir/cw04/zad4a/catcher.c.o"
-  "CMakeFiles/sysopy.dir/cw04/zad4a/sender.c.o"
+  "CMakeFiles/sysopy.dir/cw04/zad4b/catcher.c.o"
+  "CMakeFiles/sysopy.dir/cw04/zad4b/sender.c.o"
   "sysopy"
   "sysopy.pdb"
 )
