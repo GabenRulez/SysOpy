@@ -12,17 +12,26 @@ int otrzymane_sygnaly = 0;
 
 int czy_to_queue = 0;
 
+int czy_byla_informacja_zwrotna = 0;
+int tryb_odbierania = 0;
+
 void akcja_sygnalu(int sygnal, siginfo_t* info, void* kontekst){
-    if(sygnal == sygnal_1){
-        otrzymane_sygnaly++;
-        if(czy_to_queue == 1){
-            printf("%d\n", info->si_value.sival_int);
+    if(tryb_odbierania == 0){
+        czy_byla_informacja_zwrotna = 1;
+    }
+    else{
+        if(sygnal == sygnal_1){
+            otrzymane_sygnaly++;
+            if(czy_to_queue == 1){
+                printf("%d\n", info->si_value.sival_int);
+            }
+        }
+        else if(sygnal == sygnal_2){
+            printf("Otrzymalem %d sygnalow, a powinienm byl otrzymac %d.\n", otrzymane_sygnaly, ilosc_sygnalow);
+            exit(0);
         }
     }
-    else if(sygnal == sygnal_2){
-        printf("Otrzymalem %d sygnalow, a powinienm byl otrzymac %d.\n", otrzymane_sygnaly, ilosc_sygnalow);
-        exit(0);
-    }
+
 }
 
 int main(int argc, char** argv){    // pid_catchera ilosc_sygnalow kill/sigqueue/sigrt
@@ -71,6 +80,10 @@ int main(int argc, char** argv){    // pid_catchera ilosc_sygnalow kill/sigqueue
     if( strcmp(argv[3], "sigrt") == 0 || strcmp(argv[3], "kill") == 0 ){
         for(int i = 0; i<ilosc_sygnalow; i++){
             kill(catcher, sygnal_1);
+            while(czy_byla_informacja_zwrotna == 0){
+                usleep(1);
+            }
+            czy_byla_informacja_zwrotna = 0;
         }
         kill(catcher, sygnal_2);
     }
@@ -79,6 +92,10 @@ int main(int argc, char** argv){    // pid_catchera ilosc_sygnalow kill/sigqueue
         sigval.sival_int = 0;
         for(int i = 0; i<ilosc_sygnalow; i++){
             sigqueue(catcher, sygnal_1, sigval);
+            while(czy_byla_informacja_zwrotna == 0){
+                usleep(1);
+            }
+            czy_byla_informacja_zwrotna = 0;
         }
         sigqueue(catcher, sygnal_2, sigval);
     }
@@ -88,6 +105,7 @@ int main(int argc, char** argv){    // pid_catchera ilosc_sygnalow kill/sigqueue
     }
 
     printf("Wyslalem sygnaly. Czekam...\n");
+    tryb_odbierania = 1;
     while(1){
         usleep(1);
     }

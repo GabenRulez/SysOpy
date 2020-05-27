@@ -14,6 +14,13 @@ int czy_to_queue = 0;
 void akcja_sygnalu(int sygnal, siginfo_t* info, void* kontekst){
     if(sygnal == sygnal_1){
         otrzymane_sygnaly++;
+        if(czy_to_queue == 1){
+            union sigval sigval;
+            sigqueue(info->si_pid, sygnal_1, sigval);
+        }
+        else{
+            kill(info->si_pid, sygnal_1);
+        }
     }
     else if(sygnal == sygnal_2){
         if(czy_to_queue == 1){
