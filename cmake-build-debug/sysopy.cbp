@@ -76,10 +76,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/Kol1-2020/ForkAndPipe/main.c">
-			<Option target="sysopy"/>
-		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/Kol1-2020/SignalAllButOneWithValue/main.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad3/main.c">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">

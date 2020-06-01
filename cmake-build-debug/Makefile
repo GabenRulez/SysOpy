@@ -123,59 +123,32 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-Kol1-2020/ForkAndPipe/main.o: Kol1-2020/ForkAndPipe/main.c.o
+cw05/zad3/main.o: cw05/zad3/main.c.o
 
-.PHONY : Kol1-2020/ForkAndPipe/main.o
-
-# target to build an object file
-Kol1-2020/ForkAndPipe/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/ForkAndPipe/main.c.o
-.PHONY : Kol1-2020/ForkAndPipe/main.c.o
-
-Kol1-2020/ForkAndPipe/main.i: Kol1-2020/ForkAndPipe/main.c.i
-
-.PHONY : Kol1-2020/ForkAndPipe/main.i
-
-# target to preprocess a source file
-Kol1-2020/ForkAndPipe/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/ForkAndPipe/main.c.i
-.PHONY : Kol1-2020/ForkAndPipe/main.c.i
-
-Kol1-2020/ForkAndPipe/main.s: Kol1-2020/ForkAndPipe/main.c.s
-
-.PHONY : Kol1-2020/ForkAndPipe/main.s
-
-# target to generate assembly for a file
-Kol1-2020/ForkAndPipe/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/ForkAndPipe/main.c.s
-.PHONY : Kol1-2020/ForkAndPipe/main.c.s
-
-Kol1-2020/SignalAllButOneWithValue/main.o: Kol1-2020/SignalAllButOneWithValue/main.c.o
-
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.o
+.PHONY : cw05/zad3/main.o
 
 # target to build an object file
-Kol1-2020/SignalAllButOneWithValue/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/SignalAllButOneWithValue/main.c.o
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.c.o
+cw05/zad3/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.o
+.PHONY : cw05/zad3/main.c.o
 
-Kol1-2020/SignalAllButOneWithValue/main.i: Kol1-2020/SignalAllButOneWithValue/main.c.i
+cw05/zad3/main.i: cw05/zad3/main.c.i
 
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.i
+.PHONY : cw05/zad3/main.i
 
 # target to preprocess a source file
-Kol1-2020/SignalAllButOneWithValue/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/SignalAllButOneWithValue/main.c.i
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.c.i
+cw05/zad3/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.i
+.PHONY : cw05/zad3/main.c.i
 
-Kol1-2020/SignalAllButOneWithValue/main.s: Kol1-2020/SignalAllButOneWithValue/main.c.s
+cw05/zad3/main.s: cw05/zad3/main.c.s
 
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.s
+.PHONY : cw05/zad3/main.s
 
 # target to generate assembly for a file
-Kol1-2020/SignalAllButOneWithValue/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol1-2020/SignalAllButOneWithValue/main.c.s
-.PHONY : Kol1-2020/SignalAllButOneWithValue/main.c.s
+cw05/zad3/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.s
+.PHONY : cw05/zad3/main.c.s
 
 # Help Target
 help:
@@ -186,12 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... Kol1-2020/ForkAndPipe/main.o"
-	@echo "... Kol1-2020/ForkAndPipe/main.i"
-	@echo "... Kol1-2020/ForkAndPipe/main.s"
-	@echo "... Kol1-2020/SignalAllButOneWithValue/main.o"
-	@echo "... Kol1-2020/SignalAllButOneWithValue/main.i"
-	@echo "... Kol1-2020/SignalAllButOneWithValue/main.s"
+	@echo "... cw05/zad3/main.o"
+	@echo "... cw05/zad3/main.i"
+	@echo "... cw05/zad3/main.s"
 .PHONY : help
 
 

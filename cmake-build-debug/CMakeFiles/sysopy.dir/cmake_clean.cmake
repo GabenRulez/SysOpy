@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sysopy.dir/Kol1-2020/ForkAndPipe/main.c.o"
-  "CMakeFiles/sysopy.dir/Kol1-2020/SignalAllButOneWithValue/main.c.o"
+  "CMakeFiles/sysopy.dir/cw05/zad3/main.c.o"
   "sysopy"
   "sysopy.pdb"
 )
