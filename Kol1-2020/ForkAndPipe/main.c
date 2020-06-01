@@ -23,6 +23,19 @@
  *
  */
 pid_t spawn_child(int in_fd, int out_fd){
+
+    pid_t dziecko = fork();
+    if (dziecko == 0){
+        dup2(in_fd, STDIN_FILENO);
+        close(in_fd);
+        return 0;
+    }
+    else{   //rodzic
+        dup2(out_fd, STDOUT_FILENO);
+        close(out_fd);
+    }
+
+    return dziecko;
    // Uzupelnij cialo funkcji spawn_child zgodnie z
    // komentarzem powyzej
 
