@@ -6,15 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/wojtek/CLionProjects/SysOpy/cw05/zad1/main.c
-stdio.h
--
-string.h
--
-unistd.h
--
-sys/wait.h
--
-stdlib.h
--
-

@@ -5,20 +5,25 @@
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("Podaj argumenty: <sciezka potoku> <sciezka do pliku do zapisu> <N>\n");
-        return 1;
+        exit(1);
     }
 
-    FILE* plik = fopen(argv[1], "r");   // otwórz plik z argumentu
+    char* sciezka_do_potoku_nazwanego = argv[1];
+    char* sciezka_do_pliku_tekstowego = argv[2];
+    int N = (int) strtol(argv[3], (char**) NULL, 10);
 
-    char* bufor = (char*)calloc(1000, sizeof(char)); // stwórz bufor
-    FILE* wejscie_sortowania = popen("sort", "w");  // stwórz potok
+    FILE* potok_nazwany = fopen(sciezka_do_potoku_nazwanego, "r");
+    FILE* plik = fopen(sciezka_do_pliku_tekstowego, "w+");
+    if(potok_nazwany == NULL || plik == NULL) exit(2);
+    //fwrite("yo", sizeof(char), 2, plik);
 
-    while( fgets(bufor, 1000, plik) != NULL ){   // dopóki coś czytamy z pliku z argumentu
+    char* bufor = (char*)calloc(N + 4, sizeof(char));       // nie wiem czemu to +4 , może usuń
 
-        fputs(bufor, wejscie_sortowania);       //wstaw bufor do potoku
-
+    while( fread(bufor, sizeof(char), N, potok_nazwany) > 0 ){   // dopóki coś czytamy z potoku
+        fwrite(bufor, sizeof(char), N, plik);       //wstaw bufor do pliku
     }
-    pclose(wejscie_sortowania);     // zamknij potok -> niech rozpocznie pracować
+    fclose(potok_nazwany);
+    fclose(plik);
     free(bufor);
     return 0;
 }

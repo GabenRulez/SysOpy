@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw05/zad3/main.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw05/zad3/main.c.o CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.o CMakeFiles/sysopy.dir/cw05/zad3/producent.c.o  -o sysopy 

@@ -1,24 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
+
+int random_int(int minimum, int maksimum){
+    srand(time(NULL));
+    return minimum + rand()%(maksimum - minimum);
+}
 
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("Podaj argumenty: <sciezka potoku> <sciezka do pliku do odczytu> <N>\n");
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
-    FILE* plik = fopen(argv[1], "r");   // otwórz plik z argumentu
+    char* sciezka_do_potoku_nazwanego = argv[1];
+    char* sciezka_do_pliku_tekstowego = argv[2];
+    int N = (int) strtol(argv[3], (char**) NULL, 10);
 
-    char* bufor = (char*)calloc(1000, sizeof(char)); // stwórz bufor
-    FILE* wejscie_sortowania = popen("sort", "w");  // stwórz potok
+    FILE* potok_nazwany = fopen(sciezka_do_potoku_nazwanego, "w");
+    FILE* plik = fopen(sciezka_do_pliku_tekstowego, "r");
+    if(potok_nazwany == NULL || plik == NULL) exit(2);
 
-    while( fgets(bufor, 1000, plik) != NULL ){   // dopóki coś czytamy z pliku z argumentu
 
-        fputs(bufor, wejscie_sortowania);       //wstaw bufor do potoku
+    char* bufor = (char*)calloc(N, sizeof(char));
 
+    char przedrostek[9]; // "#" + liczba z zasięgu[0, 4194303] + "#"
+    sprintf(przedrostek, "#%d#", getpid());
+
+    while( fread(bufor, sizeof(char), N, plik) > 0 ){   // dopóki coś czytamy z pliku
+        sleep( random_int( 1, 5 ) );
+        char* temp_linijka = (char*)calloc(9 + N, sizeof(char));
+
+        strcpy(temp_linijka, przedrostek);
+        strcat(temp_linijka, bufor);
+
+        fwrite(temp_linijka, sizeof(char), strlen(temp_linijka), potok_nazwany);       //wstaw linijke do potoku
+        free(temp_linijka);
     }
-    pclose(wejscie_sortowania);     // zamknij potok -> niech rozpocznie pracować
+    fclose(potok_nazwany);
+    fclose(plik);
     free(bufor);
     return 0;
 }

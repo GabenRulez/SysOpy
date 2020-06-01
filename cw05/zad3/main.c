@@ -1,24 +1,33 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <wait.h>
 
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        printf("Podaj:  main <plik z lista polecen>\n");
-        return 1;
+
+    char* nazwa_potoku = "temp_potok";
+    mkfifo(nazwa_potoku, 0666);
+
+    char* pliki[] = {"pliki_wejsciowe/a.txt", "pliki_wejsciowe/b.txt", "pliki_wejsciowe/c.txt"};
+    const int ilosc_plikow = 3;     // ilość plików na górze
+    pid_t podprocesy[ilosc_plikow + 1];
+
+    for(int i=0; i<ilosc_plikow; i++){
+        podprocesy[i] = fork();
+        if( podprocesy[i] == 0 ){
+            execl("./producent", "./producent", nazwa_potoku, pliki[i], "10", NULL);    // po 10 znaków na raz
+        }
     }
 
-    FILE* plik = fopen(argv[1], "r");   // otwórz plik z argumentu
-
-    char* bufor = (char*)calloc(1000, sizeof(char)); // stwórz bufor
-    FILE* wejscie_sortowania = popen("sort", "w");  // stwórz potok
-
-    while( fgets(bufor, 1000, plik) != NULL ){   // dopóki coś czytamy z pliku z argumentu
-
-        fputs(bufor, wejscie_sortowania);       //wstaw bufor do potoku
-
+    podprocesy[ilosc_plikow] = fork();
+    if( podprocesy[ilosc_plikow] == 0 ){
+        execl("./konsument", "./konsument", nazwa_potoku, "wynik.txt", "10", NULL );
     }
-    pclose(wejscie_sortowania);     // zamknij potok -> niech rozpocznie pracować
-    free(bufor);
+
+    for(int i = 0; i<=ilosc_plikow; i++){
+        waitpid(podprocesy[i], NULL, 0);
+    }
+
     return 0;
 }
