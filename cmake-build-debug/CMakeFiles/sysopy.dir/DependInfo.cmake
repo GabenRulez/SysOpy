@@ -4,8 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/wojtek/CLionProjects/SysOpy/cw04/zad4b/catcher.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw04/zad4b/catcher.c.o"
-  "/home/wojtek/CLionProjects/SysOpy/cw04/zad4b/sender.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw04/zad4b/sender.c.o"
+  "/home/wojtek/CLionProjects/SysOpy/cw05/zad2/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw05/zad2/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

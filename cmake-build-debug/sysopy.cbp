@@ -76,10 +76,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw04/zad4b/catcher.c">
-			<Option target="sysopy"/>
-		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw04/zad4b/sender.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad2/main.c">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">

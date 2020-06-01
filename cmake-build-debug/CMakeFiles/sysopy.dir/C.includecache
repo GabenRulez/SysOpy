@@ -6,19 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/wojtek/CLionProjects/SysOpy/cw02/zad2/main.c
+/home/wojtek/CLionProjects/SysOpy/cw05/zad1/main.c
 stdio.h
--
-stdlib.h
 -
 string.h
 -
-dirent.h
+unistd.h
 -
-sys/stat.h
+sys/wait.h
 -
-time.h
--
-stdint.h
+stdlib.h
 -
 
