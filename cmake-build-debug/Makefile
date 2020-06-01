@@ -123,32 +123,86 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw05/zad2/main.o: cw05/zad2/main.c.o
+cw05/zad3/konsument.o: cw05/zad3/konsument.c.o
 
-.PHONY : cw05/zad2/main.o
+.PHONY : cw05/zad3/konsument.o
 
 # target to build an object file
-cw05/zad2/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad2/main.c.o
-.PHONY : cw05/zad2/main.c.o
+cw05/zad3/konsument.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.o
+.PHONY : cw05/zad3/konsument.c.o
 
-cw05/zad2/main.i: cw05/zad2/main.c.i
+cw05/zad3/konsument.i: cw05/zad3/konsument.c.i
 
-.PHONY : cw05/zad2/main.i
+.PHONY : cw05/zad3/konsument.i
 
 # target to preprocess a source file
-cw05/zad2/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad2/main.c.i
-.PHONY : cw05/zad2/main.c.i
+cw05/zad3/konsument.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.i
+.PHONY : cw05/zad3/konsument.c.i
 
-cw05/zad2/main.s: cw05/zad2/main.c.s
+cw05/zad3/konsument.s: cw05/zad3/konsument.c.s
 
-.PHONY : cw05/zad2/main.s
+.PHONY : cw05/zad3/konsument.s
 
 # target to generate assembly for a file
-cw05/zad2/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad2/main.c.s
-.PHONY : cw05/zad2/main.c.s
+cw05/zad3/konsument.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.s
+.PHONY : cw05/zad3/konsument.c.s
+
+cw05/zad3/main.o: cw05/zad3/main.c.o
+
+.PHONY : cw05/zad3/main.o
+
+# target to build an object file
+cw05/zad3/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.o
+.PHONY : cw05/zad3/main.c.o
+
+cw05/zad3/main.i: cw05/zad3/main.c.i
+
+.PHONY : cw05/zad3/main.i
+
+# target to preprocess a source file
+cw05/zad3/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.i
+.PHONY : cw05/zad3/main.c.i
+
+cw05/zad3/main.s: cw05/zad3/main.c.s
+
+.PHONY : cw05/zad3/main.s
+
+# target to generate assembly for a file
+cw05/zad3/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.s
+.PHONY : cw05/zad3/main.c.s
+
+cw05/zad3/producent.o: cw05/zad3/producent.c.o
+
+.PHONY : cw05/zad3/producent.o
+
+# target to build an object file
+cw05/zad3/producent.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.o
+.PHONY : cw05/zad3/producent.c.o
+
+cw05/zad3/producent.i: cw05/zad3/producent.c.i
+
+.PHONY : cw05/zad3/producent.i
+
+# target to preprocess a source file
+cw05/zad3/producent.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.i
+.PHONY : cw05/zad3/producent.c.i
+
+cw05/zad3/producent.s: cw05/zad3/producent.c.s
+
+.PHONY : cw05/zad3/producent.s
+
+# target to generate assembly for a file
+cw05/zad3/producent.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.s
+.PHONY : cw05/zad3/producent.c.s
 
 # Help Target
 help:
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw05/zad2/main.o"
-	@echo "... cw05/zad2/main.i"
-	@echo "... cw05/zad2/main.s"
+	@echo "... cw05/zad3/konsument.o"
+	@echo "... cw05/zad3/konsument.i"
+	@echo "... cw05/zad3/konsument.s"
+	@echo "... cw05/zad3/main.o"
+	@echo "... cw05/zad3/main.i"
+	@echo "... cw05/zad3/main.s"
+	@echo "... cw05/zad3/producent.o"
+	@echo "... cw05/zad3/producent.i"
+	@echo "... cw05/zad3/producent.s"
 .PHONY : help
 
 

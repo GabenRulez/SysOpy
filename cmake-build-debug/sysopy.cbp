@@ -76,7 +76,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad2/main.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad3/konsument.c">
+			<Option target="sysopy"/>
+		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad3/main.c">
+			<Option target="sysopy"/>
+		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw05/zad3/producent.c">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">
