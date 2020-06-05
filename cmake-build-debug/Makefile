@@ -123,86 +123,59 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw05/zad3/konsument.o: cw05/zad3/konsument.c.o
+cw06/zad1/klient.o: cw06/zad1/klient.c.o
 
-.PHONY : cw05/zad3/konsument.o
-
-# target to build an object file
-cw05/zad3/konsument.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.o
-.PHONY : cw05/zad3/konsument.c.o
-
-cw05/zad3/konsument.i: cw05/zad3/konsument.c.i
-
-.PHONY : cw05/zad3/konsument.i
-
-# target to preprocess a source file
-cw05/zad3/konsument.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.i
-.PHONY : cw05/zad3/konsument.c.i
-
-cw05/zad3/konsument.s: cw05/zad3/konsument.c.s
-
-.PHONY : cw05/zad3/konsument.s
-
-# target to generate assembly for a file
-cw05/zad3/konsument.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/konsument.c.s
-.PHONY : cw05/zad3/konsument.c.s
-
-cw05/zad3/main.o: cw05/zad3/main.c.o
-
-.PHONY : cw05/zad3/main.o
+.PHONY : cw06/zad1/klient.o
 
 # target to build an object file
-cw05/zad3/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.o
-.PHONY : cw05/zad3/main.c.o
+cw06/zad1/klient.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.o
+.PHONY : cw06/zad1/klient.c.o
 
-cw05/zad3/main.i: cw05/zad3/main.c.i
+cw06/zad1/klient.i: cw06/zad1/klient.c.i
 
-.PHONY : cw05/zad3/main.i
+.PHONY : cw06/zad1/klient.i
 
 # target to preprocess a source file
-cw05/zad3/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.i
-.PHONY : cw05/zad3/main.c.i
+cw06/zad1/klient.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.i
+.PHONY : cw06/zad1/klient.c.i
 
-cw05/zad3/main.s: cw05/zad3/main.c.s
+cw06/zad1/klient.s: cw06/zad1/klient.c.s
 
-.PHONY : cw05/zad3/main.s
+.PHONY : cw06/zad1/klient.s
 
 # target to generate assembly for a file
-cw05/zad3/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/main.c.s
-.PHONY : cw05/zad3/main.c.s
+cw06/zad1/klient.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.s
+.PHONY : cw06/zad1/klient.c.s
 
-cw05/zad3/producent.o: cw05/zad3/producent.c.o
+cw06/zad1/serwer.o: cw06/zad1/serwer.c.o
 
-.PHONY : cw05/zad3/producent.o
+.PHONY : cw06/zad1/serwer.o
 
 # target to build an object file
-cw05/zad3/producent.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.o
-.PHONY : cw05/zad3/producent.c.o
+cw06/zad1/serwer.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.o
+.PHONY : cw06/zad1/serwer.c.o
 
-cw05/zad3/producent.i: cw05/zad3/producent.c.i
+cw06/zad1/serwer.i: cw06/zad1/serwer.c.i
 
-.PHONY : cw05/zad3/producent.i
+.PHONY : cw06/zad1/serwer.i
 
 # target to preprocess a source file
-cw05/zad3/producent.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.i
-.PHONY : cw05/zad3/producent.c.i
+cw06/zad1/serwer.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.i
+.PHONY : cw06/zad1/serwer.c.i
 
-cw05/zad3/producent.s: cw05/zad3/producent.c.s
+cw06/zad1/serwer.s: cw06/zad1/serwer.c.s
 
-.PHONY : cw05/zad3/producent.s
+.PHONY : cw06/zad1/serwer.s
 
 # target to generate assembly for a file
-cw05/zad3/producent.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw05/zad3/producent.c.s
-.PHONY : cw05/zad3/producent.c.s
+cw06/zad1/serwer.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.s
+.PHONY : cw06/zad1/serwer.c.s
 
 # Help Target
 help:
@@ -213,15 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw05/zad3/konsument.o"
-	@echo "... cw05/zad3/konsument.i"
-	@echo "... cw05/zad3/konsument.s"
-	@echo "... cw05/zad3/main.o"
-	@echo "... cw05/zad3/main.i"
-	@echo "... cw05/zad3/main.s"
-	@echo "... cw05/zad3/producent.o"
-	@echo "... cw05/zad3/producent.i"
-	@echo "... cw05/zad3/producent.s"
+	@echo "... cw06/zad1/klient.o"
+	@echo "... cw06/zad1/klient.i"
+	@echo "... cw06/zad1/klient.s"
+	@echo "... cw06/zad1/serwer.o"
+	@echo "... cw06/zad1/serwer.i"
+	@echo "... cw06/zad1/serwer.s"
 .PHONY : help
 
 
