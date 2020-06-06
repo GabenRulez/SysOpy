@@ -76,13 +76,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw07/zad1/pracownik_1.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw07/zad1/main.c">
 			<Option target="sysopy"/>
 		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw07/zad1/pracownik_2.c">
-			<Option target="sysopy"/>
-		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw07/zad1/pracownik_3.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw07/zad1/pomocnicze.h">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">
