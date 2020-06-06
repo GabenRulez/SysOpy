@@ -6,12 +6,15 @@
 #include <stdbool.h>
 #include <string.h>
 #include <signal.h>
+#include <sys/stat.h>
+#include <mqueue.h>
+#include <fcntl.h>
 
 #include "config.h"
 
-key_t kolejki_klientow[MAX_KLIENTOW];
+char* kolejki_klientow[MAX_KLIENTOW];
 bool dostepni_klienci[MAX_KLIENTOW];
-int id_kolejki_serwera;
+mqd_t deskryptor_kolejki_serwera;
 
 void wypisz_wysrodkowane(char* wiadomosc){
     int dlugosc_napisu = (int) strlen(wiadomosc);
@@ -127,37 +130,39 @@ void funkcja_wyjscia(int signum) {
     printf("\n");
     wypisz_linie_gwiazdek();
     wypisz_wysrodkowane("Rozpoczeto wylaczanie systemu.");
-    msg_buf* komunikat = (msg_buf*)malloc(sizeof(msg_buf));
-    komunikat->m_type = STOP;
+    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+
 
     for(int i = 0; i < MAX_KLIENTOW; i++) {
-        key_t kolejka = kolejki_klientow[i];
-        if(kolejka != -1) {
-            int id_kolejki_klienta = msgget(kolejka, 0);
-            if( msgsnd(id_kolejki_klienta, komunikat, ROZMIAR_BUFORA, 0) < 0) wyjscie_z_bledem("Nie moge wyslac komunikatu.");
-            if( msgrcv(id_kolejki_serwera, komunikat, ROZMIAR_BUFORA, STOP, 0) < 0) wyjscie_z_bledem("Nie moge otrzymac komunikatu.");
+
+        if(kolejki_klientow[i] != NULL) {
+            mqd_t deskryptor_kolejki_klienta = mq_open(kolejki_klientow[i], O_RDWR);
+            if( mq_send(deskryptor_kolejki_klienta, komunikat, MAX_MSG_LEN, STOP) < 0) wyjscie_z_bledem("Nie moge wyslac komunikatu.");
+            if(mq_receive(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, NULL) < 0) wyjscie_z_bledem("Nie moge otrzymac komunikatu.");
+            if( mq_close(deskryptor_kolejki_klienta) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki.");
         }
     }
-    msgctl(id_kolejki_serwera, IPC_RMID, NULL); // usuń kolejkę
+    if(mq_close(deskryptor_kolejki_serwera) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki.");
+    if( mq_unlink(SERVER_QUEUE_NAME) < 0 ) wyjscie_z_bledem("Nie moge usunac kolejki.");
     wypisz_linie_gwiazdek();
     exit(EXIT_SUCCESS);
 }
 
 int tworz_id_klienta() {
     int i = 0;
-    while(i < MAX_KLIENTOW && kolejki_klientow[i] != -1) i++;
+    while(i < MAX_KLIENTOW && kolejki_klientow[i] != NULL) i++;
     if (i < MAX_KLIENTOW) return i+1;       // podaj pierwsze wolne miejsce w statycznej tablicy
     else return -1;
 }
 
 
 
-void glowna_petla(msg_buf* komunikat) {
-    msg_buf* komunikat_odpowiedz = (msg_buf*)malloc(sizeof(msg_buf));
-    int id_klienta = komunikat->ID_klienta;
+void glowna_petla(char* komunikat, int prio) {
+    char* komunikat_odpowiedz = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    int id_klienta;
     int id_drugiego_klienta;
 
-    switch(komunikat->m_type) {
+    switch(prio) {
 
         case INIT: ;
             wypisz_wysrodkowane("--- Odebrano zlecenie INIT ---");
@@ -167,57 +172,65 @@ void glowna_petla(msg_buf* komunikat) {
                 return;
             }
 
-            komunikat_odpowiedz->m_type = id;
-            int id_kolejki_klienta = msgget(komunikat->klucz_kolejki, 0);
-            if(id_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
+            mqd_t deskryptor_kolejki_klienta = mq_open(komunikat, O_RDWR);
+            //int id_kolejki_klienta = msgget(komunikat->klucz_kolejki, 0);
+            if(deskryptor_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
 
-            kolejki_klientow[id - 1] = komunikat->klucz_kolejki;
+            kolejki_klientow[id - 1] = (char*)calloc(NAME_LEN, sizeof(char));
+            strcpy(kolejki_klientow[id-1], komunikat);
             dostepni_klienci[id - 1] = true;
 
-            if( msgsnd(id_kolejki_klienta, komunikat_odpowiedz, ROZMIAR_BUFORA, 0) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+            if( mq_send(deskryptor_kolejki_klienta, komunikat_odpowiedz, MAX_MSG_LEN, id) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+            if( mq_close(deskryptor_kolejki_klienta) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki");
             break;
 
 
         case LIST:
             wypisz_wysrodkowane("--- Odebrano zlecenie LIST ---");
-            strcpy(komunikat_odpowiedz->m_text, "");
 
             bool flag = false;
-
+            id_klienta = (int)komunikat[0];
             for(int i = 0; i < MAX_KLIENTOW; i++) {
-                if(kolejki_klientow[i] != -1 && i+1 != id_klienta) {
+                if(kolejki_klientow[i] != NULL && i+1 != id_klienta) {
                     char temp[SZEROKOSC_KONSOLI];
                     sprintf(temp, "Klient %d - %s\n", i+1, dostepni_klienci[i] ? "dostepny" : "zajety");
-                    strcat(komunikat_odpowiedz->m_text, temp);
+                    strcat(komunikat_odpowiedz, temp);
                     flag = true;
                 }
             }
-            if(!flag) strcat(komunikat_odpowiedz->m_text, "Brak innych klientow.\n");
-            id_kolejki_klienta = msgget(kolejki_klientow[id_klienta - 1], 0);
-            if(id_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
 
-            komunikat_odpowiedz->m_type = id_klienta;
-            if( msgsnd(id_kolejki_klienta, komunikat_odpowiedz, ROZMIAR_BUFORA, 0) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+
+            if(!flag) strcat(komunikat_odpowiedz, "Brak innych klientow.\n");
+            deskryptor_kolejki_klienta = mq_open(kolejki_klientow[id_klienta - 1], O_RDWR);
+            if(deskryptor_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
+
+            if( mq_send(deskryptor_kolejki_klienta, komunikat_odpowiedz, MAX_MSG_LEN, LIST) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            if( mq_close(deskryptor_kolejki_klienta) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki");
             break;
 
 
         case CONNECT:
             wypisz_wysrodkowane("--- Odebrano zlecenie CONNECT ---");
-            id_drugiego_klienta = komunikat->ID_polaczonego_klienta;
+            id_drugiego_klienta = (int)komunikat[1];
 
-            komunikat_odpowiedz->m_type = CONNECT;
-            komunikat_odpowiedz->klucz_kolejki = kolejki_klientow[id_drugiego_klienta - 1];
-            id_kolejki_klienta = msgget(kolejki_klientow[id_klienta - 1], 0);
-            if(id_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
-            if( msgsnd(id_kolejki_klienta, komunikat_odpowiedz, ROZMIAR_BUFORA, 0) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            //komunikat_odpowiedz->m_type = CONNECT;
+            //komunikat_odpowiedz->klucz_kolejki = kolejki_klientow[id_drugiego_klienta - 1];
+            deskryptor_kolejki_klienta = mq_open(kolejki_klientow[id_klienta - 1], O_RDWR);
+            if(deskryptor_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
+            komunikat_odpowiedz[0] = id_drugiego_klienta;
+            strcat(komunikat_odpowiedz, kolejki_klientow[id_drugiego_klienta - 1]);
+
+            if( mq_send(deskryptor_kolejki_klienta, komunikat_odpowiedz, MAX_MSG_LEN, CONNECT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
 
 
-            komunikat_odpowiedz->ID_klienta = id_klienta;
-            komunikat_odpowiedz->m_type = CONNECT;
-            komunikat_odpowiedz->klucz_kolejki = kolejki_klientow[id_klienta - 1];
-            id_kolejki_klienta = msgget(kolejki_klientow[id_drugiego_klienta - 1], 0);
-            if(id_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
-            if( msgsnd(id_kolejki_klienta, komunikat_odpowiedz, ROZMIAR_BUFORA, 0) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            memset(komunikat_odpowiedz, 0, strlen(komunikat_odpowiedz));
+            deskryptor_kolejki_klienta = mq_open(kolejki_klientow[id_drugiego_klienta - 1], O_RDWR);
+            if(deskryptor_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
+            komunikat_odpowiedz[0] = id_klienta;
+            strcat(komunikat_odpowiedz, kolejki_klientow[id_klienta - 1]);
+
+            if( mq_send(deskryptor_kolejki_klienta, komunikat_odpowiedz, MAX_MSG_LEN, CONNECT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            if( mq_close(deskryptor_kolejki_klienta) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki");
 
             dostepni_klienci[id_klienta - 1] = false;
             dostepni_klienci[id_drugiego_klienta - 1] = false;
@@ -226,12 +239,13 @@ void glowna_petla(msg_buf* komunikat) {
 
         case DISCONNECT:
             wypisz_wysrodkowane("--- Odebrano zlecenie DISCONNECT ---");
-            id_drugiego_klienta = komunikat->ID_polaczonego_klienta;
+            id_klienta = (int)komunikat[0];
+            id_drugiego_klienta = (int)komunikat[1];
 
-            komunikat_odpowiedz->m_type = DISCONNECT;
-            id_kolejki_klienta = msgget(kolejki_klientow[id_drugiego_klienta - 1], 0);
-            if(id_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
-            if( msgsnd(id_kolejki_klienta, komunikat_odpowiedz, ROZMIAR_BUFORA, 0) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            deskryptor_kolejki_klienta = mq_open(kolejki_klientow[id_drugiego_klienta - 1], O_RDWR);
+            if(deskryptor_kolejki_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
+            if( mq_send(deskryptor_kolejki_klienta, komunikat_odpowiedz, MAX_MSG_LEN, DISCONNECT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu");
+            if( mq_close(deskryptor_kolejki_klienta) < 0 ) wyjscie_z_bledem("Nie moge zamknac kolejki");
 
             dostepni_klienci[id_klienta - 1] = true;
             dostepni_klienci[id_drugiego_klienta - 1] = true;
@@ -240,7 +254,8 @@ void glowna_petla(msg_buf* komunikat) {
 
         case STOP:
             wypisz_wysrodkowane("--- Odebrano zlecenie STOP ---");
-            kolejki_klientow[id_klienta - 1] = -1;
+            id_klienta = (int)komunikat[0];
+            kolejki_klientow[id_klienta - 1] = NULL;
             dostepni_klienci[id_klienta - 1] = false;
             break;
 
@@ -253,24 +268,31 @@ void glowna_petla(msg_buf* komunikat) {
 
 int main() {
     for(int i = 0; i < MAX_KLIENTOW; i++){
-        kolejki_klientow[i] = -1;
+        kolejki_klientow[i] = NULL;
         dostepni_klienci[i] = false;
     }
 
-    key_t klucz_kolejki = ftok(getenv("HOME"), ID_SERWERA);
-    id_kolejki_serwera = msgget(klucz_kolejki, IPC_CREAT | 0666);
+    struct mq_attr attr;
+    attr.mq_maxmsg = 10;
+    attr.mq_msgsize = MAX_MSG_LEN;
+
+    //key_t klucz_kolejki = ftok(getenv("HOME"), ID_SERWERA);
+    //id_kolejki_serwera = msgget(klucz_kolejki, IPC_CREAT | 0666);
+    deskryptor_kolejki_serwera = mq_open(SERVER_QUEUE_NAME, O_RDWR | O_CREAT, 0666, &attr);
+    if( deskryptor_kolejki_serwera < 0 )wyjscie_z_bledem("Nie mozna stworzyc kolejki.");
 
     wypisz_linie_gwiazdek();
-    wypisz_wysrodkowane("Uruchamiam serwer.");
+    wypisz_wysrodkowane("Uruchamiam serwer.\n");
 
-    printf("\nKlucz kolejki serwera: %d\n", klucz_kolejki);
-    printf("ID kolejki serwera: %d\n\n", id_kolejki_serwera);
+    //printf("\nKlucz kolejki serwera: %d\n", klucz_kolejki);
+    //printf("ID kolejki serwera: %d\n\n", id_kolejki_serwera);
 
     signal(SIGINT, funkcja_wyjscia);
 
-    msg_buf* komunikat = (msg_buf*)malloc(sizeof(msg_buf));
+    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    unsigned int prio;
     while(1) {
-        if( msgrcv(id_kolejki_serwera, komunikat, ROZMIAR_BUFORA, -1000, 0) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
-        glowna_petla(komunikat);
+        if(mq_receive(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, &prio) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
+        glowna_petla(komunikat, prio);
     }
 }

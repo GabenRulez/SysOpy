@@ -2,21 +2,14 @@
 #define CONFIG_H
 
 #define MAX_KLIENTOW 10
-#define ID_SERWERA 1
-
-typedef struct msg_buf {
-    long m_type;
-    char m_text[1024];
-    key_t klucz_kolejki;
-    int ID_klienta;
-    int ID_polaczonego_klienta;
-} msg_buf;
+const int MAX_MSG_LEN = 100;
+const char SERVER_QUEUE_NAME[] = "/testywojtka";
+#define NAME_LEN 8
 
 typedef enum m_type {
     STOP = 1, DISCONNECT = 2, INIT = 3, LIST = 4, CONNECT = 5
 } m_type;
 
-const int ROZMIAR_BUFORA = sizeof(msg_buf) - sizeof(long);
 
 #define SZEROKOSC_KONSOLI 80
 const char* spacja_1 = " ";
