@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sysopy.dir/cw06/zad1/klient.c.o"
-  "CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.o"
+  "CMakeFiles/sysopy.dir/cw06/zad2/klient.c.o"
+  "CMakeFiles/sysopy.dir/cw06/zad2/serwer.c.o"
   "sysopy"
   "sysopy.pdb"
 )

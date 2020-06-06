@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.o CMakeFiles/sysopy.dir/cw06/zad1/klient.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw06/zad2/serwer.c.o CMakeFiles/sysopy.dir/cw06/zad2/klient.c.o  -o sysopy 

@@ -76,13 +76,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad1/config.h">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad2/config.h">
 			<Option target="sysopy"/>
 		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad1/klient.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad2/klient.c">
 			<Option target="sysopy"/>
 		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad1/serwer.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad2/serwer.c">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">

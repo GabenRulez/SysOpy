@@ -123,59 +123,59 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw06/zad1/klient.o: cw06/zad1/klient.c.o
+cw06/zad2/klient.o: cw06/zad2/klient.c.o
 
-.PHONY : cw06/zad1/klient.o
-
-# target to build an object file
-cw06/zad1/klient.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.o
-.PHONY : cw06/zad1/klient.c.o
-
-cw06/zad1/klient.i: cw06/zad1/klient.c.i
-
-.PHONY : cw06/zad1/klient.i
-
-# target to preprocess a source file
-cw06/zad1/klient.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.i
-.PHONY : cw06/zad1/klient.c.i
-
-cw06/zad1/klient.s: cw06/zad1/klient.c.s
-
-.PHONY : cw06/zad1/klient.s
-
-# target to generate assembly for a file
-cw06/zad1/klient.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/klient.c.s
-.PHONY : cw06/zad1/klient.c.s
-
-cw06/zad1/serwer.o: cw06/zad1/serwer.c.o
-
-.PHONY : cw06/zad1/serwer.o
+.PHONY : cw06/zad2/klient.o
 
 # target to build an object file
-cw06/zad1/serwer.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.o
-.PHONY : cw06/zad1/serwer.c.o
+cw06/zad2/klient.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/klient.c.o
+.PHONY : cw06/zad2/klient.c.o
 
-cw06/zad1/serwer.i: cw06/zad1/serwer.c.i
+cw06/zad2/klient.i: cw06/zad2/klient.c.i
 
-.PHONY : cw06/zad1/serwer.i
+.PHONY : cw06/zad2/klient.i
 
 # target to preprocess a source file
-cw06/zad1/serwer.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.i
-.PHONY : cw06/zad1/serwer.c.i
+cw06/zad2/klient.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/klient.c.i
+.PHONY : cw06/zad2/klient.c.i
 
-cw06/zad1/serwer.s: cw06/zad1/serwer.c.s
+cw06/zad2/klient.s: cw06/zad2/klient.c.s
 
-.PHONY : cw06/zad1/serwer.s
+.PHONY : cw06/zad2/klient.s
 
 # target to generate assembly for a file
-cw06/zad1/serwer.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad1/serwer.c.s
-.PHONY : cw06/zad1/serwer.c.s
+cw06/zad2/klient.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/klient.c.s
+.PHONY : cw06/zad2/klient.c.s
+
+cw06/zad2/serwer.o: cw06/zad2/serwer.c.o
+
+.PHONY : cw06/zad2/serwer.o
+
+# target to build an object file
+cw06/zad2/serwer.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/serwer.c.o
+.PHONY : cw06/zad2/serwer.c.o
+
+cw06/zad2/serwer.i: cw06/zad2/serwer.c.i
+
+.PHONY : cw06/zad2/serwer.i
+
+# target to preprocess a source file
+cw06/zad2/serwer.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/serwer.c.i
+.PHONY : cw06/zad2/serwer.c.i
+
+cw06/zad2/serwer.s: cw06/zad2/serwer.c.s
+
+.PHONY : cw06/zad2/serwer.s
+
+# target to generate assembly for a file
+cw06/zad2/serwer.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw06/zad2/serwer.c.s
+.PHONY : cw06/zad2/serwer.c.s
 
 # Help Target
 help:
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw06/zad1/klient.o"
-	@echo "... cw06/zad1/klient.i"
-	@echo "... cw06/zad1/klient.s"
-	@echo "... cw06/zad1/serwer.o"
-	@echo "... cw06/zad1/serwer.i"
-	@echo "... cw06/zad1/serwer.s"
+	@echo "... cw06/zad2/klient.o"
+	@echo "... cw06/zad2/klient.i"
+	@echo "... cw06/zad2/klient.s"
+	@echo "... cw06/zad2/serwer.o"
+	@echo "... cw06/zad2/serwer.i"
+	@echo "... cw06/zad2/serwer.s"
 .PHONY : help
 
 
