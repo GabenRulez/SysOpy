@@ -12,10 +12,10 @@
 
 #include "config.h"
 
-char queue_name[NAME_LEN];
+char nazwa_kolejki[NAME_LEN];
 mqd_t deskryptor_kolejki;
 mqd_t deskryptor_kolejki_serwera;
-int id_klienta;
+unsigned int id_klienta;
 
 void wypisz_wysrodkowane(char* wiadomosc){
     int dlugosc_napisu = (int) strlen(wiadomosc);
@@ -128,57 +128,54 @@ void wyjscie_z_bledem(char* komunikat) {
 }
 
 void komenda_STOP() {
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
     komunikat[0] = id_klienta;
 
-    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, STOP) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_DLUGOSC_KOMUNIKATU, STOP) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
     if( mq_close(deskryptor_kolejki_serwera) < 0 ) wyjscie_z_bledem("Nie mozna zamknac kolejki.");
+    if(mq_unlink(nazwa_kolejki) < 0 ) wyjscie_z_bledem("Nie moge usunac kolejki.");
 
     wypisz_wysrodkowane("--- Koncze dzialanie ---");
     exit(EXIT_SUCCESS);
 }
 
 
-
-int polacz_z_serwerem() {
+void polacz_z_serwerem() {
     wypisz_wysrodkowane("Laczenie");
 
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
-    strcpy(komunikat, queue_name);
-    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, INIT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
+    strcpy(komunikat, nazwa_kolejki);
+    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_DLUGOSC_KOMUNIKATU, INIT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
 
-    unsigned int id_klienta;
-    if(mq_receive(deskryptor_kolejki, komunikat, MAX_MSG_LEN, &id_klienta) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
-    printf("ID received %d\n", id_klienta);
+    char* komunikat_odebrany = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU + 1, sizeof(char));
+    if(mq_receive(deskryptor_kolejki, komunikat_odebrany, MAX_DLUGOSC_KOMUNIKATU + 1, &id_klienta) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
 
     wypisz_wysrodkowane("Polaczono");
-    return id_klienta;
 }
-
 
 
 void tryb_chatu(int id_drugiego_klienta, mqd_t deskryptor_drugiego_klienta) {
     char* komenda = NULL;
     size_t len = 0;
     ssize_t odczyt = 0;
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
     while(1) {
         printf("Podaj tekst lub Q: ");
         odczyt = getline(&komenda, &len, stdin);
         komenda[odczyt - 1] = '\0';
 
         struct timespec* tspec = (struct timespec*)malloc(sizeof(struct timespec));
-        unsigned int type;
+        unsigned int temp_priorytet;
         bool disconnect = false;
 
         int flag_przed = false;
         int flag_po = false;
-        while(mq_timedreceive(deskryptor_kolejki, komunikat, MAX_MSG_LEN, &type, tspec) >= 0){
-            if(type==STOP){
+        while(mq_timedreceive(deskryptor_kolejki, komunikat, MAX_DLUGOSC_KOMUNIKATU, &temp_priorytet, tspec) >= 0){
+            if(temp_priorytet == STOP){
                 wypisz_wysrodkowane("--- Odebrano polecenie STOP (z serwera) ---");
                 komenda_STOP();
             }
-            else if(type == DISCONNECT){
+            else if(temp_priorytet == DISCONNECT){
                 wypisz_wysrodkowane("--- Odebrano polecenie DISCONNECT (z serwera) ---");
                 disconnect = true;
                 break;
@@ -198,43 +195,43 @@ void tryb_chatu(int id_drugiego_klienta, mqd_t deskryptor_drugiego_klienta) {
         if(strcmp(komenda, "Q") == 0) {
             komunikat[0] = id_klienta;
             komunikat[1] = id_drugiego_klienta;
-            if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, DISCONNECT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+            if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_DLUGOSC_KOMUNIKATU, DISCONNECT) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
             break;
 
         } else if(strcmp(komenda, "") != 0) {
             strcpy(komunikat, komenda);
-            if(mq_send(deskryptor_drugiego_klienta, komunikat, MAX_MSG_LEN, CONNECT) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+            if(mq_send(deskryptor_drugiego_klienta, komunikat, MAX_DLUGOSC_KOMUNIKATU, CONNECT) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
         }
     }
 }
 
 
 void komenda_CONNECT(int id) {
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
 
     komunikat[0] = id_klienta;
     komunikat[1] = id;
-    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, CONNECT) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_DLUGOSC_KOMUNIKATU, CONNECT) < 0) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
 
-    if(mq_receive(deskryptor_kolejki, komunikat, MAX_MSG_LEN, NULL) < 0) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
+    if(mq_receive(deskryptor_kolejki, komunikat, MAX_DLUGOSC_KOMUNIKATU, NULL) < 0) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
 
-    char* klucz_drugiego_klienta = (char*)calloc(NAME_LEN, sizeof(char));//komunikat_otrzymany->klucz_kolejki;
-    strncpy(klucz_drugiego_klienta, komunikat + 1, strlen(komunikat)-1);
-    printf("other name %s,\n", klucz_drugiego_klienta);
+    char* nazwa_drugiej_kolejki = (char*)calloc(NAME_LEN, sizeof(char));//komunikat_otrzymany->klucz_kolejki;
+    strncpy(nazwa_drugiej_kolejki, komunikat + 1, strlen(komunikat) - 1);
+    printf("Polaczono z klientem %s.\n\n", nazwa_drugiej_kolejki);
 
-    mqd_t deskryptor_kolejki_drugiego_klienta = mq_open(klucz_drugiego_klienta, O_RDWR);
+    mqd_t deskryptor_kolejki_drugiego_klienta = mq_open(nazwa_drugiej_kolejki, O_RDWR);
     if(deskryptor_kolejki_drugiego_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki klienta.");
 
     tryb_chatu(id, deskryptor_kolejki_drugiego_klienta);
 }
 
 void komenda_LIST() {
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
     komunikat[0] = id_klienta;
 
-    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_MSG_LEN, LIST) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
+    if(mq_send(deskryptor_kolejki_serwera, komunikat, MAX_DLUGOSC_KOMUNIKATU, LIST) < 0 ) wyjscie_z_bledem("Nie udalo sie wyslac komunikatu.");
 
-    if(mq_receive(deskryptor_kolejki, komunikat, MAX_MSG_LEN, NULL) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
+    if(mq_receive(deskryptor_kolejki, komunikat, MAX_DLUGOSC_KOMUNIKATU, NULL) < 0 ) wyjscie_z_bledem("Nie moge otrzymac zadnych komunikatow.");
     printf("%s\n", komunikat);
 }
 
@@ -244,26 +241,28 @@ void funkcja_wyjscia(int signum) {
 }
 
 void odbierz_komunikat_z_serwera() {
-    char* komunikat = (char*)calloc(MAX_MSG_LEN, sizeof(char));
+    char* komunikat = (char*)calloc(MAX_DLUGOSC_KOMUNIKATU, sizeof(char));
     bool flaga = false;
 
     struct timespec* tspec = (struct timespec*)malloc(sizeof(struct timespec));
-    unsigned int type;
+    unsigned int temp_priorytet;
 
-    if(mq_timedreceive(deskryptor_kolejki, komunikat, MAX_MSG_LEN, &type, tspec) >= 0 ) {
-        if(type == STOP) {
+    if(mq_timedreceive(deskryptor_kolejki, komunikat, MAX_DLUGOSC_KOMUNIKATU, &temp_priorytet, tspec) >= 0 ) {
+        if(temp_priorytet == STOP) {
             wypisz_wysrodkowane("--- Odebrano polecenie STOP (z serwera) ---");
             flaga = true;
             komenda_STOP();
 
-        } else if(type == CONNECT) {
-            printf("Laczenie z klientem ...\n");
+        } else if(temp_priorytet == CONNECT) {
+            wypisz_wysrodkowane("Laczenie z klientem ...");
 
-            char* other_queue_name = (char*)calloc(NAME_LEN, sizeof(char));
-            strncpy(other_queue_name, komunikat+1, strlen(komunikat)-1);
-            printf("other name %s",other_queue_name);
-            mqd_t deskryptor_kolejki_drugiego_klienta = mq_open(other_queue_name, O_RDWR);
+            char* nazwa_drugiej_kolejki = (char*)calloc(NAME_LEN, sizeof(char));
+            strncpy(nazwa_drugiej_kolejki, komunikat + 1, strlen(komunikat) - 1);
+            printf("Polaczono z klientem %s.\n\n", nazwa_drugiej_kolejki);
+
+            mqd_t deskryptor_kolejki_drugiego_klienta = mq_open(nazwa_drugiej_kolejki, O_RDWR);
             if(deskryptor_kolejki_drugiego_klienta < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki drugiego klienta.");
+
             tryb_chatu((int)komunikat[0], deskryptor_kolejki_drugiego_klienta);
             flaga = true;
         }
@@ -275,42 +274,46 @@ void odbierz_komunikat_z_serwera() {
 int main() {
     srand(time(NULL));
 
-    queue_name[0] = '/';
-    for(int i=1; i<NAME_LEN; i++) queue_name[i] = ( rand() % ('Z' - 'A' + 1) + 'A' );
-    deskryptor_kolejki = mq_open(queue_name, O_RDWR | O_CREAT, S_IRWXU | S_IRWXG | S_IRWXO, NULL);
+    nazwa_kolejki[0] = '/';
+    for(int i=1; i<NAME_LEN; i++) nazwa_kolejki[i] = "ABCDEFGHIJKLMNOPRSTUWXYZabcdefghijklmnoprstuwxyz"[rand() % 48];
+
+    struct mq_attr attr;
+    attr.mq_maxmsg = 10;
+    attr.mq_msgsize = MAX_DLUGOSC_KOMUNIKATU;
+
+    deskryptor_kolejki = mq_open(nazwa_kolejki, O_RDWR | O_CREAT, 0666, &attr);
+    if(deskryptor_kolejki < 0) wyjscie_z_bledem("Nie mozna otworzyc kolejki.");
 
     wypisz_linie_gwiazdek();
     wypisz_wysrodkowane("Uruchamiam klienta.");
 
-    printf("\nNazwa kolejki klienta: %d\n", queue_name);
+    printf("\nNazwa kolejki klienta: %s\n", nazwa_kolejki);
     printf("Deskryptor kolejki klienta: %d\n", deskryptor_kolejki);
 
 
-    deskryptor_kolejki_serwera = mq_open(SERVER_QUEUE_NAME, O_RDWR);
+    deskryptor_kolejki_serwera = mq_open(NAZWA_KOLEJKI_SERWERA, O_RDWR);
     if(deskryptor_kolejki_serwera < 0) wyjscie_z_bledem("Brak dostepu do kolejki serwera.");
     printf("Deskryptor kolejki serwera: %d\n\n", deskryptor_kolejki_serwera);
 
 
-    id_klienta = polacz_z_serwerem();
+    polacz_z_serwerem();
     printf("Otrzymane ID: %d\n", id_klienta);
     wypisz_wysrodkowane("Dostepne komendy: LIST, CONNECT, STOP");
 
     signal(SIGINT, funkcja_wyjscia);
 
-
-
     char* komenda = NULL;
     size_t len = 0;
-    ssize_t read = 0;
+    ssize_t odczyt = 0;
     while(1) {
         printf("Podaj polecenie: ");
-        read = getline(&komenda, &len, stdin);      // można się pokusić na użycie fork() - podproces zajmuje sie IO, a glowny sprawdza, czy cos nie nadeszlo
-        komenda[read - 1] = '\0';
+        odczyt = getline(&komenda, &len, stdin);
+        komenda[odczyt - 1] = '\0';
 
         odbierz_komunikat_z_serwera();
 
         if(strcmp(komenda, "") == 0) continue;
-
+        printf("\n");
         char* temp_slowo = strtok(komenda, " ");
         if(strcmp(temp_slowo, "LIST") == 0) {
             wypisz_wysrodkowane("--- Polecenie LIST ---");
@@ -332,5 +335,4 @@ int main() {
         }
     }
 
-    return 0;
 }

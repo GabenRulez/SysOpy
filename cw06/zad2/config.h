@@ -2,9 +2,9 @@
 #define CONFIG_H
 
 #define MAX_KLIENTOW 10
-const int MAX_MSG_LEN = 100;
-const char SERVER_QUEUE_NAME[] = "/testywojtka";
-#define NAME_LEN 8
+const int MAX_DLUGOSC_KOMUNIKATU = 80;
+const char NAZWA_KOLEJKI_SERWERA[] = "/testy";
+#define NAME_LEN 5
 
 typedef enum m_type {
     STOP = 1, DISCONNECT = 2, INIT = 3, LIST = 4, CONNECT = 5
