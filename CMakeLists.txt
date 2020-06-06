@@ -3,4 +3,4 @@ project(sysopy C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(sysopy cw06/zad1/serwer.c cw06/zad1/klient.c)
+add_executable(sysopy cw06/zad1/serwer.c cw06/zad1/klient.c cw06/zad1/config.h)

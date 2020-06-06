@@ -76,6 +76,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad1/config.h">
+			<Option target="sysopy"/>
+		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw06/zad1/klient.c">
 			<Option target="sysopy"/>
 		</Unit>
