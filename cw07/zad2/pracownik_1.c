@@ -19,13 +19,6 @@
 
 #include "pomocnicze.h"
 
-union semun{
-    int val;
-    struct semid_ds *buf;
-    unsigned short *array;
-    struct seminfo *__buf;
-};
-
 void wyjdz_z_bledem(char* tekst){
     wypisz_wysrodkowane("--- ERROR ---");
     printf("%s\n\n", tekst);
