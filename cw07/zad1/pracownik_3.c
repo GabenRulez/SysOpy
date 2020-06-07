@@ -37,7 +37,7 @@ int identyfikator_segmentu_pamieci_wspolnej;
 
 void wlasny_exit(int signum){
     usleep(100000);
-    printf("[%d - Pracownik_3] Zamykaja sklep. Koncze prace.\n", getpid());
+    printf("[%d %s (pracownik_3)] Zamykaja sklep. Koncze prace.\n", getpid(), obecny_timestamp());
 
     semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
     shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
@@ -74,7 +74,7 @@ void wyslij_zamowienie() {
 
     semop(identyfikator_zbioru_semaforow, sops_koniec, 2);
 
-    printf("[%d %ld (pracownik_3)] Wyslalem zamowienie o wielkosci: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), time(NULL), wielkosc, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
+    printf("[%d %s (pracownik_3)] Wyslalem zamowienie o wielkosci: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), obecny_timestamp(), wielkosc, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
     usleep(1000 * wielkosc);
 }
 
@@ -110,7 +110,7 @@ int main() {
         }
         else{
             if(flaga == false){
-                printf("[%d - Pracownik_3] Nie ma zamowien do wyslania.\n", getpid());
+                printf("[%d %s (pracownik_3)] Nie ma zamowien do wyslania.\n", getpid(), obecny_timestamp());
                 usleep(100000);
                 flaga = true;
             }
