@@ -8,34 +8,16 @@
 #include <unistd.h>
 #include <sys/sem.h>
 #include <sys/ipc.h>
+#include <sys/shm.h>
 
 #include "pomocnicze.h"
 
-#define ILOSC_SEMAFOROW 10
-//int tablica_zamowien[ILOSC_SEMAFOROW]= {0};
-int* tablica_zamowien;
-
-void uruchom_pracownika_1(){
-    while(1){
-        int wielkosc_zamowienia = losowy_int(1,6);
-        printf("buuu");
-        exit(1);
-    }
-}
-
-void uruchom_pracownika_2(){
-    while(1){
-        printf("buuu");
-        exit(1);
-    }
-}
-
-void uruchom_pracownika_3(){
-    while(1){
-        printf("buuu");
-        exit(1);
-    }
-}
+union semun{
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
+    struct seminfo *__buf;
+};
 
 void wyjdz_z_bledem(char* tekst){
     wypisz_wysrodkowane("--- ERROR ---");
@@ -43,39 +25,78 @@ void wyjdz_z_bledem(char* tekst){
     exit(1);
 }
 
-void wyjdz_poprawnie(char* tekst, pid_t* pid){
-    char* temp_tekst = calloc(SZEROKOSC_KONSOLI, sizeof(char));
-    sprintf(temp_tekst, "Proces %ls konczy prace.", pid);
-    wypisz_wysrodkowane(temp_tekst);
-    free(temp_tekst);
+int ile_pracownikow_typu_1;
+int ile_pracownikow_typu_2;
+int ile_pracownikow_typu_3;
+
+pid_t* pracownicy_typu_1;
+pid_t* pracownicy_typu_2;
+pid_t* pracownicy_typu_3;
+
+key_t klucz_zbioru_semaforow;
+int identyfikator_zbioru_semaforow;
+
+key_t klucz_segmentu_pamieci_wspolnej;
+int identyfikator_segmentu_pamieci_wspolnej;
+
+
+
+void pelny_exit(int signum){
+    wypisz_wysrodkowane("Zamykam program i jego podprocesy.");
+    for(int i=0; i<ile_pracownikow_typu_1; i++) kill(pracownicy_typu_1[i], SIGINT);
+    for(int i=0; i<ile_pracownikow_typu_2; i++) kill(pracownicy_typu_2[i], SIGINT);
+    for(int i=0; i<ile_pracownikow_typu_3; i++) kill(pracownicy_typu_3[i], SIGINT);
+    wypisz_wysrodkowane("Wyslane sygnaly do wyslania.");
+
+    semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
+    shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
+
+    wypisz_wysrodkowane("--- Koncze prace. ---");
+    exit(EXIT_SUCCESS);
 }
 
 int main(int argc, char** argv) {
     if (argc < 4) wyjdz_z_bledem("Podaj:  <ile_pracownikow_typu_1> <ile_pracownikow_typu_2> <ile_pracownikow_typu_3>\n");
 
-    int ile_pracownikow_typu_1 = (int) strtol(argv[1], (char **) NULL, 10);
-    int ile_pracownikow_typu_2 = (int) strtol(argv[2], (char **) NULL, 10);
-    int ile_pracownikow_typu_3 = (int) strtol(argv[3], (char **) NULL, 10);
+    ile_pracownikow_typu_1 = (int) strtol(argv[1], (char **) NULL, 10);
+    ile_pracownikow_typu_2 = (int) strtol(argv[2], (char **) NULL, 10);
+    ile_pracownikow_typu_3 = (int) strtol(argv[3], (char **) NULL, 10);
 
     if(ile_pracownikow_typu_1 < 1 || ile_pracownikow_typu_2 < 1 || ile_pracownikow_typu_3 < 1) wyjdz_z_bledem("Musi istniec przynajmniej po 1 pracowniku kazdego rodzaju.");
 
-    pid_t* pracownicy_typu_1 = calloc(ile_pracownikow_typu_1, sizeof(pid_t));
-    pid_t* pracownicy_typu_2 = calloc(ile_pracownikow_typu_2, sizeof(pid_t));
-    pid_t* pracownicy_typu_3 = calloc(ile_pracownikow_typu_3, sizeof(pid_t));
+    pracownicy_typu_1 = calloc(ile_pracownikow_typu_1, sizeof(pid_t));
+    pracownicy_typu_2 = calloc(ile_pracownikow_typu_2, sizeof(pid_t));
+    pracownicy_typu_3 = calloc(ile_pracownikow_typu_3, sizeof(pid_t));
 
-    tablica_zamowien = (int*)calloc(ILOSC_SEMAFOROW, sizeof(int));
+    signal(SIGINT, pelny_exit);
 
     // stworz tutaj semafory
-    key_t klucz_zbioru_semaforow = ftok("test_absdjalkfal", 1);
-    int identyfikator_zbioru_semaforow = semget(klucz_zbioru_semaforow, ILOSC_SEMAFOROW, IPC_CREAT | 0666);
-    for(int i=0; i<ILOSC_SEMAFOROW; i++) semctl(identyfikator_zbioru_semaforow, i, SETVAL, 0);
+    klucz_zbioru_semaforow = ftok(getenv("HOME"), 1);
+    identyfikator_zbioru_semaforow = semget(klucz_zbioru_semaforow, 6, IPC_CREAT | 0666);
+    /*
+     * Semafory
+     * 0 - czy tablica jest w tym momencie modyfikowana
+     * 1 - pierwszy wolny indeks w tablicy
+     * 2 - pierwszy indeks zamowienia do przygotowania
+     * 3 - ilosc zamowien do przygotowania
+     * 4 - pierwszy indeks zamowienia do wyslania
+     * 5 - ilosc zamowien do wyslania
+     * */
 
+    union semun arg;
+    arg.val = 0;
+    for(int i=0; i<6; i++) semctl(identyfikator_zbioru_semaforow, i, SETVAL, arg);
+
+
+
+    klucz_segmentu_pamieci_wspolnej = ftok(getenv("HOME"), 2);
+    identyfikator_segmentu_pamieci_wspolnej = shmget(klucz_segmentu_pamieci_wspolnej, sizeof(tablica_zamowien), IPC_CREAT | 0666);
 
 
     for(int i=0; i<ile_pracownikow_typu_1; i++){
         pid_t dziecko = fork();
         if(dziecko == 0){
-            uruchom_pracownika_1();
+            execlp("./pracownik_1", "pracownik_1", NULL);
         }
         else{
             pracownicy_typu_1[i] = dziecko;
@@ -86,7 +107,7 @@ int main(int argc, char** argv) {
     for(int i=0; i<ile_pracownikow_typu_2; i++){
         pid_t dziecko = fork();
         if(dziecko == 0){
-            uruchom_pracownika_2();
+            execlp("./pracownik_2", "pracownik_2", NULL);
         }
         else{
             pracownicy_typu_2[i] = dziecko;
@@ -97,7 +118,7 @@ int main(int argc, char** argv) {
     for(int i=0; i<ile_pracownikow_typu_3; i++){
         pid_t dziecko = fork();
         if(dziecko == 0){
-            uruchom_pracownika_3();
+            execlp("./pracownik_3", "pracownik_3", NULL);
         }
         else{
             pracownicy_typu_3[i] = dziecko;
@@ -105,10 +126,14 @@ int main(int argc, char** argv) {
         usleep(losowy_int(1000, 100000));
     }
 
+    for(int i=0; i < ile_pracownikow_typu_1 + ile_pracownikow_typu_2 + ile_pracownikow_typu_3; i++) wait(NULL);
+
 
     free(pracownicy_typu_1);
     free(pracownicy_typu_2);
     free(pracownicy_typu_3);
-    free(tablica_zamowien);
+
+    semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
+    shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
     return 0;
 }

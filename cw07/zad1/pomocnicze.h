@@ -2,7 +2,11 @@
 #define POMOCNICZE_H
 
 #define SZEROKOSC_KONSOLI 80
+#define MAX_ZAMOWIEN 5
 
+struct tablica_zamowien{
+    int wartosci[MAX_ZAMOWIEN];
+}; typedef struct tablica_zamowien tablica_zamowien;
 
 
 const char* spacja_1 = " ";
