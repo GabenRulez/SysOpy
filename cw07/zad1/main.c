@@ -42,16 +42,18 @@ int identyfikator_segmentu_pamieci_wspolnej;
 
 
 void pelny_exit(int signum){
-    wypisz_wysrodkowane("Zamykam program i jego podprocesy.");
+    printf("\n\n");
+    sleep(1);
+
     for(int i=0; i<ile_pracownikow_typu_1; i++) kill(pracownicy_typu_1[i], SIGINT);
     for(int i=0; i<ile_pracownikow_typu_2; i++) kill(pracownicy_typu_2[i], SIGINT);
     for(int i=0; i<ile_pracownikow_typu_3; i++) kill(pracownicy_typu_3[i], SIGINT);
-    wypisz_wysrodkowane("Wyslane sygnaly do wyslania.");
+    usleep(100000);
 
     semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
     shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
 
-    wypisz_wysrodkowane("--- Koncze prace. ---");
+    wypisz_wysrodkowane("--- Sklep konczy prace. ---\n");
     exit(EXIT_SUCCESS);
 }
 
@@ -75,8 +77,8 @@ int main(int argc, char** argv) {
     identyfikator_zbioru_semaforow = semget(klucz_zbioru_semaforow, 6, IPC_CREAT | 0666);
     /*
      * Semafory
-     * 0 - czy tablica jest w tym momencie modyfikowana
-     * 1 - pierwszy wolny indeks w tablicy
+     * 0 - czy tablica jest w tym momencie modyfikowana (wartość 0 dla modyfikowana, 1 dla wolna)
+     * 1 - ostatni zapisany indeks w tablicy
      * 2 - pierwszy indeks zamowienia do przygotowania
      * 3 - ilosc zamowien do przygotowania
      * 4 - pierwszy indeks zamowienia do wyslania
@@ -86,12 +88,14 @@ int main(int argc, char** argv) {
     union semun arg;
     arg.val = 0;
     for(int i=0; i<6; i++) semctl(identyfikator_zbioru_semaforow, i, SETVAL, arg);
-
+    arg.val = 1;
+    semctl(identyfikator_zbioru_semaforow, 0, SETVAL, arg); // ustawienie semafora 0 na 1
 
 
     klucz_segmentu_pamieci_wspolnej = ftok(getenv("HOME"), 2);
     identyfikator_segmentu_pamieci_wspolnej = shmget(klucz_segmentu_pamieci_wspolnej, sizeof(tablica_zamowien), IPC_CREAT | 0666);
 
+    wypisz_wysrodkowane("--- Otwarty sklep ---");
 
     for(int i=0; i<ile_pracownikow_typu_1; i++){
         pid_t dziecko = fork();

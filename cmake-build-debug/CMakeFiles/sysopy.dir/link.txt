@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw07/zad1/main.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw07/zad1/main.c.o CMakeFiles/sysopy.dir/cw07/zad1/pracownik_1.c.o CMakeFiles/sysopy.dir/cw07/zad1/pracownik_2.c.o CMakeFiles/sysopy.dir/cw07/zad1/pracownik_3.c.o  -o sysopy 
