@@ -54,7 +54,6 @@ void pakuj_zamowienie() {
     tablica_zamowien *tablica = mmap(NULL, sizeof(tablica_zamowien), PROT_READ | PROT_WRITE, MAP_SHARED, deskryptor_pamieci_wspolnej, 0);
     if(tablica == (void*)-1) wyjdz_z_bledem("Nie moge zmapowac pamieci wspolnej.");
 
-    int wielkosc_zamowienia = losowy_int(1, 1000);
     int indeks = wartosc_semafora(2);
     int wielkosc = tablica->wartosci[indeks] * 2;
     tablica->wartosci[indeks] = wielkosc;
