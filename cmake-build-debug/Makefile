@@ -123,113 +123,113 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw07/zad1/main.o: cw07/zad1/main.c.o
+cw07/zad2/main.o: cw07/zad2/main.c.o
 
-.PHONY : cw07/zad1/main.o
-
-# target to build an object file
-cw07/zad1/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/main.c.o
-.PHONY : cw07/zad1/main.c.o
-
-cw07/zad1/main.i: cw07/zad1/main.c.i
-
-.PHONY : cw07/zad1/main.i
-
-# target to preprocess a source file
-cw07/zad1/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/main.c.i
-.PHONY : cw07/zad1/main.c.i
-
-cw07/zad1/main.s: cw07/zad1/main.c.s
-
-.PHONY : cw07/zad1/main.s
-
-# target to generate assembly for a file
-cw07/zad1/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/main.c.s
-.PHONY : cw07/zad1/main.c.s
-
-cw07/zad1/pracownik_1.o: cw07/zad1/pracownik_1.c.o
-
-.PHONY : cw07/zad1/pracownik_1.o
+.PHONY : cw07/zad2/main.o
 
 # target to build an object file
-cw07/zad1/pracownik_1.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_1.c.o
-.PHONY : cw07/zad1/pracownik_1.c.o
+cw07/zad2/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/main.c.o
+.PHONY : cw07/zad2/main.c.o
 
-cw07/zad1/pracownik_1.i: cw07/zad1/pracownik_1.c.i
+cw07/zad2/main.i: cw07/zad2/main.c.i
 
-.PHONY : cw07/zad1/pracownik_1.i
+.PHONY : cw07/zad2/main.i
 
 # target to preprocess a source file
-cw07/zad1/pracownik_1.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_1.c.i
-.PHONY : cw07/zad1/pracownik_1.c.i
+cw07/zad2/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/main.c.i
+.PHONY : cw07/zad2/main.c.i
 
-cw07/zad1/pracownik_1.s: cw07/zad1/pracownik_1.c.s
+cw07/zad2/main.s: cw07/zad2/main.c.s
 
-.PHONY : cw07/zad1/pracownik_1.s
+.PHONY : cw07/zad2/main.s
 
 # target to generate assembly for a file
-cw07/zad1/pracownik_1.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_1.c.s
-.PHONY : cw07/zad1/pracownik_1.c.s
+cw07/zad2/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/main.c.s
+.PHONY : cw07/zad2/main.c.s
 
-cw07/zad1/pracownik_2.o: cw07/zad1/pracownik_2.c.o
+cw07/zad2/pracownik_1.o: cw07/zad2/pracownik_1.c.o
 
-.PHONY : cw07/zad1/pracownik_2.o
+.PHONY : cw07/zad2/pracownik_1.o
 
 # target to build an object file
-cw07/zad1/pracownik_2.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_2.c.o
-.PHONY : cw07/zad1/pracownik_2.c.o
+cw07/zad2/pracownik_1.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_1.c.o
+.PHONY : cw07/zad2/pracownik_1.c.o
 
-cw07/zad1/pracownik_2.i: cw07/zad1/pracownik_2.c.i
+cw07/zad2/pracownik_1.i: cw07/zad2/pracownik_1.c.i
 
-.PHONY : cw07/zad1/pracownik_2.i
+.PHONY : cw07/zad2/pracownik_1.i
 
 # target to preprocess a source file
-cw07/zad1/pracownik_2.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_2.c.i
-.PHONY : cw07/zad1/pracownik_2.c.i
+cw07/zad2/pracownik_1.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_1.c.i
+.PHONY : cw07/zad2/pracownik_1.c.i
 
-cw07/zad1/pracownik_2.s: cw07/zad1/pracownik_2.c.s
+cw07/zad2/pracownik_1.s: cw07/zad2/pracownik_1.c.s
 
-.PHONY : cw07/zad1/pracownik_2.s
+.PHONY : cw07/zad2/pracownik_1.s
 
 # target to generate assembly for a file
-cw07/zad1/pracownik_2.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_2.c.s
-.PHONY : cw07/zad1/pracownik_2.c.s
+cw07/zad2/pracownik_1.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_1.c.s
+.PHONY : cw07/zad2/pracownik_1.c.s
 
-cw07/zad1/pracownik_3.o: cw07/zad1/pracownik_3.c.o
+cw07/zad2/pracownik_2.o: cw07/zad2/pracownik_2.c.o
 
-.PHONY : cw07/zad1/pracownik_3.o
+.PHONY : cw07/zad2/pracownik_2.o
 
 # target to build an object file
-cw07/zad1/pracownik_3.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_3.c.o
-.PHONY : cw07/zad1/pracownik_3.c.o
+cw07/zad2/pracownik_2.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_2.c.o
+.PHONY : cw07/zad2/pracownik_2.c.o
 
-cw07/zad1/pracownik_3.i: cw07/zad1/pracownik_3.c.i
+cw07/zad2/pracownik_2.i: cw07/zad2/pracownik_2.c.i
 
-.PHONY : cw07/zad1/pracownik_3.i
+.PHONY : cw07/zad2/pracownik_2.i
 
 # target to preprocess a source file
-cw07/zad1/pracownik_3.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_3.c.i
-.PHONY : cw07/zad1/pracownik_3.c.i
+cw07/zad2/pracownik_2.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_2.c.i
+.PHONY : cw07/zad2/pracownik_2.c.i
 
-cw07/zad1/pracownik_3.s: cw07/zad1/pracownik_3.c.s
+cw07/zad2/pracownik_2.s: cw07/zad2/pracownik_2.c.s
 
-.PHONY : cw07/zad1/pracownik_3.s
+.PHONY : cw07/zad2/pracownik_2.s
 
 # target to generate assembly for a file
-cw07/zad1/pracownik_3.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad1/pracownik_3.c.s
-.PHONY : cw07/zad1/pracownik_3.c.s
+cw07/zad2/pracownik_2.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_2.c.s
+.PHONY : cw07/zad2/pracownik_2.c.s
+
+cw07/zad2/pracownik_3.o: cw07/zad2/pracownik_3.c.o
+
+.PHONY : cw07/zad2/pracownik_3.o
+
+# target to build an object file
+cw07/zad2/pracownik_3.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_3.c.o
+.PHONY : cw07/zad2/pracownik_3.c.o
+
+cw07/zad2/pracownik_3.i: cw07/zad2/pracownik_3.c.i
+
+.PHONY : cw07/zad2/pracownik_3.i
+
+# target to preprocess a source file
+cw07/zad2/pracownik_3.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_3.c.i
+.PHONY : cw07/zad2/pracownik_3.c.i
+
+cw07/zad2/pracownik_3.s: cw07/zad2/pracownik_3.c.s
+
+.PHONY : cw07/zad2/pracownik_3.s
+
+# target to generate assembly for a file
+cw07/zad2/pracownik_3.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw07/zad2/pracownik_3.c.s
+.PHONY : cw07/zad2/pracownik_3.c.s
 
 # Help Target
 help:
@@ -240,18 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw07/zad1/main.o"
-	@echo "... cw07/zad1/main.i"
-	@echo "... cw07/zad1/main.s"
-	@echo "... cw07/zad1/pracownik_1.o"
-	@echo "... cw07/zad1/pracownik_1.i"
-	@echo "... cw07/zad1/pracownik_1.s"
-	@echo "... cw07/zad1/pracownik_2.o"
-	@echo "... cw07/zad1/pracownik_2.i"
-	@echo "... cw07/zad1/pracownik_2.s"
-	@echo "... cw07/zad1/pracownik_3.o"
-	@echo "... cw07/zad1/pracownik_3.i"
-	@echo "... cw07/zad1/pracownik_3.s"
+	@echo "... cw07/zad2/main.o"
+	@echo "... cw07/zad2/main.i"
+	@echo "... cw07/zad2/main.s"
+	@echo "... cw07/zad2/pracownik_1.o"
+	@echo "... cw07/zad2/pracownik_1.i"
+	@echo "... cw07/zad2/pracownik_1.s"
+	@echo "... cw07/zad2/pracownik_2.o"
+	@echo "... cw07/zad2/pracownik_2.i"
+	@echo "... cw07/zad2/pracownik_2.s"
+	@echo "... cw07/zad2/pracownik_3.o"
+	@echo "... cw07/zad2/pracownik_3.i"
+	@echo "... cw07/zad2/pracownik_3.s"
 .PHONY : help
 
 
