@@ -45,16 +45,13 @@ void wlasny_exit(int signum){
 }
 
 void pakuj_zamowienie() {
-    printf("PRACOWNIK2 \n");
     struct sembuf *sops_start = (struct sembuf *) calloc(2, sizeof(struct sembuf));
     sops_start[0].sem_num = 0;
     sops_start[0].sem_op = -1;
 
-
     sops_start[1].sem_num = 3;     //zmniejsz ilosc zamowien do przygotowania
     sops_start[1].sem_op = -1;
-    semop(identyfikator_zbioru_semaforow, sops_start, 1); // ustaw że ty modyfikujesz teraz tablice
-
+    semop(identyfikator_zbioru_semaforow, sops_start, 2); // ustaw że ty modyfikujesz teraz tablice
 
 
     tablica_zamowien *tablica = shmat(identyfikator_segmentu_pamieci_wspolnej, NULL, 0);
@@ -69,15 +66,15 @@ void pakuj_zamowienie() {
     sops_koniec[0].sem_op = 1;
 
     sops_koniec[1].sem_num = 2;     // ustaw ostatni zapisany indeks
-    if (indeks == 0) {
-        sops_koniec[1].sem_op = -MAX_ZAMOWIEN+1;
+    if (indeks == MAX_ZAMOWIEN-1) {
+        sops_koniec[1].sem_op = -indeks;
     } else {
         sops_koniec[1].sem_op = 1;
     }
 
-    sops_koniec[3].sem_num = 5;     //zwieksz ilosc zamowien do wyslania
-    sops_koniec[3].sem_op = 1;
-    semop(identyfikator_zbioru_semaforow, sops_koniec, 4);
+    sops_koniec[2].sem_num = 5;     //zwieksz ilosc zamowien do wyslania
+    sops_koniec[2].sem_op = 1;
+    semop(identyfikator_zbioru_semaforow, sops_koniec, 3);
 
     printf("[%d %ld] Przygotowalem zamowienie o wielkosci: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), time(NULL), wielkosc, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
     usleep(1000 * wielkosc);
@@ -109,7 +106,7 @@ int main() {
     bool flaga = false;
     while(1){
         usleep(losowy_int(10000, 1000000));
-        if( semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL) > 0 ){
+        if( semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL) > 0 && semctl(identyfikator_zbioru_semaforow, 0, GETVAL, NULL) == 1 ){
             pakuj_zamowienie();
             flaga = false;
         }
@@ -122,6 +119,14 @@ int main() {
         }
     }
 
+    /*
+        printf("\n%d\n", semctl(identyfikator_zbioru_semaforow, 0, GETVAL, NULL));
+    printf("%d\n", semctl(identyfikator_zbioru_semaforow, 1, GETVAL, NULL));
+    printf("%d\n", semctl(identyfikator_zbioru_semaforow, 2, GETVAL, NULL));
+    printf("%d\n", semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL));
+    printf("%d\n", semctl(identyfikator_zbioru_semaforow, 4, GETVAL, NULL));
+    printf("%d\n", semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
+     */
 
 
     semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
