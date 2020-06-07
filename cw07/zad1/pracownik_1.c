@@ -74,7 +74,7 @@ void dodaj_zamowienie() {
     sops_koniec[2].sem_op = 1;
     semop(identyfikator_zbioru_semaforow, sops_koniec, 3);
 
-    printf("[%d %ld] Dodalem liczbe: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), time(NULL), wielkosc_zamowienia, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
+    printf("[%d %ld (pracownik_1)] Dodalem liczbe: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), time(NULL), wielkosc_zamowienia, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
     usleep(1000 * wielkosc_zamowienia);
 }
 

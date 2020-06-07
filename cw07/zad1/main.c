@@ -91,6 +91,7 @@ int main(int argc, char** argv) {
     arg.val = 1;
     semctl(identyfikator_zbioru_semaforow, 0, SETVAL, arg); // ustawienie semafora 0 na 1
     semctl(identyfikator_zbioru_semaforow, 2, SETVAL, arg);
+    semctl(identyfikator_zbioru_semaforow, 4, SETVAL, arg);
 
 
     klucz_segmentu_pamieci_wspolnej = ftok(getenv("HOME"), 2);
