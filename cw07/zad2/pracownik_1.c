@@ -12,6 +12,11 @@
 #include <time.h>
 #include <stdbool.h>
 
+#include <semaphore.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+
 #include "pomocnicze.h"
 
 union semun{
@@ -27,54 +32,56 @@ void wyjdz_z_bledem(char* tekst){
     exit(1);
 }
 
-key_t klucz_zbioru_semaforow;
-int identyfikator_zbioru_semaforow;
-
-key_t klucz_segmentu_pamieci_wspolnej;
-int identyfikator_segmentu_pamieci_wspolnej;
+sem_t* semafory[6];
+int deskryptor_pamieci_wspolnej;
 
 
+int wartosc_semafora(int indeks){
+    int wartosc;
+    sem_getvalue(semafory[indeks], &wartosc);
+    return wartosc;
+}
 
 void wlasny_exit(int signum){
     usleep(100000);
     printf("[%d %s (pracownik_1)] Zamykaja sklep. Koncze prace.\n", getpid(), obecny_timestamp());
 
-    semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
-    shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
+    for(int i=0; i<6; i++){
+        int temp = sem_close(semafory[i]);
+        if(temp == -1) wyjdz_z_bledem("Nie udalo sie zamknac semafora.");
+    }
     exit(EXIT_SUCCESS);
 }
 
 void dodaj_zamowienie() {
-    struct sembuf *sops_start = (struct sembuf *) calloc(1, sizeof(struct sembuf));
-    sops_start[0].sem_num = 0;
-    sops_start[0].sem_op = -1;
-    semop(identyfikator_zbioru_semaforow, sops_start, 1); // ustaw że ty modyfikujesz teraz tablice
+    sem_wait(semafory[0]); // ustaw że ty modyfikujesz teraz tablice
 
 
 
-    tablica_zamowien *tablica = shmat(identyfikator_segmentu_pamieci_wspolnej, NULL, 0);
-    int indeks = (semctl(identyfikator_zbioru_semaforow, 1, GETVAL, NULL) + 1) % MAX_ZAMOWIEN;
+    tablica_zamowien *tablica = mmap(NULL, sizeof(tablica_zamowien), PROT_READ | PROT_WRITE, MAP_SHARED, deskryptor_pamieci_wspolnej, 0);
+    if(tablica == (void*)-1) wyjdz_z_bledem("Nie moge zmapowac pamieci wspolnej.");
+
+    int indeks = (wartosc_semafora(1) + 1) % MAX_ZAMOWIEN;
     int wielkosc_zamowienia = losowy_int(1, 1000);
     tablica->wartosci[indeks] = wielkosc_zamowienia;
-    shmdt(tablica);
+
+    if( munmap(tablica, sizeof(tablica_zamowien)) == -1 ) wyjdz_z_bledem("Nie moge odlaczyc pamieci wspolnej.");
 
 
-    struct sembuf *sops_koniec = (struct sembuf *) calloc(3, sizeof(struct sembuf));
-    sops_koniec[0].sem_num = 0;     // ustaw, że już nie korzystasz
-    sops_koniec[0].sem_op = 1;
 
-    sops_koniec[1].sem_num = 1;     // ustaw ostatni zapisany indeks
-    if (indeks == 0) {
-        sops_koniec[1].sem_op = -MAX_ZAMOWIEN+1;
-    } else {
-        sops_koniec[1].sem_op = 1;
+    if( indeks == MAX_ZAMOWIEN - 1 ){   // ustaw ostatni zapisany indeks
+        for(int i=0; i<MAX_ZAMOWIEN - 1; i++){
+            sem_trywait(semafory[1]);
+        }
     }
+    else{
+        sem_post(semafory[1]);
+    }
+    sem_post(semafory[3]);          //zwieksz ilosc zamowien do przygotowania
+    sem_post(semafory[0]);          // ustaw, że już nie korzystasz
 
-    sops_koniec[2].sem_num = 3;     //zwieksz ilosc zamowien do przygotowania
-    sops_koniec[2].sem_op = 1;
-    semop(identyfikator_zbioru_semaforow, sops_koniec, 3);
 
-    printf("[%d %s (pracownik_1)] Dodalem liczbe: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), obecny_timestamp(), wielkosc_zamowienia, semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL), semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL));
+    printf("[%d %s (pracownik_1)] Dodalem liczbe: %d. Liczba zamowien do przygotowania: %d. Liczba zamowien do wyslania: %d.\n", getpid(), obecny_timestamp(), wielkosc_zamowienia, wartosc_semafora(3), wartosc_semafora(5));
     usleep(1000 * wielkosc_zamowienia);
 }
 
@@ -83,9 +90,11 @@ int main() {
     srand(time(NULL) + getpid());
 
     // stworz tutaj semafory
-    klucz_zbioru_semaforow = ftok(getenv("HOME"), 1);
-    identyfikator_zbioru_semaforow = semget(klucz_zbioru_semaforow, 0, 0);
-    if(identyfikator_zbioru_semaforow < 0) wyjdz_z_bledem("Nie moge otworzyc zbioru semaforow.");
+    for(int i=0; i<6; i++){
+        semafory[i] = sem_open(SEMAFORY[i], O_RDWR);
+        if(semafory[i] == SEM_FAILED) wyjdz_z_bledem("Nie mozna otworzyc semafora.");
+    }
+
     /*
      * Semafory
      * 0 - czy tablica jest w tym momencie modyfikowana (wartość 0 dla modyfikowana, 1 dla wolna)
@@ -97,14 +106,14 @@ int main() {
      * */
 
 
-    klucz_segmentu_pamieci_wspolnej = ftok(getenv("HOME"), 2);
-    identyfikator_segmentu_pamieci_wspolnej = shmget(klucz_segmentu_pamieci_wspolnej, 0, 0);
-    if(identyfikator_segmentu_pamieci_wspolnej < 0) wyjdz_z_bledem("Nie moge otworzyc segmentu pamieci wspolnej.");
+    deskryptor_pamieci_wspolnej = shm_open(PAMIEC_WSPOLNA, O_RDWR | O_CREAT, S_IRWXU | S_IRWXG | S_IRWXO);
+    if(deskryptor_pamieci_wspolnej == -1) wyjdz_z_bledem("Nie udalo sie otworzyc pamieci wspolnej");
+
 
     bool flaga = false;
     while(1){
         usleep(losowy_int(10000, 1000000));
-        if( semctl(identyfikator_zbioru_semaforow, 3, GETVAL, NULL) + semctl(identyfikator_zbioru_semaforow, 5, GETVAL, NULL) < MAX_ZAMOWIEN ){
+        if( wartosc_semafora(3) + wartosc_semafora(5) < MAX_ZAMOWIEN ){
             dodaj_zamowienie();
             flaga = false;
         }
@@ -118,8 +127,9 @@ int main() {
     }
 
 
-
-    semctl(identyfikator_zbioru_semaforow, 0, IPC_RMID, NULL);
-    shmctl(identyfikator_segmentu_pamieci_wspolnej, IPC_RMID, NULL);
+    for(int i=0; i<6; i++){
+        int temp = sem_close(semafory[i]);
+        if(temp == -1) wyjdz_z_bledem("Nie udalo sie zamknac semafora.");
+    }
     return 0;
 }
