@@ -3,4 +3,4 @@ project(sysopy C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(sysopy Kol2-2020/Semafory/semafor.c Kol2-2020/InetSocket/main.c)
+add_executable(sysopy cw08/zad1/main.c cw08/zad1/funkcje_tekstowe.h cw08/zad1/pomocnicze.h)

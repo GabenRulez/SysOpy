@@ -27,13 +27,33 @@ unsigned short int* tablica_pliku_wejsciowego;
 int szerokosc;
 int wysokosc;
 int liczba_watkow = -1;
+unsigned int ilosc_wystapien[256] = {0};
 
+void ukaz_wyniki(){
+    wypisz_wysrodkowane("Histogram");
+    for(int i=0; i<256; i++) printf("Ilosc wystapien %d: %d\n", i, ilosc_wystapien[i]);
+}
 
 void* histogram_czesc_sign(void* arg){
+    struct timeval czas_startu;
+    gettimeofday(&czas_startu, NULL);
+
+
     int i = *((int*) arg);
     int start = sufit(i * 256, liczba_watkow);
     int koniec = sufit((i+1) * 256, liczba_watkow) - 1;
-    printf("Start %d, Koniec %d\n\n", start, koniec);
+    for(int mierzona_wartosc = start; mierzona_wartosc <= koniec; mierzona_wartosc++){
+        for(int j=0; j<szerokosc*wysokosc; j++){
+            ilosc_wystapien[ tablica_pliku_wejsciowego[j] ]++;
+        }
+    }
+
+
+    struct timeval czas_konca;
+    gettimeofday(&czas_konca, NULL);
+    long* wynik_w_mikrosekundach = malloc(sizeof(long));
+    *(wynik_w_mikrosekundach) = (czas_konca.tv_sec - czas_startu.tv_sec) * 1000000 + czas_konca.tv_usec - czas_startu.tv_usec;
+    pthread_exit(wynik_w_mikrosekundach);
 }
 
 int stworz_histogram(int tryb){
@@ -41,19 +61,24 @@ int stworz_histogram(int tryb){
         case 1:
         {
             pthread_t* watki = (pthread_t*)calloc(liczba_watkow, sizeof(pthread_t));
-            unsigned int ilosc_wystapien[256] = {0};
+            for(int i=0; i<256; i++) ilosc_wystapien[i] = 0;
             for(int i=0; i<liczba_watkow; i++){
-                argumenty* argumenty_watku = malloc(sizeof(argumenty));
 
-                argumenty_watku->start = sufit(i * 256, liczba_watkow);
-                argumenty_watku->koniec = sufit((i+1) * 256, liczba_watkow) - 1;
-                argumenty_watku->ilosc_wystapien = ilosc_wystapien;
                 int* i_temp = malloc(sizeof(int));
                 *(i_temp) = i;
 
-                pthread_create(&watki[i], NULL, histogram_czesc_sign, *argumenty_watku);
+                pthread_create(&watki[i], NULL, histogram_czesc_sign, i_temp);
+                usleep(1);
+            };
+            for(int i=0; i<liczba_watkow; i++){
+
+                void* temp;
+                if( pthread_join(watki[i], &temp) > 1 ) wyjscie_z_bledem("Nie moge skonczyc watku.");
+                long czas_w_mikrosekundach = *((long*) temp);
+                printf("\nWatek %lu: Zakonczylem prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
                 usleep(1);
             }
+            ukaz_wyniki();
             break;
         }
 
@@ -81,27 +106,26 @@ int main(int argc, char** argv){
         return 1;
     }
     liczba_watkow = (int) strtol(argv[1], (char**)NULL, 10);
-    int tryb = 0;
+    int tryb;
     if(strcmp(argv[2], "sign") == 0) tryb = 1;                  // sign = 1, block = 2, interleaved = 3
     else if(strcmp(argv[2], "block") == 0) tryb = 2;
     else if(strcmp(argv[2], "interleaved") == 0) tryb = 3;
     else wyjscie_z_bledem("Nie istnieje taki tryb.");
 
-    stworz_histogram(1);
-
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     FILE* plik_wejsciowy = fopen(argv[3], "r");
     if(plik_wejsciowy == NULL) wyjscie_z_bledem("Nie moge otworzyc pliku wejsciowego.");
     
     char* linia;
-    size_t len;
+    size_t len = 0;
+    char* temp;
     int indeks_wiersza = 0;
-    int indeks_kolumny = 0;
-    
+    int indeks_piksela = 0;
+
     while( getline(&linia, &len, plik_wejsciowy) != -1 ){
         if(indeks_wiersza == 1){        // Wczytanie headera z pliku
-            char* temp = strtok(linia, " ");
+            temp = strtok(linia, " ");
             szerokosc = (int) strtol(temp, (char**)NULL, 10);
             temp = strtok(NULL, "\n");
             wysokosc = (int) strtol(temp, (char**)NULL, 10);
@@ -109,25 +133,23 @@ int main(int argc, char** argv){
             tablica_pliku_wejsciowego = (unsigned short int*)calloc(szerokosc * wysokosc, sizeof(unsigned short int));
         }
         else if(indeks_wiersza > 2){    //wczytanie zawartości z pliku
-            char* temp = strtok(linia, "\n\t");
+            temp = strtok(linia, " \n\t");
             while(temp != NULL){
                 unsigned short int wartosc_piksela = (int) strtol(temp, (char**)NULL, 10);
                 if(wartosc_piksela>255) wartosc_piksela = 255;  //dla pewnosci
-                tablica_pliku_wejsciowego[indeks_kolumny + szerokosc*indeks_wiersza] = wartosc_piksela;
-                temp = strtok(NULL, "\n\t");
-                indeks_kolumny++;
+                tablica_pliku_wejsciowego[indeks_piksela] = (unsigned short int) wartosc_piksela;
+                temp = strtok(NULL, " \n\t");
+                indeks_piksela++;
             }
         }
         indeks_wiersza++;
-        indeks_kolumny = 0;
     }
-
     fclose(plik_wejsciowy);
     
     //////////////////////////////////////////////////////////////////////////////// już mamy wczytana tablice wartosci
 
+    stworz_histogram(tryb);
 
-
-
+    free(tablica_pliku_wejsciowego);
     return 0;
 }

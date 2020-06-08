@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.o CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.o  -o sysopy 
+/usr/bin/cc -g   CMakeFiles/sysopy.dir/cw08/zad1/main.c.o  -o sysopy 

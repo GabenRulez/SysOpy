@@ -76,10 +76,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/Kol2-2020/InetSocket/main.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw08/zad1/funkcje_tekstowe.h">
 			<Option target="sysopy"/>
 		</Unit>
-		<Unit filename="/home/wojtek/CLionProjects/SysOpy/Kol2-2020/Semafory/semafor.c">
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw08/zad1/main.c">
+			<Option target="sysopy"/>
+		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw08/zad1/pomocnicze.h">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/CMakeLists.txt">
