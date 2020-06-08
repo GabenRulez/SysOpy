@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/wojtek/CLionProjects/SysOpy/cw08/zad1/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/cw08/zad1/main.c.o"
+  "/home/wojtek/CLionProjects/SysOpy/Kol2-2020/InetSocket/main.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.o"
+  "/home/wojtek/CLionProjects/SysOpy/Kol2-2020/Semafory/semafor.c" "/home/wojtek/CLionProjects/SysOpy/cmake-build-debug/CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

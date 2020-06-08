@@ -123,32 +123,59 @@ sysopy/fast:
 	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/build
 .PHONY : sysopy/fast
 
-cw08/zad1/main.o: cw08/zad1/main.c.o
+Kol2-2020/InetSocket/main.o: Kol2-2020/InetSocket/main.c.o
 
-.PHONY : cw08/zad1/main.o
+.PHONY : Kol2-2020/InetSocket/main.o
 
 # target to build an object file
-cw08/zad1/main.c.o:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw08/zad1/main.c.o
-.PHONY : cw08/zad1/main.c.o
+Kol2-2020/InetSocket/main.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.o
+.PHONY : Kol2-2020/InetSocket/main.c.o
 
-cw08/zad1/main.i: cw08/zad1/main.c.i
+Kol2-2020/InetSocket/main.i: Kol2-2020/InetSocket/main.c.i
 
-.PHONY : cw08/zad1/main.i
+.PHONY : Kol2-2020/InetSocket/main.i
 
 # target to preprocess a source file
-cw08/zad1/main.c.i:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw08/zad1/main.c.i
-.PHONY : cw08/zad1/main.c.i
+Kol2-2020/InetSocket/main.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.i
+.PHONY : Kol2-2020/InetSocket/main.c.i
 
-cw08/zad1/main.s: cw08/zad1/main.c.s
+Kol2-2020/InetSocket/main.s: Kol2-2020/InetSocket/main.c.s
 
-.PHONY : cw08/zad1/main.s
+.PHONY : Kol2-2020/InetSocket/main.s
 
 # target to generate assembly for a file
-cw08/zad1/main.c.s:
-	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/cw08/zad1/main.c.s
-.PHONY : cw08/zad1/main.c.s
+Kol2-2020/InetSocket/main.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.s
+.PHONY : Kol2-2020/InetSocket/main.c.s
+
+Kol2-2020/Semafory/semafor.o: Kol2-2020/Semafory/semafor.c.o
+
+.PHONY : Kol2-2020/Semafory/semafor.o
+
+# target to build an object file
+Kol2-2020/Semafory/semafor.c.o:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.o
+.PHONY : Kol2-2020/Semafory/semafor.c.o
+
+Kol2-2020/Semafory/semafor.i: Kol2-2020/Semafory/semafor.c.i
+
+.PHONY : Kol2-2020/Semafory/semafor.i
+
+# target to preprocess a source file
+Kol2-2020/Semafory/semafor.c.i:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.i
+.PHONY : Kol2-2020/Semafory/semafor.c.i
+
+Kol2-2020/Semafory/semafor.s: Kol2-2020/Semafory/semafor.c.s
+
+.PHONY : Kol2-2020/Semafory/semafor.s
+
+# target to generate assembly for a file
+Kol2-2020/Semafory/semafor.c.s:
+	$(MAKE) -f CMakeFiles/sysopy.dir/build.make CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.s
+.PHONY : Kol2-2020/Semafory/semafor.c.s
 
 # Help Target
 help:
@@ -159,9 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sysopy"
-	@echo "... cw08/zad1/main.o"
-	@echo "... cw08/zad1/main.i"
-	@echo "... cw08/zad1/main.s"
+	@echo "... Kol2-2020/InetSocket/main.o"
+	@echo "... Kol2-2020/InetSocket/main.i"
+	@echo "... Kol2-2020/InetSocket/main.s"
+	@echo "... Kol2-2020/Semafory/semafor.o"
+	@echo "... Kol2-2020/Semafory/semafor.i"
+	@echo "... Kol2-2020/Semafory/semafor.s"
 .PHONY : help
 
 

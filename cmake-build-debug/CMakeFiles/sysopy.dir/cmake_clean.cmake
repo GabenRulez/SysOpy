@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sysopy.dir/cw08/zad1/main.c.o"
+  "CMakeFiles/sysopy.dir/Kol2-2020/InetSocket/main.c.o"
+  "CMakeFiles/sysopy.dir/Kol2-2020/Semafory/semafor.c.o"
   "sysopy"
   "sysopy.pdb"
 )

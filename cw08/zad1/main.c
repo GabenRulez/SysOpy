@@ -44,6 +44,7 @@ int stworz_histogram(int tryb){
             unsigned int ilosc_wystapien[256] = {0};
             for(int i=0; i<liczba_watkow; i++){
                 argumenty* argumenty_watku = malloc(sizeof(argumenty));
+
                 argumenty_watku->start = sufit(i * 256, liczba_watkow);
                 argumenty_watku->koniec = sufit((i+1) * 256, liczba_watkow) - 1;
                 argumenty_watku->ilosc_wystapien = ilosc_wystapien;
