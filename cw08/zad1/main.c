@@ -24,14 +24,23 @@ struct argumenty{
 }; typedef struct argumenty argumenty;
 
 unsigned short int* tablica_pliku_wejsciowego;
+char* plik_wyjsciowy;
 int szerokosc;
 int wysokosc;
 int liczba_watkow = -1;
 unsigned int ilosc_wystapien[256] = {0};
 
 void ukaz_wyniki(){
-    wypisz_wysrodkowane("Histogram");
-    for(int i=0; i<256; i++) printf("Ilosc wystapien %d: %d\n", i, ilosc_wystapien[i]);
+    printf("\n");
+    wypisz_wysrodkowane("--- Tworze histogram ---");
+
+    unsigned int ilosc_pikseli = 0;
+    for(int i=0; i<256; i++) ilosc_pikseli+= ilosc_wystapien[i];
+    if( ilosc_pikseli != szerokosc*wysokosc ) wyjscie_z_bledem("Nastapil blad jednostajnego dostepu do pamieci wspolnej.");
+
+    FILE * odpowiedni_plik_wyjsciowy = fopen(plik_wyjsciowy, "w+");
+    for(int i=0; i<256; i++) fprintf(odpowiedni_plik_wyjsciowy, "%d %d\n", i, ilosc_wystapien[i]);
+    fclose(odpowiedni_plik_wyjsciowy);
 }
 
 void* histogram_czesc_sign(void* arg){
@@ -44,9 +53,13 @@ void* histogram_czesc_sign(void* arg){
     int koniec = sufit((i+1) * 256, liczba_watkow) - 1;
     for(int mierzona_wartosc = start; mierzona_wartosc <= koniec; mierzona_wartosc++){
         for(int j=0; j<szerokosc*wysokosc; j++){
-            ilosc_wystapien[ tablica_pliku_wejsciowego[j] ]++;
+            int temp = tablica_pliku_wejsciowego[j];
+            if( temp == mierzona_wartosc ){
+                ilosc_wystapien[mierzona_wartosc]++;
+            }
         }
     }
+
 
 
     struct timeval czas_konca;
@@ -75,7 +88,7 @@ int stworz_histogram(int tryb){
                 void* temp;
                 if( pthread_join(watki[i], &temp) > 1 ) wyjscie_z_bledem("Nie moge skonczyc watku.");
                 long czas_w_mikrosekundach = *((long*) temp);
-                printf("\nWatek %lu: Zakonczylem prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
+                printf("\nWatek %lu zakonczyl prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
                 usleep(1);
             }
             ukaz_wyniki();
@@ -84,11 +97,13 @@ int stworz_histogram(int tryb){
 
         case 2:
         {
+            printf("\nhuh2\n");
             break;
         }
 
         case 3:
         {
+            printf("\nhuh3\n");
             break;
         }
 
@@ -98,6 +113,7 @@ int stworz_histogram(int tryb){
             break;
         }
     }
+    return 0;
 }
 
 int main(int argc, char** argv){
@@ -147,6 +163,7 @@ int main(int argc, char** argv){
     fclose(plik_wejsciowy);
     
     //////////////////////////////////////////////////////////////////////////////// już mamy wczytana tablice wartosci
+    plik_wyjsciowy = argv[4];
 
     stworz_histogram(tryb);
 

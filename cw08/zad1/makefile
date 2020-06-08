@@ -8,8 +8,19 @@ build:
 
 
 test:
-	./main 10 sign plik1 plik2
+	./main 4 sign f14.pgm histogram.txt
+
+full_test:
+	./main 1 sign f14.pgm histogram1.txt
+	./main 2 sign f14.pgm histogram2.txt
+	./main 4 sign f14.pgm histogram4.txt
 
 clean:
 	rm -f main
 
+full_clean:
+	make clean
+	rm -f histogram.txt
+	rm -f histogram1.txt
+	rm -f histogram2.txt
+	rm -f histogram4.txt
