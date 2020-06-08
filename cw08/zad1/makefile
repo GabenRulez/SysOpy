@@ -13,16 +13,32 @@ test:
 	./main 4 interleaved f14.pgm histogram_interleaved.txt
 
 full_test:
-	./main 1 sign f14.pgm histogram1.txt
-	./main 2 sign f14.pgm histogram2.txt
-	./main 4 sign f14.pgm histogram4.txt
+	@echo "" > Times.txt
+	./main 1 sign f14.pgm temp >> Times.txt
+	./main 1 block f14.pgm temp >> Times.txt
+	./main 1 interleaved f14.pgm temp >> Times.txt
+
+	./main 2 sign f14.pgm temp >> Times.txt
+	./main 2 block f14.pgm temp >> Times.txt
+	./main 2 interleaved f14.pgm temp >> Times.txt
+
+	./main 4 sign f14.pgm temp >> Times.txt
+	./main 4 block f14.pgm temp >> Times.txt
+	./main 4 interleaved f14.pgm temp >> Times.txt
+
+	./main 8 sign f14.pgm temp >> Times.txt
+	./main 8 block f14.pgm temp >> Times.txt
+	./main 8 interleaved f14.pgm temp >> Times.txt
+
+	make full_clean
 
 clean:
 	rm -f main
+	rm -f histogram_sign.txt
+	rm -f histogram_block.txt
+	rm -f histogram_interleaved.txt
 
 full_clean:
 	make clean
-	rm -f histogram.txt
-	rm -f histogram1.txt
-	rm -f histogram2.txt
-	rm -f histogram4.txt
+	rm -f temp
+

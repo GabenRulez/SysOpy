@@ -1,0 +1,142 @@
+
+
+
+                   --- Tworze histogram - wariant 'sign' ---                    
+ Ilosc uzytych watkow: 1
+
+Watek 139769927161600 zakonczyl prace w 746923 mikrosekund.
+Proces glowny         zakonczyl prace w 747349 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'block' ---                   
+ Ilosc uzytych watkow: 1
+
+Watek 140094839023360 zakonczyl prace w 3451 mikrosekund.
+Proces glowny         zakonczyl prace w 3924 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                --- Tworze histogram - wariant 'interleaved' ---                
+ Ilosc uzytych watkow: 1
+
+Watek 140155574359808 zakonczyl prace w 2164 mikrosekund.
+Proces glowny         zakonczyl prace w 3264 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'sign' ---                    
+ Ilosc uzytych watkow: 2
+
+Watek 139744416724736 zakonczyl prace w 396372 mikrosekund.
+Watek 139744408332032 zakonczyl prace w 418266 mikrosekund.
+Proces glowny         zakonczyl prace w 418490 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'block' ---                   
+ Ilosc uzytych watkow: 2
+
+Watek 140541004830464 zakonczyl prace w 4002 mikrosekund.
+Watek 140540996437760 zakonczyl prace w 3708 mikrosekund.
+Proces glowny         zakonczyl prace w 4300 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                --- Tworze histogram - wariant 'interleaved' ---                
+ Ilosc uzytych watkow: 2
+
+Watek 140220546373376 zakonczyl prace w 2319 mikrosekund.
+Watek 140220537980672 zakonczyl prace w 2327 mikrosekund.
+Proces glowny         zakonczyl prace w 2818 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'sign' ---                    
+ Ilosc uzytych watkow: 4
+
+Watek 140188328646400 zakonczyl prace w 363290 mikrosekund.
+Watek 140188320253696 zakonczyl prace w 343659 mikrosekund.
+Watek 140188311860992 zakonczyl prace w 378868 mikrosekund.
+Watek 140188303468288 zakonczyl prace w 377700 mikrosekund.
+Proces glowny         zakonczyl prace w 388218 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'block' ---                   
+ Ilosc uzytych watkow: 4
+
+Watek 140454778816256 zakonczyl prace w 3865 mikrosekund.
+Watek 140454770423552 zakonczyl prace w 3963 mikrosekund.
+Watek 140454762030848 zakonczyl prace w 3816 mikrosekund.
+Watek 140454753638144 zakonczyl prace w 3339 mikrosekund.
+Proces glowny         zakonczyl prace w 8097 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                --- Tworze histogram - wariant 'interleaved' ---                
+ Ilosc uzytych watkow: 4
+
+Watek 139763033908992 zakonczyl prace w 524 mikrosekund.
+Watek 139763025405696 zakonczyl prace w 1380 mikrosekund.
+Watek 139763017012992 zakonczyl prace w 1210 mikrosekund.
+Watek 139762933430016 zakonczyl prace w 486 mikrosekund.
+Proces glowny         zakonczyl prace w 4761 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'sign' ---                    
+ Ilosc uzytych watkow: 8
+
+Watek 139733550343936 zakonczyl prace w 341359 mikrosekund.
+Watek 139733541951232 zakonczyl prace w 317870 mikrosekund.
+Watek 139733533558528 zakonczyl prace w 360861 mikrosekund.
+Watek 139733525165824 zakonczyl prace w 324441 mikrosekund.
+Watek 139733516773120 zakonczyl prace w 357318 mikrosekund.
+Watek 139733508380416 zakonczyl prace w 361935 mikrosekund.
+Watek 139733499987712 zakonczyl prace w 366425 mikrosekund.
+Watek 139733491595008 zakonczyl prace w 342611 mikrosekund.
+Proces glowny         zakonczyl prace w 386324 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                   --- Tworze histogram - wariant 'block' ---                   
+ Ilosc uzytych watkow: 8
+
+Watek 139995038594816 zakonczyl prace w 3707 mikrosekund.
+Watek 139995030202112 zakonczyl prace w 4108 mikrosekund.
+Watek 139995021809408 zakonczyl prace w 9467 mikrosekund.
+Watek 139995013416704 zakonczyl prace w 3435 mikrosekund.
+Watek 139995005024000 zakonczyl prace w 3435 mikrosekund.
+Watek 139994996631296 zakonczyl prace w 3268 mikrosekund.
+Watek 139994988238592 zakonczyl prace w 5905 mikrosekund.
+Watek 139994979845888 zakonczyl prace w 3059 mikrosekund.
+Proces glowny         zakonczyl prace w 14759 mikrosekund.
+
+Zapisuje histogram w pliku temp...
+
+
+                --- Tworze histogram - wariant 'interleaved' ---                
+ Ilosc uzytych watkow: 8
+
+Watek 140306209163008 zakonczyl prace w 254 mikrosekund.
+Watek 140306200659712 zakonczyl prace w 296 mikrosekund.
+Watek 140306192267008 zakonczyl prace w 965 mikrosekund.
+Watek 140306112575232 zakonczyl prace w 598 mikrosekund.
+Watek 140306104182528 zakonczyl prace w 390 mikrosekund.
+Watek 140306095789824 zakonczyl prace w 258 mikrosekund.
+Watek 140306087397120 zakonczyl prace w 821 mikrosekund.
+Watek 140306079004416 zakonczyl prace w 430 mikrosekund.
+Proces glowny         zakonczyl prace w 7850 mikrosekund.
+
+Zapisuje histogram w pliku temp...
