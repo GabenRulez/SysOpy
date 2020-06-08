@@ -8,7 +8,9 @@ build:
 
 
 test:
-	./main 4 sign f14.pgm histogram.txt
+	./main 4 sign f14.pgm histogram_sign.txt
+	./main 4 block f14.pgm histogram_block.txt
+	./main 4 interleaved f14.pgm histogram_interleaved.txt
 
 full_test:
 	./main 1 sign f14.pgm histogram1.txt

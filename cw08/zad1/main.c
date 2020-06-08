@@ -5,6 +5,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <stdatomic.h>
 
 #include "pomocnicze.h"
 #include "funkcje_tekstowe.h"
@@ -36,7 +37,7 @@ void ukaz_wyniki(){
 
     unsigned int ilosc_pikseli = 0;
     for(int i=0; i<256; i++) ilosc_pikseli+= ilosc_wystapien[i];
-    if( ilosc_pikseli != szerokosc*wysokosc ) wyjscie_z_bledem("Nastapil blad jednostajnego dostepu do pamieci wspolnej.");
+    if( ilosc_pikseli != szerokosc*wysokosc ) wyjscie_z_bledem("Nastapil blad jednoczesnego dostepu do pamieci wspolnej.");
 
     FILE * odpowiedni_plik_wyjsciowy = fopen(plik_wyjsciowy, "w+");
     for(int i=0; i<256; i++) fprintf(odpowiedni_plik_wyjsciowy, "%d %d\n", i, ilosc_wystapien[i]);
@@ -69,12 +70,57 @@ void* histogram_czesc_sign(void* arg){
     pthread_exit(wynik_w_mikrosekundach);
 }
 
+void* histogram_czesc_block(void* arg){
+    struct timeval czas_startu;
+    gettimeofday(&czas_startu, NULL);
+
+
+    int i = *((int*) arg);
+    int start_x = sufit(i * szerokosc, liczba_watkow);
+    int koniec_x = sufit((i+1) * szerokosc, liczba_watkow) - 1;
+    for(int j=0; j<szerokosc*wysokosc; j++){
+        if(j % szerokosc >= start_x && j % szerokosc <= koniec_x){
+            //ilosc_wystapien[ tablica_pliku_wejsciowego[j] ]++;
+            atomic_fetch_add(&ilosc_wystapien[tablica_pliku_wejsciowego[j]], 1);
+        }
+    }
+
+
+    struct timeval czas_konca;
+    gettimeofday(&czas_konca, NULL);
+    long* wynik_w_mikrosekundach = malloc(sizeof(long));
+    *(wynik_w_mikrosekundach) = (czas_konca.tv_sec - czas_startu.tv_sec) * 1000000 + czas_konca.tv_usec - czas_startu.tv_usec;
+    pthread_exit(wynik_w_mikrosekundach);
+}
+
+void* histogram_czesc_interleaved(void* arg){
+    struct timeval czas_startu;
+    gettimeofday(&czas_startu, NULL);
+
+
+    int i = *((int*) arg);
+    int start_x = sufit(i * szerokosc, liczba_watkow);
+    int koniec_x = sufit((i+1) * szerokosc, liczba_watkow) - 1;
+    for(int j=i; j<szerokosc*wysokosc; j+=liczba_watkow){
+        atomic_fetch_add(&ilosc_wystapien[tablica_pliku_wejsciowego[j]], 1);
+    }
+
+
+    struct timeval czas_konca;
+    gettimeofday(&czas_konca, NULL);
+    long* wynik_w_mikrosekundach = malloc(sizeof(long));
+    *(wynik_w_mikrosekundach) = (czas_konca.tv_sec - czas_startu.tv_sec) * 1000000 + czas_konca.tv_usec - czas_startu.tv_usec;
+    pthread_exit(wynik_w_mikrosekundach);
+}
+
 int stworz_histogram(int tryb){
+
+    pthread_t* watki = (pthread_t*)calloc(liczba_watkow, sizeof(pthread_t));
+    for(int i=0; i<256; i++) ilosc_wystapien[i] = 0;
+
     switch(tryb){
         case 1:
         {
-            pthread_t* watki = (pthread_t*)calloc(liczba_watkow, sizeof(pthread_t));
-            for(int i=0; i<256; i++) ilosc_wystapien[i] = 0;
             for(int i=0; i<liczba_watkow; i++){
 
                 int* i_temp = malloc(sizeof(int));
@@ -83,27 +129,32 @@ int stworz_histogram(int tryb){
                 pthread_create(&watki[i], NULL, histogram_czesc_sign, i_temp);
                 usleep(1);
             };
-            for(int i=0; i<liczba_watkow; i++){
-
-                void* temp;
-                if( pthread_join(watki[i], &temp) > 1 ) wyjscie_z_bledem("Nie moge skonczyc watku.");
-                long czas_w_mikrosekundach = *((long*) temp);
-                printf("\nWatek %lu zakonczyl prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
-                usleep(1);
-            }
-            ukaz_wyniki();
             break;
         }
 
         case 2:
         {
-            printf("\nhuh2\n");
+            for(int i=0; i<liczba_watkow; i++){
+
+                int* i_temp = malloc(sizeof(int));
+                *(i_temp) = i;
+
+                pthread_create(&watki[i], NULL, histogram_czesc_block, i_temp);
+                usleep(1);
+            };
             break;
         }
 
         case 3:
         {
-            printf("\nhuh3\n");
+            for(int i=0; i<liczba_watkow; i++){
+
+                int* i_temp = malloc(sizeof(int));
+                *(i_temp) = i;
+
+                pthread_create(&watki[i], NULL, histogram_czesc_interleaved, i_temp);
+                usleep(1);
+            };
             break;
         }
 
@@ -113,6 +164,17 @@ int stworz_histogram(int tryb){
             break;
         }
     }
+
+    for(int i=0; i<liczba_watkow; i++){
+
+        void* temp;
+        if( pthread_join(watki[i], &temp) > 1 ) wyjscie_z_bledem("Nie moge skonczyc watku.");
+        long czas_w_mikrosekundach = *((long*) temp);
+        printf("\nWatek %lu zakonczyl prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
+        usleep(1);
+    }
+    ukaz_wyniki();
+
     return 0;
 }
 
