@@ -32,8 +32,7 @@ int liczba_watkow = -1;
 unsigned int ilosc_wystapien[256] = {0};
 
 void ukaz_wyniki(){
-    printf("\n");
-    wypisz_wysrodkowane("--- Tworze histogram ---");
+    printf("\n\nZapisuje histogram w pliku %s...\n", plik_wyjsciowy);
 
     unsigned int ilosc_pikseli = 0;
     for(int i=0; i<256; i++) ilosc_pikseli+= ilosc_wystapien[i];
@@ -60,7 +59,6 @@ void* histogram_czesc_sign(void* arg){
             }
         }
     }
-
 
 
     struct timeval czas_konca;
@@ -99,8 +97,6 @@ void* histogram_czesc_interleaved(void* arg){
 
 
     int i = *((int*) arg);
-    int start_x = sufit(i * szerokosc, liczba_watkow);
-    int koniec_x = sufit((i+1) * szerokosc, liczba_watkow) - 1;
     for(int j=i; j<szerokosc*wysokosc; j+=liczba_watkow){
         atomic_fetch_add(&ilosc_wystapien[tablica_pliku_wejsciowego[j]], 1);
     }
@@ -114,6 +110,9 @@ void* histogram_czesc_interleaved(void* arg){
 }
 
 int stworz_histogram(int tryb){
+    struct timeval czas_startu;
+    gettimeofday(&czas_startu, NULL);
+
 
     pthread_t* watki = (pthread_t*)calloc(liczba_watkow, sizeof(pthread_t));
     for(int i=0; i<256; i++) ilosc_wystapien[i] = 0;
@@ -173,6 +172,12 @@ int stworz_histogram(int tryb){
         printf("\nWatek %lu zakonczyl prace w %ld mikrosekund.", watki[i], czas_w_mikrosekundach);
         usleep(1);
     }
+
+
+    struct timeval czas_konca;
+    gettimeofday(&czas_konca, NULL);
+    long wynik_w_mikrosekundach = (czas_konca.tv_sec - czas_startu.tv_sec) * 1000000 + czas_konca.tv_usec - czas_startu.tv_usec;
+    printf("\nProces glowny         zakonczyl prace w %ld mikrosekund.", wynik_w_mikrosekundach);
     ukaz_wyniki();
 
     return 0;
@@ -226,6 +231,25 @@ int main(int argc, char** argv){
     
     //////////////////////////////////////////////////////////////////////////////// już mamy wczytana tablice wartosci
     plik_wyjsciowy = argv[4];
+
+    printf("\n\n");
+    switch(tryb){
+        case 1:{
+            wypisz_wysrodkowane("--- Tworze histogram - wariant 'sign' ---");
+            break;
+        }
+        case 2:{
+            wypisz_wysrodkowane("--- Tworze histogram - wariant 'block' ---");
+            break;
+        }
+        case 3:{
+            wypisz_wysrodkowane("--- Tworze histogram - wariant 'interleaved' ---");
+            break;
+        }
+        default:
+            break;
+    }
+    printf(" Ilosc uzytych watkow: %d\n", liczba_watkow);
 
     stworz_histogram(tryb);
 
