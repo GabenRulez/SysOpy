@@ -26,6 +26,8 @@ int deskryptor_gniazda_unix;
 struct sockaddr_in adres_gniazda_inet;
 int deskryptor_gniazda_inet;
 
+
+
 void inicjalizuj_serwer(){
     adres_gniazda_unix.sun_family = AF_UNIX;
     strcpy(adres_gniazda_unix.sun_path, sciezka_gniazda_UNIX);
@@ -40,10 +42,22 @@ void inicjalizuj_serwer(){
 
     /*************************************************/
 
+    struct in_addr temp = *(struct in_addr*) gethostbyname("localhost")->h_addr;
+    adres_gniazda_inet.sin_family = AF_INET;
+    adres_gniazda_inet.sin_port = htons(numer_portu);
+    adres_gniazda_inet.sin_addr.s_addr = temp.s_addr;
+
+    deskryptor_gniazda_inet = socket(AF_INET, SOCK_STREAM, 0);
+    if(deskryptor_gniazda_inet < 0) wyjscie_z_bledem("Nieudane utworzenie gniazda (Inet).");
+
+    if( bind(deskryptor_gniazda_inet, (struct sockaddr*) &adres_gniazda_inet, sizeof(adres_gniazda_inet)) < 0 ) wyjscie_z_bledem("Nieudane związanie gniazda z jego adresem (Inet).");
+    if( listen(deskryptor_gniazda_inet, MAX_KLIENTOW) < 0 ) wyjscie_z_bledem("Nieudane rozpoczecie akceptowania polaczen od klientow (Inet).");
+
+    printf("Gniazdo INET nasluchuje na %s:%d\n", inet_ntoa(temp), numer_portu);
+}
 
 
-
-
+void wylacz_serwer(){
 
 }
 
@@ -54,9 +68,10 @@ int main(int argc, char** argv){
     numer_portu = (int) strtol(argv[1], (char**)NULL, 10);
     sciezka_gniazda_UNIX = argv[2];
 
+    inicjalizuj_serwer();
 
 
 
-
-
+    wylacz_serwer();
+    return 0;
 }
