@@ -76,7 +76,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw10/zad1/funkcje_tekstowe.h">
+			<Option target="sysopy"/>
+		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw10/zad1/klient.c">
+			<Option target="sysopy"/>
+		</Unit>
+		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw10/zad1/pomocnicze.h">
 			<Option target="sysopy"/>
 		</Unit>
 		<Unit filename="/home/wojtek/CLionProjects/SysOpy/cw10/zad1/serwer.c">
