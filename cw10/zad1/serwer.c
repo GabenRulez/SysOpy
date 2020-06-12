@@ -58,6 +58,11 @@ void inicjalizuj_serwer(){
 
 
 void wylacz_serwer(){
+    if( shutdown(deskryptor_gniazda_unix, SHUT_RDWR) < 0 ) wyjscie_z_bledem("Nie udalo sie wylaczyc gniazda (Unix).");
+    if( close(deskryptor_gniazda_unix) < 0 ) wyjscie_z_bledem("Nie udalo sie zamknac gniazda (Unix).");
+
+    if( shutdown(deskryptor_gniazda_inet, SHUT_RDWR) < 0 ) wyjscie_z_bledem("Nie udalo sie wylaczyc gniazda (Inet).");
+    if( close(deskryptor_gniazda_inet) < 0 ) wyjscie_z_bledem("Nie udalo sie zamknac gniazda (Inet).");
 
 }
 
