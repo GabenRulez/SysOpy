@@ -59,12 +59,17 @@ void inicjalizuj_serwer(){
 
 
 void wylacz_serwer(){
+    if( pthread_cancel(watek_obslugujacy_siec) != 0 ) wyjscie_z_bledem("Nie udalo sie wyslac sygnalu CANCEL do watku obslugujacego siec.");
+    if( pthread_cancel(watek_pingujacy) != 0 ) wyjscie_z_bledem("Nie udalo sie wyslac sygnalu CANCEL do watku obslugujacego pingowanie");
+
     if( shutdown(deskryptor_gniazda_unix, SHUT_RDWR) < 0 ) wyjscie_z_bledem("Nie udalo sie wylaczyc gniazda (Unix).");
     if( close(deskryptor_gniazda_unix) < 0 ) wyjscie_z_bledem("Nie udalo sie zamknac gniazda (Unix).");
+    if( unlink(sciezka_gniazda_UNIX) < 0 ) wyjscie_z_bledem("Nieudane usuwanie pliku reprezentujacego gniazdo (Unix).");
 
     if( shutdown(deskryptor_gniazda_inet, SHUT_RDWR) < 0 ) wyjscie_z_bledem("Nie udalo sie wylaczyc gniazda (Inet).");
     if( close(deskryptor_gniazda_inet) < 0 ) wyjscie_z_bledem("Nie udalo sie zamknac gniazda (Inet).");
 
+    exit(0);
 }
 
 void* obsluga_sieci(){
