@@ -26,7 +26,8 @@ int deskryptor_gniazda_unix;
 struct sockaddr_in adres_gniazda_inet;
 int deskryptor_gniazda_inet;
 
-
+pthread_t watek_obslugujacy_siec;
+pthread_t watek_pingujacy;
 
 void inicjalizuj_serwer(){
     adres_gniazda_unix.sun_family = AF_UNIX;
@@ -66,6 +67,14 @@ void wylacz_serwer(){
 
 }
 
+void* obsluga_sieci(){
+    return 0;
+}
+
+void* obsluga_pingowania(){
+    return 0;
+}
+
 
 int main(int argc, char** argv){
 
@@ -74,8 +83,13 @@ int main(int argc, char** argv){
     sciezka_gniazda_UNIX = argv[2];
 
     inicjalizuj_serwer();
+    signal(SIGINT, wylacz_serwer);
 
+    if( pthread_create(&watek_obslugujacy_siec, NULL, obsluga_sieci, NULL) != 0) wyjscie_z_bledem("Nie udalo sie utworzyc watku (do obslugi sieci).");
+    if( pthread_create(&watek_pingujacy, NULL, obsluga_pingowania, NULL) != 0) wyjscie_z_bledem("Nie udalo sie utworzyc watku (do obslugi pingowania).");
 
+    pthread_join(watek_obslugujacy_siec, NULL);
+    pthread_join(watek_pingujacy, NULL);
 
     wylacz_serwer();
     return 0;
