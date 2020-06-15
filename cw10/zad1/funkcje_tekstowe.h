@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #define SZEROKOSC_KONSOLI 80
+#define WYSOKOSC_KONSOLI 24
 
 const char* spacja_1 = " ";
 const char* spacja_2 = "  ";
