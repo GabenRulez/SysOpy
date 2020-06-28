@@ -2,8 +2,7 @@
 Systemy operacyjne - zajęcia na kierunku Informatyka AGH
 
 Zajęcia laboratoryjne:
-1. Opcje kompilatora `gcc/g++`. Narzędzia: `GDB`, `Make`.
-   - [Zarządzanie pamięcią; biblioteki; pomiar czasu.](./cw01/)
+1. [Zarządzanie pamięcią; biblioteki; pomiar czasu.](./cw01/)
    
 2. [Pliki](./cw02/)
 
