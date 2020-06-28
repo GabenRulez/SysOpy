@@ -51,7 +51,7 @@ Wynik wykonania `diff a.txt b.txt`:
 W tym przypadku tablica główna powinna zawierać tylko jeden wskaźnik na  blok operacji edycyjnych (bo mamy tylko jedną parę plików).  Blok operacji edycyjnych powinien być trzyelementową tablicą wskaźników na napisy z treścią operacji edycyjnych.
 
 
-<a id="bbb" href="#user-content-bbb" disabled style="pointer-events: none !important"><img src="https://raw.github.com/GabenRulez/SysOpy/master/readme_static/lab1_1.png" href=""></a>
+<a id="bbb" href="#user-content-bbb" disabled pointer-events="none"><img src="https://raw.github.com/GabenRulez/SysOpy/master/readme_static/lab1_1.png" href=""></a>
 
 Tablice / bloki powinny być alokowane przy pomocy funkcji `calloc()` (alokacja dynamiczna).
 
