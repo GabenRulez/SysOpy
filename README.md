@@ -5,7 +5,7 @@ Zajęcia laboratoryjne:
 1. Opcje kompilatora `gcc/g++`. Narzędzia: `GDB`, `Make`.
    - [Zarządzanie pamięcią; biblioteki; pomiar czasu.](./cw01/)
    
-2. Pliki
+2. [Pliki](./cw02/)
 
 3. Procesy
 
